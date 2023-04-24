@@ -1,5 +1,14 @@
+// TODO стили в отдельный файл + clean.css
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 @card-width: 224px;
@@ -14,4 +23,11 @@
   font-size: @size;
   font-weight: @font-weight;
   line-height: @line-height;
+}
+
+.gallery(@repeat-count, @width, @row-gap, @column-gap) {
+  display: grid;
+  grid-template-columns: repeat(@repeat-count, @width);
+  grid-row-gap: @row-gap;
+  grid-column-gap: @column-gap;
 }

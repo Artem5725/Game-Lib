@@ -10,9 +10,6 @@
   }
 
   &__gallery {
-    display: grid;
-    grid-template-columns: repeat(4, @card-width);
-    justify-content: space-between;
-    grid-row-gap: 43px;
+    .gallery(4, @card-width, 43px, 30px);
   }
 }
