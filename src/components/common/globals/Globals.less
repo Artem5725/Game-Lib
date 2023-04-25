@@ -18,7 +18,7 @@ body {
 @up-panel-height: 90px;
 @up-panel-elems-height: 26px;
 @modal-window-background-color: rgba(200, 200, 200, 0.8);
-@modal-window-content-background-color: rgba(17,20,49,1.0);
+@modal-window-content-background-color: rgba(17, 20, 49, 1);
 
 .font-mixin(@size, @line-height, @font-weight) {
   font-family: 'Roboto', sans-serif;
@@ -27,9 +27,28 @@ body {
   line-height: @line-height;
 }
 
+// TODO каждый миксины по файлам раскидать
 .gallery(@repeat-count, @width, @row-gap, @column-gap) {
   display: grid;
   grid-template-columns: repeat(@repeat-count, @width);
   grid-row-gap: @row-gap;
   grid-column-gap: @column-gap;
+}
+
+.button(@width, @height, @padding, @color, @back-color, @hover-back-color, @active-back-color, @font-size, @line-height, @font-weight) {
+  width: @width;
+  height: @height;
+  padding: @padding;
+  border-radius: 30px;
+  color: @color;
+  background-color: @back-color;
+  .font-mixin(@font-size,  @line-height, @font-weight);
+
+  &:hover {
+    background-color: @hover-back-color;
+  }
+
+  &_active {
+    background-color: @active-back-color;
+  }
 }

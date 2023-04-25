@@ -1,0 +1,28 @@
+@import '../globals/Globals.less';
+
+// left side tip
+.tip-block {
+  position: relative;
+  width: fit-content;
+
+  &__main-elem {
+    &:hover + .tip-block__tip-elem {
+      right: 100%;
+      opacity: 1;
+    }
+  }
+
+  //https://cubic-bezier.com/
+  &__tip-elem {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: calc(200px + 100%);
+    opacity: 0;
+    transition: right 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
+      opacity 0.5s 0.2s linear;
+    background-color: @modal-window-content-background-color;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}

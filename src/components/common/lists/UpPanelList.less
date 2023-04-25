@@ -1,23 +1,19 @@
 @import '../globals/Globals.less';
-
+// TODO переименовать и собрать все цвета в глобалках
 .panel-up__list {
   display: flex;
   flex-flow: row nowrap;
   background-color: transparent;
   &-item {
-    width: fit-content;
-    height: fit-content;
-    padding: 5px 25px;
-    border-radius: 30px;
-    color: rgba(255, 255, 255, 1);
-    .font-mixin(16px, 16px, 400);
-
-    &:hover{
-      background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    &_active {
-      background-color: rgba(0, 0, 255, 1);
-    }
+    .button(fit-content, 
+    fit-content, 
+    5px 25px, 
+    rgba(255, 255, 255, 1), 
+    transparent, 
+    rgba(255, 255, 255, 0.5), 
+    rgba(0, 0, 255, 1), 
+    16px, 
+    16px,
+    400);
   }
 }
