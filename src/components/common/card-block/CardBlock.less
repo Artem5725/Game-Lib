@@ -1,7 +1,7 @@
 @import '../globals/Globals.less';
 
 .card-block {
-  width: 1000px;
+  width: 100%; //1000px;
   background-color: inherit;
   &__name {
     .font-mixin(20px, 28px, 700);
@@ -10,6 +10,7 @@
   }
 
   &__gallery {
-    .gallery(4, @card-width, 43px, 30px);
+    .gallery(5, @card-width, 43px, 10px);
+    justify-content: space-between;
   }
 }
