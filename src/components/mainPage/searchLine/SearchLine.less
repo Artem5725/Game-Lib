@@ -1,5 +1,7 @@
 @import '../../common/globals/Globals.less';
 
+@input-back-color: rgba(196, 196, 196, 0.5);
+
 .search-line {
   display: grid;
   grid-template-columns: 20px 1fr 20px;
@@ -8,7 +10,7 @@
   height: 48px;
   margin: auto;
   padding: 14px;
-  background-color: rgba(196, 196, 196, 0.5);
+  background-color: @input-back-color;
   border-radius: 12px;
 
   &_active {
@@ -20,7 +22,7 @@
     height: 20px;
     content: '';
     transition-duration: 0.5s;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: @common-icon-color-transparent;
 
     &-search {
       mask: url('./search.svg') no-repeat 10% 50%;
@@ -35,7 +37,7 @@
     }
 
     &:hover {
-      background-color: rgba(255, 255, 255, 1);
+      background-color: @common-icon-color;
     }
   }
 
@@ -44,7 +46,7 @@
     text-decoration: none;
     border: none;
     outline: none;
-    color: rgba(255, 255, 255, 1);
+    color: @common-font-color;
     .font-mixin(16px, 20px, 400);
   }
 }

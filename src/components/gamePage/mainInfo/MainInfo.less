@@ -6,7 +6,7 @@
 .main-info {
   width: 100%;
   height: fit-content;
-  color: rgba(255, 255, 255, 1);
+  color: @common-font-color;
 
   &__wrapper {
     display: flex;
@@ -49,10 +49,10 @@
 
   &__platform {
     .button(@padding:10px 35px, 
-    @color: rgba(255, 255, 255, 1), 
-    @back-color: rgba(255, 255, 255, 0.5), 
-    @hover-back-color: rgba(255, 255, 255, 0.5), 
-    @active-back-color: rgba(255, 255, 255, 0.5), 
+    @color: @common-font-color, 
+    @back-color: @common-hover-back-color, 
+    @hover-back-color: @common-hover-back-color, 
+    @active-back-color: @common-hover-back-color, 
     @font-weight: 400);
   }
 }

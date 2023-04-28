@@ -9,7 +9,16 @@
 @up-panel-height: 90px;
 @up-panel-elems-height: 26px;
 
+@page-back-color: linear-gradient(112deg, #1a1c4b 16.68%, #0897ab 96.66%);
 @panel-background-color: rgba(17, 16, 29, 1);
+@button-active-back-color: rgba(0, 0, 255, 1);
+@common-font-color: rgba(255, 255, 255, 1);
+// now equal with font, but may be changed
+@common-icon-color: rgba(255, 255, 255, 1);
+@common-icon-color-transparent: rgba(255, 255, 255, 0.5);
+@common-blocks-back-color: rgba(17, 20, 49, 1);
+@common-border-color: rgba(25, 210, 234, 1);
+@common-hover-back-color: rgba(255, 255, 255, 0.5);
 @modal-window-background-color: rgba(200, 200, 200, 0.8);
 @modal-window-content-background-color: rgba(17, 20, 49, 1);
 
@@ -33,10 +42,10 @@
 .button(@width:fit-content, 
 @height:fit-content, 
 @padding: 18px 54px, 
-@color:rgba(255, 255, 255, 1), 
+@color:@common-font-color, 
 @back-color: @modal-window-content-background-color, 
-@hover-back-color:rgba(255, 255, 255, 0.5), 
-@active-back-color: rgba(0, 0, 255, 1), 
+@hover-back-color: @common-hover-back-color, 
+@active-back-color: @button-active-back-color, 
 @font-size: 16px, 
 @line-height: 16px, 
 @font-weight: 600) {

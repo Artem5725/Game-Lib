@@ -16,7 +16,7 @@
     padding: 10px;
     margin-bottom: 10px;
     &_active {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: @common-hover-back-color;
       border-radius: 12px;
       .panel-side__list-marker {
         transform: rotate(90deg) translate(-100%, 0);
@@ -32,13 +32,13 @@
     height: @marker-width * 2;
     border-top: @marker-width solid transparent;
     border-bottom: @marker-width solid transparent;
-    border-left: @marker-width solid white;
+    border-left: @marker-width solid @common-font-color;
     transition-duration: 0.5s; // Todo delete
   }
 
   &-text {
     margin-left: 20px;
-    color: rgba(255, 255, 255, 1);
+    color: @common-font-color;
     .font-mixin(20px, 20px, 400);
   }
   // TODO подумать, как внедрить картинки вместо стрелок
