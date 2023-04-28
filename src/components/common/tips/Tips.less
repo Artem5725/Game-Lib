@@ -6,9 +6,18 @@
   width: fit-content;
 
   &__main-elem {
-    &:hover + .tip-block__tip-elem {
-      right: 100%;
-      opacity: 1;
+    &_left {
+      &:hover + .tip-block__tip-elem_left {
+        right: 100%;
+        opacity: 1;
+      }
+    }
+
+    &_right {
+      &:hover + .tip-block__tip-elem_right {
+        left: 100%;
+        opacity: 1;
+      }
     }
   }
 
@@ -16,13 +25,23 @@
   &__tip-elem {
     position: absolute;
     z-index: 100;
-    top: 0;
-    right: calc(200px + 100%);
     opacity: 0;
-    transition: right 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
-      opacity 0.5s 0.2s linear;
     background-color: @modal-window-content-background-color;
     padding: 10px;
     border-radius: 10px;
+
+    &_left {
+      top: 0;
+      right: calc(200px + 100%);
+      transition: right 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
+        opacity 0.5s 0.2s linear;
+    }
+
+    &_right {
+      top: 0;
+      left: calc(200px + 100%);
+      transition: left 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
+        opacity 0.5s 0.2s linear;
+    }
   }
 }

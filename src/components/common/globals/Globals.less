@@ -1,22 +1,15 @@
-// TODO стили в отдельный файл + clean.css
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
+// TODO переименовать и собрать все цвета в глобалках
 
 @card-width: 224px;
-@panel-background-color: rgba(17, 16, 29, 1);
+@card-min-height: 330px;
+@card-border-radius: 20px;
+
 @side-panel-width: 250px;
 @side-panel-elems-width: 200px;
 @up-panel-height: 90px;
 @up-panel-elems-height: 26px;
+
+@panel-background-color: rgba(17, 16, 29, 1);
 @modal-window-background-color: rgba(200, 200, 200, 0.8);
 @modal-window-content-background-color: rgba(17, 20, 49, 1);
 
@@ -27,15 +20,26 @@ body {
   line-height: @line-height;
 }
 
-// TODO каждый миксины по файлам раскидать
-.gallery(@repeat-count, @width, @row-gap, @column-gap) {
+.gallery(@repeat-count: 5, 
+@width: @card-width, 
+@row-gap: 43px, 
+@column-gap: 10px) {
   display: grid;
   grid-template-columns: repeat(@repeat-count, @width);
   grid-row-gap: @row-gap;
   grid-column-gap: @column-gap;
 }
 
-.button(@width, @height, @padding, @color, @back-color, @hover-back-color, @active-back-color, @font-size, @line-height, @font-weight) {
+.button(@width:fit-content, 
+@height:fit-content, 
+@padding: 18px 54px, 
+@color:rgba(255, 255, 255, 1), 
+@back-color: @modal-window-content-background-color, 
+@hover-back-color:rgba(255, 255, 255, 0.5), 
+@active-back-color: rgba(0, 0, 255, 1), 
+@font-size: 16px, 
+@line-height: 16px, 
+@font-weight: 600) {
   width: @width;
   height: @height;
   padding: @padding;

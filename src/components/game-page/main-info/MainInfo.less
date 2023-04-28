@@ -48,15 +48,11 @@
   }
 
   &__platform {
-    .button(fit-content, 
-    fit-content, 
-    10px 35px, 
-    rgba(255, 255, 255, 1), 
-    rgba(255, 255, 255, 0.5), 
-    rgba(255, 255, 255, 0.5), 
-    rgba(255, 255, 255, 0.5), 
-    16px, 
-    16px,
-    400);
+    .button(@padding:10px 35px, 
+    @color: rgba(255, 255, 255, 1), 
+    @back-color: rgba(255, 255, 255, 0.5), 
+    @hover-back-color: rgba(255, 255, 255, 0.5), 
+    @active-back-color: rgba(255, 255, 255, 0.5), 
+    @font-weight: 400);
   }
 }

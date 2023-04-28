@@ -1,19 +1,12 @@
 @import '../globals/Globals.less';
-// TODO переименовать и собрать все цвета в глобалках
+
 .panel-up__list {
   display: flex;
   flex-flow: row nowrap;
   background-color: transparent;
   &-item {
-    .button(fit-content, 
-    fit-content, 
-    5px 25px, 
-    rgba(255, 255, 255, 1), 
-    transparent, 
-    rgba(255, 255, 255, 0.5), 
-    rgba(0, 0, 255, 1), 
-    16px, 
-    16px,
-    400);
+    .button( @padding: 5px 25px, 
+    @back-color: transparent, 
+    @font-weight: 400);
   }
 }
