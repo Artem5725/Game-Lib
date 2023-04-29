@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet/less" type="text/css" href="/src/Clean.less" />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/gamePage/mainInfo/MainInfo.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/gamePage/buyButton/BuyButton.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/gamePage/userComment/UserComment.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/gamePage/commentsBlock/CommentsBlock.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/gamePage/singleComment/SingleComment.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/tips/Tips.less"
+    />
+    <link rel="stylesheet/less" type="text/css" href="/src/pages/Page.less" />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/pages/PageContent.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/card/Card.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/cardBlock/CardBlock.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/lists/SidePanelList.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/SidePanel.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/lists/UpPanelList.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/UpPanel.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/scroll/ScrollHorizontal.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/addGroupBlock/AddGroupBlock.less"
+    />
+    
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <title>Document</title>
+  </head>
+  <!-- test -->
+  <body style="background-color: black">
+    <div class="panel-side">
+      <ul class="panel-side__list">
+        <li class="panel-side__list-item panel-side__list-item_active">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Поиск</div>
+        </li>
+        <li class="panel-side__list-item">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Избранное</div>
+        </li>
+        <li class="panel-side__list-item">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Все</div>
+        </li>
+        <li class="panel-side__list-item">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Test</div>
+        </li>
+      </ul>
+      <div class="add-group-block">
+        <div class="add-group-block__add">+</div>
+        <input class="add-group-block__input" placeholder="Группа..." />
+      </div>
+    </div>
+    <div class="panel-up">
+      <div class="panel-up__img"></div>
+      <div class="panel-up__text">Game Store</div>
+      <div class="panel-up__list">
+        <div class="panel-up__list-item panel-up__list-item_active">PS</div>
+        <div class="panel-up__list-item">XBOX</div>
+        <div class="panel-up__list-item">PC</div>
+        <div class="panel-up__list-item">Nintendo</div>
+      </div>
+    </div>
+    <div class="page">
+      <div class="page-content">
+        <div class="main-info">
+          <div class="main-info__wrapper">
+            <img
+              class="main-info__img"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="main-info__info">
+              <div class="main-info__name">Название игры</div>
+              <button type="button" class="main-info__button buy-button">
+                Старт
+              </button>
+            </div>
+          </div>
+
+          <div class="main-info__platforms">
+            <div class="main-info__platform">Платформа 1</div>
+            <div class="main-info__platform">Платформа 2</div>
+            <div class="main-info__platform">Платформа 3</div>
+          </div>
+        </div>
+        <div class="scroll">
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+          <img src="/public/placeholder.png" alt="test" />
+        </div>
+        <div class="scroll">
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_right"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_right">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_left"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_left">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_left"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_left">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_left"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_left">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_left"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_left">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+          <div class="tip-block">
+            <img
+              class="tip-block__main-elem_left"
+              src="/public/placeholder.png"
+              alt="test"
+            />
+            <div class="tip-block__tip-elem tip-block__tip-elem_left">
+              <a href="#">Подсказка по ачивке</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-block__name">DLC</div>
+          <div class="card-block__gallery">
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-block__name">Игры серии</div>
+          <div class="card-block__gallery">
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__image-space">
+                <img
+                  class="card__image"
+                  alt="Hello"
+                  src="/public/placeholder.png"
+                />
+                <div class="card__image-favourite">
+                  <div class="card__image-favourite-star"></div>
+                </div>
+              </div>
+              <div class="card__mark">5.0</div>
+              <div class="card__name">Game</div>
+              <div class="card__platforms">
+                <div class="card__platform">Ps4</div>
+                <div class="card__platform">Ps5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="comment-block">
+          <div class="comment-block__comment single-comment">
+            <div class="single-comment__username">Вася</div>
+            <div class="single-comment__comment">Коммент 1</div>
+          </div>
+          <div class="comment-block__comment single-comment">
+            <div class="single-comment__username">Петя</div>
+            <div class="single-comment__comment">Коммент 2</div>
+          </div>
+          <div class="comment-block__comment single-comment">
+            <div class="single-comment__username">Коля</div>
+            <div class="single-comment__comment">Коммент 3</div>
+          </div>
+        </div>
+        <div class="user-comment">
+          <textarea
+            class="user-comment__field"
+            placeholder="Комментарий..."
+          ></textarea>
+          <button class="user-comment__button" type="button">
+            Подтвердить
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
