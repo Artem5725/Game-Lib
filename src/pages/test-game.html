@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet/less"
-      type="text/css"
-      href="/src/Clean.less"
-    />
+    <link rel="stylesheet/less" type="text/css" href="/src/Clean.less" />
     <link
       rel="stylesheet/less"
       type="text/css"
@@ -80,6 +76,12 @@
       type="text/css"
       href="/src/components/common/scroll/ScrollHorizontal.less"
     />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/addGroupBlock/AddGroupBlock.less"
+    />
+    
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
     <title>Document</title>
   </head>
@@ -87,11 +89,15 @@
   <body style="background-color: black">
     <div class="panel-side">
       <ul class="panel-side__list">
+        <li class="panel-side__list-item panel-side__list-item_active">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Поиск</div>
+        </li>
         <li class="panel-side__list-item">
           <div class="panel-side__list-marker"></div>
           <div class="panel-side__list-text">Избранное</div>
         </li>
-        <li class="panel-side__list-item panel-side__list-item_active">
+        <li class="panel-side__list-item">
           <div class="panel-side__list-marker"></div>
           <div class="panel-side__list-text">Все</div>
         </li>
@@ -100,6 +106,10 @@
           <div class="panel-side__list-text">Test</div>
         </li>
       </ul>
+      <div class="add-group-block">
+        <div class="add-group-block__add">+</div>
+        <input class="add-group-block__input" placeholder="Группа..." />
+      </div>
     </div>
     <div class="panel-up">
       <div class="panel-up__img"></div>
@@ -122,7 +132,9 @@
             />
             <div class="main-info__info">
               <div class="main-info__name">Название игры</div>
-              <button type="button" class="main-info__button buy-button">Старт</button>
+              <button type="button" class="main-info__button buy-button">
+                Старт
+              </button>
             </div>
           </div>
 
