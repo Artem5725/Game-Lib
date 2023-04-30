@@ -8,12 +8,23 @@ import {
   AchievementsInfo
 } from './RawgTypes.mjs';
 
+/**
+ * Реализует функционал получения данных об играх через api Rawg
+ */
 export class RawgApiProvider {
   private key: string;
   constructor(key: string) {
     this.key = key;
   }
 
+  /**
+   * Метод получает информацию об играх по поисковому запросу и форматирует его.
+   * Обертка над searchGames
+   * @param {string} searchRequest поисковой запрос
+   * @param {number} parentPlatformId идентификатор платформы, игры которой будут искаться
+   * @param {number} pageNumber номер страницы результата
+   * @returns промис, результатом которого будет отформатированный список записей о найденных играх
+   */
   public loadCardsOnRequest(
     searchRequest: string,
     parentPlatformId: number,
@@ -26,6 +37,12 @@ export class RawgApiProvider {
       .catch((error) => console.log(error)); // TODO check error
   }
 
+  /**
+   * Метод получает весь необходимый набор дополнительной информации для игры.
+   * Обертка над getGameExtraInfo
+   * @param {number} game_id идентификатор игры, для которой нужно получить дополнительную информацию
+   * @returns промис, результатом которого будет информация, собранная об игре
+   */
   public loadGameInfo(game_id: number): Promise<GameExtraInfo> {
     const gameInfo: GameExtraInfo = {
       screenshots: [],
@@ -75,6 +92,12 @@ export class RawgApiProvider {
     return Promise.allSettled(cardInfoPromises).then((_res) => gameInfo);
   }
 
+  /**
+   * Метод для получения конкретного типа дополнительной информации об игре
+   * @param {number} gameId идентификатор игры, о котором запрашивается дополнительная информация
+   * @param {string} infoType тип дополнительной информации
+   * @returns промис, который вернет структуру, содержащую запрошенную информацию
+   */
   private getGameExtraInfo<T>(
     gameId: number,
     infoType: string
@@ -90,6 +113,13 @@ export class RawgApiProvider {
     });
   }
 
+  /**
+   * Фунция получает информацию об играх по поисковому запросу
+   * @param {string} request поисковой запрос
+   * @param {number} parentPlatformId идентификатор платформы, игры которой будут искаться
+   * @param {number} pageNumber номер страницы результата
+   * @returns промис, результатом которого будет список записей, представленных объектами Rawg
+   */
   private searchGames(
     request: string,
     parentPlatformId: number,
@@ -114,10 +144,20 @@ export class RawgApiProvider {
     });
   }
 
+  /**
+   * Метод извлекает uri для скриншотов из объектов Rawg
+   * @param {RawgScreenshotInfo[]} results массив записей о скриншотов, представленных объектами Rawg
+   * @returns массив uri скриншотов
+   */
   private mapScreenshotInfo(results: RawgScreenshotInfo[]): string[] {
     return results.map(({ image }) => image);
   }
 
+  /**
+   * Метод извлекает необходимую информацию об играх из объектов Rawg
+   * @param {RawgGameInfo[]} results массив записей об играх, представленных объектами Rawg
+   * @returns массив с набором информации об играх, необходимой для приложения 
+   */
   private mapCardInfo(results: RawgGameInfo[]): CardInfo[] {
     return results.map(
       ({ id, background_image, name, released, platforms, rating }) => {
@@ -133,6 +173,11 @@ export class RawgApiProvider {
     );
   }
 
+  /**
+   * Метод извлекает необходимую информацию о достижениях для игр из объектов Rawg
+   * @param {RawgAchievementsInfo[]} results массив записей об достижениях, представленных объектами Rawg
+   * @returns массив с набором информации о достижениях, необходимой для приложения 
+   */
   private mapAchievementsInfo(
     results: RawgAchievementsInfo[]
   ): AchievementsInfo[] {
