@@ -1,3 +1,5 @@
+import { CardInfo } from "../RawgApiProvider/RawgTypes.mjs";
+
 type Comment = {
   author: string;
   comment: string;
@@ -10,7 +12,7 @@ export type GameComments = {
 
 type UserGroupInfo = {
   groupName: string;
-  groupMembers: number[];
+  groupMembers: CardInfo[];
 };
 
 export type AccountInfo = {

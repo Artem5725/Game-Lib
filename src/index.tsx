@@ -5,6 +5,7 @@ import App from './App';
 
 import { RawgApiProvider } from './ApiProviders/RawgApiProvider/RawgApi';
 import { FirebaseApiProvider } from './ApiProviders/FirebaseApiProvider/FirebaseApi';
+import { CardInfo } from './ApiProviders/RawgApiProvider/RawgTypes.mjs';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -24,14 +25,41 @@ root.render(
 // });
 
 // test firebase api
-const firebase = new FirebaseApiProvider();
-// firebase.signUp(`test${solt}@mail.ru`, '1234567');
-// firebase.signIn(`tester@mail.ru`, '123456');
+// const firebase = new FirebaseApiProvider();
+// const groupMemberToTest1: CardInfo = {
+//   id: 2,
+//   name: 'game2',
+//   released: 2022,
+//   background_image: 'test.png',
+//   rating: 5,
+//   platforms: ['pc', 'ps']
+// };
+// const groupMemberToTest2: CardInfo = {
+//   id: 2,
+//   name: 'game2',
+//   released: 2022,
+//   background_image: 'test.png',
+//   rating: 5,
+//   platforms: ['pc', 'xbox']
+// };
 
-//  firebase.newUserEntry('user5');
-//  firebase.newUserGroup('user5', 'custom_group2');
-// firebase.changeGroupMember('user5', 'custom_group2', 3, false);
-// firebase.newGameComment('game3', 'user1', 'Super !22');
+// firebase.authenticationProvider.signUp(`test@mail.ru`, '1234567');
+// firebase.authenticationProvider.signIn(`test@mail.ru`, '1234567');
 
-firebase.getAccountGroupsByUid('user6');
-firebase.getCommentsByGameId('game3333');
+// firebase.accountsProvider.newUserEntry('user5');
+//  firebase.accountsProvider.newUserGroup('user5', 'custom_group2');
+// firebase.accountsProvider.changeGroupMember(
+//   'user5',
+//   'Все',
+//   groupMemberToTest1
+// );
+// firebase.accountsProvider.changeGroupMember(
+//   'user5',
+//   'custom_group2',
+//   groupMemberToTest2,
+//   false
+// );
+// firebase.commentsProvider.newGameComment('game5', 'user5', 'Rubish');
+
+// firebase.accountsProvider.getAccountGroupsByUid('user5');
+// firebase.commentsProvider.getCommentsByGameId('game5');
