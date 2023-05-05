@@ -13,12 +13,12 @@ import { FirebaseCommentsApi } from './FirebaseCommentsApi';
  */
 export class FirebaseApiProvider {
   private firebaseConfig = {
-    apiKey: 'AIzaSyAgKltSb4pkjhu__s42eJOdWXqxwFTtWoA',
-    authDomain: 'play-store-fintech.firebaseapp.com',
-    projectId: 'play-store-fintech',
-    storageBucket: 'play-store-fintech.appspot.com',
-    messagingSenderId: '1033892939108',
-    appId: '1:1033892939108:web:d73dff32a3321fc184e671'
+    apiKey: process.env.REACT_APP_FIRE_API_KEY,
+    authDomain: process.env.REACT_APP_FIRE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIRE_MESSAGE_SENDER_ID,
+    appId: process.env.REACT_APP_FIRE_APP_ID
   };
   private app;
   private db;

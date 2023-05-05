@@ -13,8 +13,8 @@ import {
  */
 export class RawgApiProvider {
   private key: string;
-  constructor(key: string) {
-    this.key = key;
+  constructor() {
+    this.key = process.env.REACT_APP_RAWG_API_KEY ?? '';
   }
 
   /**
@@ -156,7 +156,7 @@ export class RawgApiProvider {
   /**
    * Метод извлекает необходимую информацию об играх из объектов Rawg
    * @param {RawgGameInfo[]} results массив записей об играх, представленных объектами Rawg
-   * @returns массив с набором информации об играх, необходимой для приложения 
+   * @returns массив с набором информации об играх, необходимой для приложения
    */
   private mapCardInfo(results: RawgGameInfo[]): CardInfo[] {
     return results.map(
@@ -176,7 +176,7 @@ export class RawgApiProvider {
   /**
    * Метод извлекает необходимую информацию о достижениях для игр из объектов Rawg
    * @param {RawgAchievementsInfo[]} results массив записей об достижениях, представленных объектами Rawg
-   * @returns массив с набором информации о достижениях, необходимой для приложения 
+   * @returns массив с набором информации о достижениях, необходимой для приложения
    */
   private mapAchievementsInfo(
     results: RawgAchievementsInfo[]

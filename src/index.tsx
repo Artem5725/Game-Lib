@@ -17,10 +17,9 @@ root.render(
 );
 
 // test  rawg api
-// const key = "f14802914f8f49a2b4099efa97a74fe2";
-// const test = new RawgApiProvider(key);
+//  const test = new RawgApiProvider();
 // test.loadCardsOnRequest('the witcher 3', 1, 1).then((res) => console.log(res));
-// test.loadGameInfo(-1).then((res: any) => { // 3328 - test
+// test.loadGameInfo(3328).then((res: any) => { // 3328 - test
 //     console.log(res);
 // });
 
