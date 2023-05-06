@@ -12,7 +12,8 @@ const blockName = 'Test block';
 const Page: React.FC<any> = (_props) => {
   return (
     <div className="page">
-      <UserPage blockName={blockName}></UserPage>
+      {/* <UserPage blockName={blockName}></UserPage> */}
+      <MainPage></MainPage>
     </div>
   );
 };

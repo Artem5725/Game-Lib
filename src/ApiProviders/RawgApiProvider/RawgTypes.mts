@@ -90,6 +90,11 @@ export type CardInfo = {
   platforms: string[];
 };
 
+export type CardWithFavouriteFlag = {
+  card: CardInfo;
+  isFavourite: boolean;
+};
+
 export type GameExtraInfo = {
   screenshots: string[];
   achievements: AchievementsInfo[];
