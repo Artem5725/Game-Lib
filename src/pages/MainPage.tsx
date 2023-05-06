@@ -28,7 +28,7 @@ const testFavourite: CardWithFavouriteFlag = {
   isFavourite: true
 };
 
-const MainPage: React.FC<any> = (props) => {
+const MainPage: React.FC<{}> = (_props) => {
   // TODO из фетча стора по запросу и платформе (в первый раз запрос автом сделать)
   const cards: CardWithFavouriteFlag[] = [test, test, testFavourite];
 
