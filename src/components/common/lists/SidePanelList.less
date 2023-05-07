@@ -10,18 +10,29 @@
   width: fit-content;
   max-width: @side-panel-elems-width;
   background-color: transparent;
+
+  &-nav {
+    text-decoration: none;
+
+    &_active {
+      text-decoration: none;
+
+      .panel-side__list-item {
+        background-color: @common-hover-back-color;
+        border-radius: 12px;
+      }
+      
+      .panel-side__list-marker {
+        transform: rotate(90deg) translate(-100%, 0);
+      }
+    }
+  }
+
   &-item {
     position: relative;
     display: flex;
     padding: 10px;
     margin-bottom: 10px;
-    &_active {
-      background-color: @common-hover-back-color;
-      border-radius: 12px;
-      .panel-side__list-marker {
-        transform: rotate(90deg) translate(-100%, 0);
-      }
-    }
   }
 
   &-marker {

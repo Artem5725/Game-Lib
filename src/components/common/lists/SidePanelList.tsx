@@ -1,26 +1,27 @@
 import React from 'react';
 import './SidePanelList.less';
+import { NavLink } from 'react-router-dom';
 
 type Props = {
   items: string[];
-  active: string;
 };
 
-const SidePanelList: React.FC<Props> = ({ items, active }) => {
+const SidePanelList: React.FC<Props> = ({ items }) => {
   return (
     <ul className="panel-side__list">
       {items.map((elem) => {
         return (
-          <li
-            key={elem}
-            className={
-              'panel-side__list-item' +
-              (elem === active ? ' panel-side__list-item_active' : '')
+          <NavLink
+            to={`/user/${elem}`}
+            className={({ isActive }) =>
+              'panel-side__list-nav' + (isActive ? '_active' : '')
             }
           >
-            <div className="panel-side__list-marker" />
-            <div className="panel-side__list-text">{elem}</div>
-          </li>
+            <li key={elem} className={'panel-side__list-item'}>
+              <div className="panel-side__list-marker" />
+              <div className="panel-side__list-text">{elem}</div>
+            </li>
+          </NavLink>
         );
       })}
     </ul>

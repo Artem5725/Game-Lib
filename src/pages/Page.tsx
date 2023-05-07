@@ -3,24 +3,24 @@ import './Page.less';
 import GamePage from './GamePage';
 import MainPage from './MainPage';
 import UserPage from './UserPage';
+import ErrorPage from './ErrorPage';
+import { Route, Routes } from 'react-router-dom';
+import { errorsMap } from '../helpers/Errors';
 
-// UserPage
-// TODO по должно из юрла при роутинге браться
-// TODO placeholder
-const blockName = 'Test block';
-
-// MainPage
-// TODO по должно из юрла при роутинге браться
-// TODO placeholder
-const gameId = 1234;
-
-// TODO роутинг здесь внутри page-content
 const Page: React.FC<any> = (_props) => {
+  // TODO селектить ошибку из стора
+
   return (
     <div className="page">
-      {/* <UserPage blockName={blockName}></UserPage> */}
-      {/* <MainPage></MainPage> */}
-      <GamePage gameId={gameId}></GamePage>
+      <Routes>
+        <Route index path="/search?" element={<MainPage />}></Route>
+        <Route path="/game/:gameId" element={<GamePage />}></Route>
+        <Route path="/user/:groupName" element={<UserPage />}></Route>
+        <Route
+          path="*"
+          element={<ErrorPage errorText={errorsMap.pageNotFound} />}
+        ></Route>
+      </Routes>
     </div>
   );
 };

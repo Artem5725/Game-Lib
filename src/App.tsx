@@ -3,13 +3,14 @@ import './Clean.less';
 import SidePanel from './components/common/panels/SidePanel';
 import UpPanel from './components/common/panels/UpPanel';
 import Page from './pages/Page';
+import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
-    <Fragment>
+    <BrowserRouter>
       <SidePanel />
       <UpPanel />
       <Page />
-    </Fragment>
+    </BrowserRouter>
   );
 }
 

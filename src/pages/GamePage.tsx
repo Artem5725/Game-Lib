@@ -7,10 +7,7 @@ import CommentsBlock from '../components/gamePage/commentsBlock/CommentsBlock';
 import UserComment from '../components/gamePage/userComment/UserComment';
 import Card from '../components/common/card/Card';
 import { tipsHoc } from '../components/common/tips/Tips';
-
-type Props = {
-  gameId: number;
-};
+import { useParams } from 'react-router-dom';
 
 // TODO placeholder
 const commentSingle1 = {
@@ -27,31 +24,31 @@ const test = {
   id: 1,
   name: 'Best game',
   released: 2022,
-  background_image: 'placeholder.png',
+  background_image: '../../placeholder.png',
   rating: 5.0,
   platforms: ['PC', 'PS']
 };
 
 const achivement = {
   description: 'finish 1 location',
-  image: 'placeholder.png',
+  image: '../../placeholder.png',
   name: 'achievement 1'
 };
 
 // TODO проверять, если коммент введен, то не рендерить UserComment
-// TODO в проп указывать id игры - от роутера
-// по id игры селектить инфу о ней из стора
-const GamePage: React.FC<Props> = (props) => {
-  // TODO подтягиваются фечами стора - доп инфа об игре
+
+const GamePage: React.FC<{}> = (_props) => {
+  const { gameId } = useParams();
+  // TODO подтягиваются фечами стора - доп инфа об игре по gameid
   const dlcs = [test, test];
   const series = [test, test];
   const screenshots = [
-    'placeholder.png',
-    'placeholder.png',
-    'placeholder.png',
-    'placeholder.png',
-    'placeholder.png',
-    'placeholder.png'
+    '../../placeholder.png',
+    '../../placeholder.png',
+    '../../placeholder.png',
+    '../../placeholder.png',
+    '../../placeholder.png',
+    '../../placeholder.png'
   ];
   const achievements = [
     achivement,

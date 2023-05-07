@@ -10,7 +10,7 @@ const test: CardWithFavouriteFlag = {
     id: 1,
     name: 'Best game',
     released: 2022,
-    background_image: 'placeholder.png',
+    background_image: '../../placeholder.png',
     rating: 5.0,
     platforms: ['PC', 'PS']
   },
@@ -21,7 +21,7 @@ const testFavourite: CardWithFavouriteFlag = {
     id: 1,
     name: 'Best game',
     released: 2022,
-    background_image: 'placeholder.png',
+    background_image: '../../placeholder.png',
     rating: 5.0,
     platforms: ['PC', 'PS']
   },

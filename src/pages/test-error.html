@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet/less" type="text/css" href="/src/Clean.less" />
+    <link rel="stylesheet/less" type="text/css" href="/src/pages/Page.less" />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/pages/PageContent.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/addGroupBlock/AddGroupBlock.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/lists/SidePanelList.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/SidePanel.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/lists/UpPanelList.less"
+    />
+    <link
+      rel="stylesheet/less"
+      type="text/css"
+      href="/src/components/common/panels/UpPanel.less"
+    />
+    <link rel="stylesheet/less" type="text.css" href="/src/pages/ErrorPage.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <title>Document</title>
+  </head>
+  <!-- test -->
+  <body>
+    <div class="panel-side">
+      <ul class="panel-side__list">
+        <li class="panel-side__list-item">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Избранное</div>
+        </li>
+        <li class="panel-side__list-item panel-side__list-item_active">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Все</div>
+        </li>
+        <li class="panel-side__list-item">
+          <div class="panel-side__list-marker"></div>
+          <div class="panel-side__list-text">Test</div>
+        </li>
+      </ul>
+      <div class="add-group-block">
+        <div class="add-group-block__add">+</div>
+        <input class="add-group-block__input" placeholder="Группа..." />
+      </div>
+    </div>
+    <div class="panel-up">
+      <div class="panel-up__img"></div>
+      <div class="panel-up__text">Game Store</div>
+      <div class="panel-up__list">
+        <div class="panel-up__list-item panel-up__list-item_active">PS</div>
+        <div class="panel-up__list-item">XBOX</div>
+        <div class="panel-up__list-item">PC</div>
+        <div class="panel-up__list-item">Nintendo</div>
+      </div>
+    </div>
+    <div class="page">
+      <div class="page-content">
+        <div class="error-msg">Error loading content</div>
+      </div>
+    </div>
+  </body>
+</html>
