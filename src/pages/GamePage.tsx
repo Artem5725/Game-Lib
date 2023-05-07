@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './PageContent.less';
 import MainInfo from '../components/gamePage/mainInfo/MainInfo';
 import ScrollHorizontal from '../components/common/scroll/ScrollHorizontal';
@@ -8,6 +8,8 @@ import UserComment from '../components/gamePage/userComment/UserComment';
 import Card from '../components/common/card/Card';
 import { tipsHoc } from '../components/common/tips/Tips';
 import { useParams } from 'react-router-dom';
+import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { useNavigate } from 'react-router-dom';
 
 // TODO placeholder
 const commentSingle1 = {
@@ -20,15 +22,6 @@ const commentSingle2 = {
 };
 const comments = [commentSingle1, commentSingle2];
 
-const test = {
-  id: 1,
-  name: 'Best game',
-  released: 2022,
-  background_image: '../../placeholder.png',
-  rating: 5.0,
-  platforms: ['PC', 'PS']
-};
-
 const achivement = {
   description: 'finish 1 location',
   image: '../../placeholder.png',
@@ -39,6 +32,48 @@ const achivement = {
 
 const GamePage: React.FC<{}> = (_props) => {
   const { gameId } = useParams();
+
+  const navigate = useNavigate();
+
+  const onCardClick = useCallback((id: number) => {
+    navigate(`/game/${id}`);
+  }, []);
+
+  // TODO из фетча стора по blockname
+  // TODO placeholder
+  const testFavourite: MainCardInfo = {
+    cardInfo: {
+      id: 1,
+      name: 'Best game',
+      released: 2022,
+      background_image: '../../placeholder.png',
+      rating: 5.0,
+      platforms: ['PC', 'PS']
+    },
+    isFavourite: true,
+    isInAll: false,
+    onClickAction: onCardClick,
+    onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
+    onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
+  };
+  const test: MainCardInfo = {
+    cardInfo: {
+      id: 1,
+      name: 'Best game',
+      released: 2022,
+      background_image: '../../placeholder.png',
+      rating: 5.0,
+      platforms: ['PC', 'PS']
+    },
+    isFavourite: false,
+    isInAll: true,
+    onClickAction: onCardClick,
+    onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
+    onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
+  };
+
+  const cards: MainCardInfo[] = [test, test, testFavourite];
+
   // TODO подтягиваются фечами стора - доп инфа об игре по gameid
   const dlcs = [test, test];
   const series = [test, test];
@@ -61,16 +96,16 @@ const GamePage: React.FC<{}> = (_props) => {
 
   return (
     <div className="page-content">
-      <MainInfo game={test}></MainInfo>
+      <MainInfo game={test.cardInfo}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map((elem) => {
-          return <img src={elem} alt="Screenshot" />;
+          return <img key={elem} src={elem} alt="Screenshot" />;
         })}
       </ScrollHorizontal>
       <ScrollHorizontal>
         {achievements.map((elem, index) => {
           return tipsHoc(
-            <img src={elem.image} alt="Achievement" />,
+            <img key={elem.name} src={elem.image} alt="Achievement" />,
             <div>
               <p>{elem.name}</p>
               <p>{elem.description}</p>
@@ -81,12 +116,12 @@ const GamePage: React.FC<{}> = (_props) => {
       </ScrollHorizontal>
       <CardBlock name="DLC">
         {dlcs.map((elem) => {
-          return <Card card={elem} isFavourite={false} />;
+          return <Card key={elem.cardInfo.id} card={elem} />;
         })}
       </CardBlock>
       <CardBlock name="Игры серии">
         {series.map((elem) => {
-          return <Card card={elem} isFavourite={false} />;
+          return <Card key={elem.cardInfo.id} card={elem} />;
         })}
       </CardBlock>
       <CommentsBlock comments={comments}></CommentsBlock>

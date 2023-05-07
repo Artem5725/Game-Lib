@@ -11,7 +11,9 @@ const CommentsBlock: React.FC<Props> = ({ comments }) => {
   return (
     <div className="comment-block">
       {comments.map((elem) => {
-        return <SingleComment commentData={elem}></SingleComment>;
+        return (
+          <SingleComment key={elem.author} commentData={elem}></SingleComment>
+        );
       })}
     </div>
   );

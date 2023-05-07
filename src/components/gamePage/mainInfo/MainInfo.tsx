@@ -28,7 +28,11 @@ const MainInfo: React.FC<Props> = ({
       </div>
       <div className="main-info__platforms">
         {platforms.map((elem) => {
-          return <div className="main-info__platform">{elem}</div>;
+          return (
+            <div key={elem} className="main-info__platform">
+              {elem}
+            </div>
+          );
         })}
       </div>
     </div>

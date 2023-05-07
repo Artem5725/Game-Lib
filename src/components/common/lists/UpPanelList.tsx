@@ -12,6 +12,7 @@ const UpPanelList: React.FC<Props> = ({ items, active }) => {
       {items.map((elem) => {
         return (
           <div
+            key={elem}
             className={
               'panel-up__list-item' +
               (active === elem ? ' panel-up__list-item_active' : '')

@@ -90,9 +90,13 @@ export type CardInfo = {
   platforms: string[];
 };
 
-export type CardWithFavouriteFlag = {
-  card: CardInfo;
+export type MainCardInfo = {
+  cardInfo: CardInfo;
   isFavourite: boolean;
+  isInAll: boolean;
+  onClickAction: (id: number) => void;
+  onFavouriteChangeAction: (id: number) => void;
+  onAllChangeAction: (id: number) => void;
 };
 
 export type GameExtraInfo = {

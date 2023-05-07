@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './Clean.less';
 import SidePanel from './components/common/panels/SidePanel';
 import UpPanel from './components/common/panels/UpPanel';

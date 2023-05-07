@@ -12,12 +12,13 @@ const SidePanelList: React.FC<Props> = ({ items }) => {
       {items.map((elem) => {
         return (
           <NavLink
+            key={elem}
             to={`/user/${elem}`}
             className={({ isActive }) =>
               'panel-side__list-nav' + (isActive ? '_active' : '')
             }
           >
-            <li key={elem} className={'panel-side__list-item'}>
+            <li className={'panel-side__list-item'}>
               <div className="panel-side__list-marker" />
               <div className="panel-side__list-text">{elem}</div>
             </li>
