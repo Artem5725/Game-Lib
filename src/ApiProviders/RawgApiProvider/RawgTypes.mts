@@ -93,7 +93,7 @@ export type CardInfo = {
 export type MainCardInfo = {
   cardInfo: CardInfo;
   isFavourite: boolean;
-  isInAll: boolean;
+  isInGroup: boolean;
   onClickAction: (id: number) => void;
   onFavouriteChangeAction: (id: number) => void;
   onAllChangeAction: (id: number) => void;

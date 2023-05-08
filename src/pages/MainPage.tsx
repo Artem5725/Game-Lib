@@ -24,7 +24,7 @@ const MainPage: React.FC<{}> = (_props) => {
       platforms: ['PC', 'PS']
     },
     isFavourite: true,
-    isInAll: false,
+    isInGroup: false,
     onClickAction: onCardClick,
     onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
@@ -39,7 +39,7 @@ const MainPage: React.FC<{}> = (_props) => {
       platforms: ['PC', 'PS']
     },
     isFavourite: false,
-    isInAll: true,
+    isInGroup: true,
     onClickAction: onCardClick,
     onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
@@ -48,7 +48,7 @@ const MainPage: React.FC<{}> = (_props) => {
   const cards: MainCardInfo[] = [test, test, testFavourite];
 
   return (
-    <div className="page-content">
+    <div className="page-content main-page">
       <SearchLine />
       <CardBlock>
         {cards.map((elem) => {

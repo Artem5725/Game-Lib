@@ -14,7 +14,7 @@ const Card: React.FC<Props> = ({ card }) => {
         return;
       }
       //@ts-ignore
-      if (event.target.classList.contains('card__image-button-icon_check')) {
+      if (event.target.classList.contains('card__image-button-icon_group')) {
         card.onAllChangeAction(card.cardInfo.id);
         return;
       }
@@ -40,8 +40,8 @@ const Card: React.FC<Props> = ({ card }) => {
         </div>
         <div className="card__image-button card__image-button_all">
           <div
-            className={`card__image-button-icon card__image-button-icon_check ${
-              card.isInAll ? 'card__image-button-icon_check_active' : ''
+            className={`card__image-button-icon card__image-button-icon_group ${
+              card.isInGroup ? 'card__image-button-icon_group_active' : ''
             }`}
           />
         </div>

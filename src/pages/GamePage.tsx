@@ -51,7 +51,7 @@ const GamePage: React.FC<{}> = (_props) => {
       platforms: ['PC', 'PS']
     },
     isFavourite: true,
-    isInAll: false,
+    isInGroup: false,
     onClickAction: onCardClick,
     onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
@@ -66,7 +66,7 @@ const GamePage: React.FC<{}> = (_props) => {
       platforms: ['PC', 'PS']
     },
     isFavourite: false,
-    isInAll: true,
+    isInGroup: true,
     onClickAction: onCardClick,
     onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
@@ -95,7 +95,7 @@ const GamePage: React.FC<{}> = (_props) => {
   ];
 
   return (
-    <div className="page-content">
+    <div className="page-content game-page">
       <MainInfo game={test.cardInfo}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map((elem) => {

@@ -5,12 +5,14 @@
 @card-alternative-color-dark: rgba(0, 0, 0, 0.4);
 @card-base-back-color: rgba(255, 255, 255, 1);
 @card-hover-back-color: rgba(231, 236, 241, 0.8);
-@star-block-color: rgba(123, 123, 123, 0.5);
-@star-base-color: rgba(123, 123, 123, 0.7);
+@icon-block-color: rgba(123, 123, 123, 0.5);
+@icon-base-color: rgba(123, 123, 123, 0.7);
 @star-hover-color: rgba(237, 185, 41, 1);
 @star-active-color: rgba(223, 148, 27, 1);
 @check-hover-color: rgb(86, 212, 109);
 @check-active-color: rgba(13, 164, 41, 1);
+@cross-hover-color: rgba(215, 9, 9, 1);
+@cross-active-color: @icon-base-color;
 
 @adding-card-back-color: rgba(123, 123, 123, 0.7);
 @adding-card-plus-color: rgba(244, 244, 244, 1);
@@ -51,7 +53,7 @@
     z-index: 10;
     width: 30px;
     height: 30px;
-    background-color: @star-block-color;
+    background-color: @icon-block-color;
     border-radius: 50%;
 
     &_favourite {
@@ -66,7 +68,7 @@
 
     &-icon {
       margin: auto;
-      background-color: @star-base-color;
+      background-color: @icon-base-color;
       content: '';
       transition-duration: 0.5s;
 
@@ -85,19 +87,11 @@
         }
       }
 
-      &_check {
+      &_group {
         width: 100%;
         height: 100%;
-        mask: url('./check.svg') no-repeat 10% 50%;
-        -webkit-mask: url('./check.svg') no-repeat 10% 50%;
         mask-size: cover;
         -webkit-mask-size: cover;
-        &:hover {
-          background-color: @check-hover-color;
-        }
-        &_active {
-          background-color: @check-active-color;
-        }
       }
     }
   }
@@ -126,6 +120,29 @@
       content: '•';
       margin-left: 9px;
     }
+  }
+}
+
+.main-page .card__image-button-icon_group,
+.game-page .card__image-button-icon_group {
+  mask: url('./check.svg') no-repeat 10% 50%;
+  -webkit-mask: url('./check.svg') no-repeat 10% 50%;
+  &:hover {
+    background-color: @check-hover-color;
+  }
+  &_active {
+    background-color: @check-active-color;
+  }
+}
+
+.user-page .card__image-button-icon_group {
+  mask: url('./cross.svg') no-repeat 10% 50%;
+  -webkit-mask: url('./cross.svg') no-repeat 10% 50%;
+  &:hover {
+    background-color: @cross-hover-color;
+  }
+  &_active {
+    background-color: @cross-active-color;
   }
 }
 
