@@ -16,53 +16,50 @@ import { AccountInfo } from './FirebaseTypes';
 import { CardInfo } from '../RawgApiProvider/RawgTypes';
 
 /**
- * Класс реализует функционал для работы с базой данных аккаунтов на Firebase 
+ * Класс реализует функционал для работы с базой данных аккаунтов на Firebase
  */
 export class FirebaseAccountApi {
   private db: Firestore;
+  private uid: string;
 
   constructor(db: Firestore) {
     this.db = db;
+    this.uid = '';
   }
 
   /**
    * Метод-обертка для создания сслыки на документ с записью пользователя со всеми его группами
-   * @param {string} uid идентификатор пользователя
    * @returns возвращается ссылка на документ со всеми группами пользователя
    */
-  private docRefToUserGenerator(uid: string) {
-    return doc(this.db, 'users', uid);
+  private docRefToUserGenerator() {
+    return doc(this.db, 'users', this.uid);
   }
 
   /**
    * Метод-обертка для создания сслыки на документ с группами игр пользователя
-   * @param {string} uid идентификатор пользователя
    * @param {string} groupName название группы
    * @returns возвращается ссылка на документ с группой пользователя
    */
-  private docRefToGroupGenerator(uid: string, groupName: string) {
-    return doc(this.db, `users/${uid}/groups`, groupName);
+  private docRefToGroupGenerator(groupName: string) {
+    return doc(this.db, `users/${this.uid}/groups`, groupName);
   }
 
   /**
    * Метод-обертка для создания сслыки на коллекцию с группами игр пользователя
-   * @param {string} uid идентификатор пользователя
    * @returns возвращается ссылка на коллекцию с группами игр пользователя
    */
-  private collectionRefToUserGroupsGenerator(uid: string) {
-    return collection(this.db, `users/${uid}/groups`);
+  private collectionRefToUserGroupsGenerator() {
+    return collection(this.db, `users/${this.uid}/groups`);
   }
 
   /**
    * Метод формирует запись в таблице users о новом созданном аккаунте
    * Должен вызываться после signUp
-   * @param {string} uid идентификатор нового созданного аккаунта
    * @returns возвращает промис, который вернет сообщение о результате
    */
-  public newUserEntry(uid: string): Promise<string> {
-    const docUser = this.docRefToUserGenerator(uid);
-
-    return getDoc(docUser).then(res => {
+  public newUserEntry(): Promise<string> {
+    const docUser = this.docRefToUserGenerator();
+    return getDoc(docUser).then((res) => {
       if (res.exists()) {
         return 'User already exists';
       }
@@ -71,12 +68,12 @@ export class FirebaseAccountApi {
           const promises: Promise<void>[] = [];
 
           promises.push(
-            setDoc(this.docRefToGroupGenerator(uid, 'Все'), {
+            setDoc(this.docRefToGroupGenerator('Все'), {
               groupMembers: []
             })
           );
           promises.push(
-            setDoc(this.docRefToGroupGenerator(uid, 'Избранное'), {
+            setDoc(this.docRefToGroupGenerator('Избранное'), {
               groupMembers: []
             })
           );
@@ -88,13 +85,11 @@ export class FirebaseAccountApi {
 
   /**
    * Метод проверяет, создана ли уже группа, если нет, то создает новую пользовательскую группу игр
-   * @param {string} uid идентификатор аккаунта пользователя
    * @param {string} groupName название группы пользователя
    * @returns возвращает промис, который вернет сообщение о результате
    */
-  public newUserGroup(uid: string, groupName: string): Promise<string> {
-    const docRef = this.docRefToGroupGenerator(uid, groupName);
-
+  public newUserGroup(groupName: string): Promise<string> {
+    const docRef = this.docRefToGroupGenerator(groupName);
     return getDoc(docRef)
       .then(res => {
         if (res.exists()) {
@@ -107,7 +102,6 @@ export class FirebaseAccountApi {
 
   /**
    * Метод добавляет в группу новую игру или удаляет игру из группы, если группа есть
-   * @param {sring} uid идентификатор аккаунта пользователя
    * @param {string} groupName название группы
    * @param {CardInfo} groupMember информация о изменяемой игре
    * @param {boolean} shouldAdd флаг, определяющий, будет ли выполнено добавление или удаление
@@ -115,13 +109,11 @@ export class FirebaseAccountApi {
    * @returns возвращает промис, который вернет сообщение о результате
    */
   public changeGroupMember(
-    uid: string,
     groupName: string,
     groupMember: CardInfo,
     shouldAdd = true
   ): Promise<string> {
-    const docRef = this.docRefToGroupGenerator(uid, groupName);
-
+    const docRef = this.docRefToGroupGenerator(groupName);
     return getDoc(docRef)
       .then(res => {
         if (!res.exists()) {
@@ -156,15 +148,26 @@ export class FirebaseAccountApi {
 
   /**
    * Метод получает запись о группах пользователя из базы данных
-   * @param {string} uid идентификатор пользователя
    * @returns возвращается промис, который вернет запись о группах пользователя или null
    */
-  public getAccountGroupsByUid(uid: string): Promise<AccountInfo | null> {
-    const collectionRef = this.collectionRefToUserGroupsGenerator(uid);
+  public getAccountGroups(): Promise<AccountInfo | null> {
+    const collectionRef = this.collectionRefToUserGroupsGenerator();
     const groupsQuery = query(collectionRef);
 
     return getDocs(groupsQuery)
-      .then(res => this.mapFirebaseDataToAccountInfo(res))
-      .catch(_e => null);
+      .then((res) => {
+        return this.mapFirebaseDataToAccountInfo(res);
+      })
+      .catch((_e) => {
+        return null;
+      });
+  }
+
+  /**
+   * Метод используется для задания идентификатора аккаунта пользователя
+   * @param {string} uid идентификатор аккаунта пользвоателя 
+   */
+  public setUid(uid: string) {
+    this.uid = uid;
   }
 }

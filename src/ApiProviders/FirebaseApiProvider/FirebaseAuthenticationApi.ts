@@ -22,9 +22,11 @@ export class FirebaseAuthenticationApi {
    */
   public signIn(mail: string, password: string): Promise<string | void> {
     return signInWithEmailAndPassword(this.auth, mail, password)
-      .then(userCreds => userCreds.user.uid)
-      .catch(error => {
-        console.log(error);
+      .then((userCreds) => {
+        return userCreds.user.uid;
+      })
+      .catch((error) => {
+        console.log(error); // TODO заменить на ошибку
       });
   }
 
@@ -38,10 +40,10 @@ export class FirebaseAuthenticationApi {
     return createUserWithEmailAndPassword(this.auth, mail, password)
       .then(userCreds => 
         // TODO после создания аккаунта нужно сразу в базе данных для пользователя сделать запись
-        userCreds.user.uid
-      )
-      .catch(error => {
-        console.log(error);
+        return userCreds.user.uid;
+      })
+      .catch((error) => {
+        console.log(error); // TODO заменить на ошибку
       });
   }
 }

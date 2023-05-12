@@ -57,7 +57,6 @@ export class FirebaseCommentsApi {
    * @returns возвращает промис, который вернет сообщение о результате
    */
   public newGameComment(
-    // TODO пока можно перезаписывать комментарии
     gameId: string,
     uid: string,
     comment: string
