@@ -15,13 +15,9 @@ type UserGroupInfo = {
   groupMembers: CardInfo[];
 };
 
-
 export type UserGroupCardInfo = {
   groupName: string;
   card: CardInfo;
 };
 
-export type AccountInfo = {
-  groups: UserGroupInfo[];
-};
-
+export type AccountInfo = UserGroupInfo[];

@@ -13,7 +13,8 @@ import {
   Firestore
 } from 'firebase/firestore';
 import { AccountInfo } from './FirebaseTypes';
-import { CardInfo } from '../RawgApiProvider/RawgTypes';
+import { CardInfo } from '../RawgApiProvider/RawgTypes.mjs';
+import { customErrorsMap } from '../../helpers/Errors';
 
 /**
  * Класс реализует функционал для работы с базой данных аккаунтов на Firebase
@@ -55,13 +56,13 @@ export class FirebaseAccountApi {
   /**
    * Метод формирует запись в таблице users о новом созданном аккаунте
    * Должен вызываться после signUp
-   * @returns возвращает промис, который вернет сообщение о результате
+   * @returns возвращает промис, который вернет сообщение об успехе или выбросит ошибку
    */
-  public newUserEntry(): Promise<string> {
+  public newUserEntry(): Promise<string | void> {
     const docUser = this.docRefToUserGenerator();
     return getDoc(docUser).then((res) => {
       if (res.exists()) {
-        return 'User already exists';
+        throw new Error(customErrorsMap.fbNewAccountAlreadyExists);
       }
       return setDoc(docUser, {})
         .then(() => {
@@ -77,55 +78,67 @@ export class FirebaseAccountApi {
               groupMembers: []
             })
           );
-          return Promise.all(promises).then(() => 'User entry set');
+          return Promise.all(promises).then(() => {
+            return customErrorsMap.success;
+          });
         })
-        .catch(_e => 'Error adding user entry');
+        .catch((_e) => {
+          throw new Error(customErrorsMap.fbAddingAccountFail);
+        });
     });
   }
 
   /**
    * Метод проверяет, создана ли уже группа, если нет, то создает новую пользовательскую группу игр
    * @param {string} groupName название группы пользователя
-   * @returns возвращает промис, который вернет сообщение о результате
+   * @returns возвращает промис, который вернет сообщение об успехе или выбросит ошибку
    */
-  public newUserGroup(groupName: string): Promise<string> {
+  public newUserGroup(groupName: string): Promise<string | void> {
     const docRef = this.docRefToGroupGenerator(groupName);
     return getDoc(docRef)
       .then(res => {
         if (res.exists()) {
-          return 'Group exists';
+          throw new Error(customErrorsMap.fbNewGroupAlreadyExists);
         }
-        return setDoc(docRef, { groupMembers: [] }).then(() => 'Group added');
+        return setDoc(docRef, { groupMembers: [] }).then(() => {
+          return customErrorsMap.success;
+        });
       })
-      .catch(_e => 'Error adding group');
+      .catch((_e) => {
+        throw new Error(customErrorsMap.fbAddingGroupFail);
+      });
   }
 
   /**
    * Метод добавляет в группу новую игру или удаляет игру из группы, если группа есть
    * @param {string} groupName название группы
-   * @param {CardInfo} groupMember информация о изменяемой игре
+   * @param {CardInfo} groupMember информация о игре, которая добавляется в группу или удаляется из нее
    * @param {boolean} shouldAdd флаг, определяющий, будет ли выполнено добавление или удаление
    * true - добавить, false - удалить
-   * @returns возвращает промис, который вернет сообщение о результате
+   * @returns возвращает промис, который вернет сообщение об успехе или выбросит ошибку
    */
   public changeGroupMember(
     groupName: string,
     groupMember: CardInfo,
-    shouldAdd = true
-  ): Promise<string> {
+    shouldAdd: boolean = true
+  ): Promise<string | void> {
     const docRef = this.docRefToGroupGenerator(groupName);
     return getDoc(docRef)
       .then(res => {
         if (!res.exists()) {
-          return 'Group doesn\'t exist';
+          throw new Error(customErrorsMap.fbNoRequiredGroup);
         }
         return updateDoc(docRef, {
-          groupMembers: shouldAdd ?
-            arrayUnion(groupMember) :
-            arrayRemove(groupMember)
-        }).then(() => 'Group member changed');
+          groupMembers: shouldAdd
+            ? arrayUnion(groupMember)
+            : arrayRemove(groupMember)
+        }).then(() => {
+          return customErrorsMap.success;
+        });
       })
-      .catch(_e => 'Error changing member of group');
+      .catch((_e) => {
+        throw new Error(customErrorsMap.fbChangingGroupMemberFail);
+      });
   }
 
   /**
@@ -135,10 +148,9 @@ export class FirebaseAccountApi {
    * @returns возвращается объект, содержащий группы пользователя
    */
   private mapFirebaseDataToAccountInfo(data: DocumentData): AccountInfo {
-    const accountInfo: AccountInfo = { groups: [] };
-
+    const accountInfo: AccountInfo = [];
     data.forEach((entry: any) => {
-      accountInfo.groups.push({
+      accountInfo.push({
         groupName: entry.id,
         groupMembers: entry.data().groupMembers
       });
@@ -148,24 +160,28 @@ export class FirebaseAccountApi {
 
   /**
    * Метод получает запись о группах пользователя из базы данных
-   * @returns возвращается промис, который вернет запись о группах пользователя или null
+   * @returns возвращается промис, который вернет запись о группах пользователя или выбросит ошибку
    */
-  public getAccountGroups(): Promise<AccountInfo | null> {
+  public getAccountGroups(): Promise<AccountInfo | void> {
     const collectionRef = this.collectionRefToUserGroupsGenerator();
     const groupsQuery = query(collectionRef);
 
     return getDocs(groupsQuery)
       .then((res) => {
-        return this.mapFirebaseDataToAccountInfo(res);
+        const userGroups = this.mapFirebaseDataToAccountInfo(res);
+        if (userGroups.length === 0) {
+          throw new Error(customErrorsMap.fbLoadingAccountGroupsZeroFound);
+        }
+        return userGroups;
       })
       .catch((_e) => {
-        return null;
+        throw new Error(customErrorsMap.fbLoadingAccountGroupsFail);
       });
   }
 
   /**
    * Метод используется для задания идентификатора аккаунта пользователя
-   * @param {string} uid идентификатор аккаунта пользвоателя 
+   * @param {string} uid идентификатор аккаунта пользвоателя
    */
   public setUid(uid: string) {
     this.uid = uid;
