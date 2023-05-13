@@ -4,7 +4,7 @@ import './Tips.less';
 export function tipsHoc(
   elem: JSX.Element,
   tip: JSX.Element,
-  isLeft: boolean = true
+  isLeft = true
 ): JSX.Element {
   return (
     <div className="tip-block">

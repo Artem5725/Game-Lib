@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useCallback } from 'react';
 import './Card.less';
-import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 
 type Props = {
   card: MainCardInfo;
@@ -49,13 +50,11 @@ const Card: React.FC<Props> = ({ card }) => {
       <div className="card__mark">{card.cardInfo.rating}</div>
       <div className="card__name">{card.cardInfo.name}</div>
       <div className="card__platforms">
-        {card.cardInfo.platforms.map((elem) => {
-          return (
-            <div key={elem} className="card__platform">
-              {elem}
-            </div>
-          );
-        })}
+        {card.cardInfo.platforms.map(elem => (
+          <div key={elem} className="card__platform">
+            {elem}
+          </div>
+        ))}
       </div>
     </div>
   );

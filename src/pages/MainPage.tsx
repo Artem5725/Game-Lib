@@ -3,10 +3,10 @@ import './PageContent.less';
 import SearchLine from '../components/mainPage/searchLine/SearchLine';
 import Card from '../components/common/card/Card';
 import CardBlock from '../components/common/cardBlock/CardBlock';
-import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes';
 import { useNavigate } from 'react-router-dom';
 
-const MainPage: React.FC<{}> = (_props) => {
+const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const onCardClick = useCallback((id: number) => {
     navigate(`/game/${id}`);
@@ -51,9 +51,9 @@ const MainPage: React.FC<{}> = (_props) => {
     <div className="page-content main-page">
       <SearchLine />
       <CardBlock>
-        {cards.map((elem) => {
-          return <Card key={elem.cardInfo.id} card={elem} />;
-        })}
+        {cards.map(elem => (
+          <Card key={elem.cardInfo.id} card={elem} />
+        ))}
       </CardBlock>
     </div>
   );

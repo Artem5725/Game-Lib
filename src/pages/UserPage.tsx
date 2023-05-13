@@ -3,11 +3,11 @@ import './PageContent.less';
 import Card from '../components/common/card/Card';
 import CardAdd from '../components/common/card/CardAdd';
 import CardBlock from '../components/common/cardBlock/CardBlock';
-import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const UserPage: React.FC<{}> = (_props) => {
+const UserPage: React.FC = () => {
   const { groupName } = useParams();
 
   const navigate = useNavigate();
@@ -53,9 +53,9 @@ const UserPage: React.FC<{}> = (_props) => {
   return (
     <div className="page-content user-page">
       <CardBlock name={groupName ?? ''}>
-        {cards.map((elem) => {
-          return <Card key={elem.cardInfo.id} card={elem} />;
-        })}
+        {cards.map(elem => (
+          <Card key={elem.cardInfo.id} card={elem} />
+        ))}
         <CardAdd />
       </CardBlock>
     </div>

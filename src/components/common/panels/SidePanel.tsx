@@ -6,13 +6,11 @@ import AddGroupBlock from './addGroupBlock/AddGroupBlock';
 // TODO placeholder
 const itemsPlaceholder = ['Все', 'Избранное'];
 
-const SidePanel: React.FC<any> = (_props) => {
-  return (
-    <div className="panel-side">
-      <SidePanelList items={itemsPlaceholder} />
-      <AddGroupBlock />
-    </div>
-  );
-};
+const SidePanel: React.FC = () => (
+  <div className="panel-side">
+    <SidePanelList items={itemsPlaceholder} />
+    <AddGroupBlock />
+  </div>
+);
 
 export default React.memo(SidePanel);

@@ -7,10 +7,10 @@ import ErrorPage from './ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 import { errorsMap } from '../helpers/Errors';
 
-const Page: React.FC<any> = (_props) => {
-  // TODO селектить ошибку из стора
+const Page: React.FC = () => 
+// TODO селектить ошибку из стора
 
-  return (
+  (
     <div className="page">
       <Routes>
         <Route index path="/search?" element={<MainPage />}></Route>
@@ -22,7 +22,8 @@ const Page: React.FC<any> = (_props) => {
         ></Route>
       </Routes>
     </div>
-  );
-};
+  )
+
+;
 
 export default React.memo(Page);

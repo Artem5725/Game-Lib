@@ -1,7 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
 import './SearchLine.less';
 
-const SearchLine: React.FC<{}> = (_props) => {
+const SearchLine: React.FC = () => {
+  const [isActive, setIsActive] = useState(false);
+  const refSearch = useRef(null);
   const startSearch = useCallback(
     (_event: React.MouseEvent<HTMLDivElement>) => {
       if (refSearch.current) {
@@ -13,16 +15,15 @@ const SearchLine: React.FC<{}> = (_props) => {
   );
   const cleanInput = useCallback((_event: React.MouseEvent<HTMLDivElement>) => {
     if (refSearch.current) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       refSearch.current.value = '';
     }
   }, []);
-  const [isActive, setIsActive] = useState(false);
-  const refSearch = useRef(null);
 
   return (
     <div
-      className={'search-line' + (isActive ? ' search-line_active' : '')}
+      className={`search-line${isActive ? ' search-line_active' : ''}`}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}
     >

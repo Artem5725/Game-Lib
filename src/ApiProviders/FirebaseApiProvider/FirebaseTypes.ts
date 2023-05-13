@@ -1,4 +1,4 @@
-import { CardInfo } from '../RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../RawgApiProvider/RawgTypes';
 
 export type CommentFirebase = {
   author: string;

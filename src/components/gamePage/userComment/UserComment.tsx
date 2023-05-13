@@ -2,7 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import './UserComment.less';
 
 // TODO через проп прокинуть колбэк для возврата введенного комента в строку
-const UserComment: React.FC<any> = (props) => {
+const UserComment: React.FC = () => {
+  const refComment = useRef(null);
   const submitComment = useCallback(
     (_event: React.MouseEvent<HTMLButtonElement>) => {
       if (refComment.current) {
@@ -12,7 +13,7 @@ const UserComment: React.FC<any> = (props) => {
     []
   );
 
-  const refComment = useRef(null);
+
 
   return (
     <div className="user-comment">

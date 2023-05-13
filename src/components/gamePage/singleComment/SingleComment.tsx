@@ -9,13 +9,11 @@ type Props = {
 
 const SingleComment: React.FC<Props> = ({
   commentData: { author, comment }
-}) => {
-  return (
-    <div className="comment-block__comment single-comment">
-      <div className="single-comment__username">{author}</div>
-      <div className="single-comment__comment">{comment}</div>
-    </div>
-  );
-};
+}) => (
+  <div className="comment-block__comment single-comment">
+    <div className="single-comment__username">{author}</div>
+    <div className="single-comment__comment">{comment}</div>
+  </div>
+);
 
 export default React.memo(SingleComment);

@@ -63,26 +63,19 @@ export class FirebaseCommentsApi {
     comment: string
   ): Promise<string> {
     const docRef = this.docRefToGameCommentsGenerator(gameId);
+
     return getDoc(docRef)
-      .then((res) => {
+      .then(res => {
         if (res.exists()) {
           return setDoc(this.docRefToUserCommentGenerator(gameId, uid), {
             comment
-          }).then(() => {
-            return 'Comment added';
-          });
+          }).then(() => 'Comment added');
         }
-        return setDoc(docRef, {}).then(() => {
-          return setDoc(this.docRefToUserCommentGenerator(gameId, uid), {
-            comment
-          }).then(() => {
-            return 'Comment added';
-          });
-        });
+        return setDoc(docRef, {}).then(() => setDoc(this.docRefToUserCommentGenerator(gameId, uid), {
+          comment
+        }).then(() => 'Comment added'));
       })
-      .catch((_e) => {
-        return 'Error adding comment';
-      });
+      .catch(_e => 'Error adding comment');
   }
 
   /**
@@ -97,6 +90,7 @@ export class FirebaseCommentsApi {
       gameId,
       comments: []
     };
+
     data.forEach((entry: any) => {
       gameComments.comments.push({
         comment: entry.data().comment,
@@ -114,12 +108,9 @@ export class FirebaseCommentsApi {
   public getCommentsByGameId(gameId: string): Promise<GameComments | null> {
     const collectionRef = this.collectionRefToGameCommentsGenerator(gameId);
     const groupsQuery = query(collectionRef);
+
     return getDocs(groupsQuery)
-      .then((res) => {
-        return this.mapFirebaseDataToGameComments(res, gameId);
-      })
-      .catch((_e) => {
-        return null;
-      });
+      .then(res => this.mapFirebaseDataToGameComments(res, gameId))
+      .catch(_e => null);
   }
 }
