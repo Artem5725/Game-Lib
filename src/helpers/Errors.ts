@@ -15,5 +15,7 @@ export const customErrorsMap = {
   fbNoGameCommentsYet: 'На игру еще нет обзоров',
   fbChangingCommentFail: 'Не удалось изменить обзор',
   rawgLoadGameExtraInfoFail:
-    'Не удалось получить дополнительную информацию об игре' // TODO ...
+    'Не удалось получить дополнительную информацию об игре',
+  rawgLoadGamesOnRequestFail: 'Не выполнить поиск',
+  rawgNoGamesOnRequestFound: 'Игр по запросу не найдено' // TODO ...
 };
