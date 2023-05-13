@@ -27,7 +27,7 @@ const reducer = (state = initialState, action: GroupsAction): GroupsState => {
       ];
     }
     case groups.GROUPS_MEMBER_ADDED: {
-      const stateCopy: AccountInfo = structuredClone(state);
+      const stateCopy: GroupsState = structuredClone(state);
       const requiredGroupLink = stateCopy.find((elem) => {
         return (
           elem.groupName === (action.payload as UserGroupCardInfo).groupName
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action: GroupsAction): GroupsState => {
       return stateCopy;
     }
     case groups.GROUPS_MEMBER_REMOVED: {
-      const stateCopy: AccountInfo = structuredClone(state);
+      const stateCopy: GroupsState = structuredClone(state);
       const requiredGroupLink = stateCopy.find((elem) => {
         return (
           elem.groupName === (action.payload as UserGroupCardInfo).groupName

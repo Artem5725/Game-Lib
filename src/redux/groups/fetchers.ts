@@ -1,5 +1,4 @@
-// фетч - создание новой записи о пользователе
-import { firebaseProveder } from '../store/apiProviders';
+import { firebaseProvider } from '../store/apiProviders';
 import * as groupActions from './actions';
 import { DispatchType, GetStateType } from '../store/store';
 import { errorsMessageChanged } from '../shared/actions';
@@ -15,11 +14,11 @@ export async function fetchLoadUserGroups(
   _getState: GetStateType
 ) {
   dispatch(groupActions.groupsLoading());
-  firebaseProveder.accountsProvider
+  firebaseProvider.accountsProvider
     .getAccountGroups()
-    .then((groups) => {
-      if (groups) {
-        dispatch(groupActions.groupsLoaded(groups));
+    .then((accountGroups) => {
+      if (accountGroups) {
+        dispatch(groupActions.groupsLoaded(accountGroups));
       }
     })
     .catch((error: Error) => {
@@ -37,7 +36,7 @@ export function fetchSendNewGroupAddedWrapper(groupName: string) {
     dispatch: DispatchType,
     _getState: GetStateType
   ) {
-    firebaseProveder.accountsProvider
+    firebaseProvider.accountsProvider
       .newUserGroup(groupName)
       .then((_res) => {
         dispatch(groupActions.groupsAddedNew(groupName));
@@ -66,7 +65,7 @@ export function fetchSendChangeGroupMemberWrapper(
     dispatch: DispatchType,
     _getState: GetStateType
   ) {
-    firebaseProveder.accountsProvider
+    firebaseProvider.accountsProvider
       .changeGroupMember(groupName, groupMember, shouldAdd)
       .then((_res) => {
         dispatch(
@@ -90,7 +89,7 @@ export function fetchInitializeNewUser(
   dispatch: DispatchType,
   _getState: GetStateType
 ) {
-  firebaseProveder.accountsProvider
+  firebaseProvider.accountsProvider
     .newUserEntry()
     .then((_res) => {
       // @ts-ignore

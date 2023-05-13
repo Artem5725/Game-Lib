@@ -5,10 +5,7 @@ export type CommentFirebase = {
   comment: string;
 };
 
-export type GameComments = {
-  gameId: string;
-  comments: CommentFirebase[];
-};
+export type GameComments = CommentFirebase[];
 
 type UserGroupInfo = {
   groupName: string;

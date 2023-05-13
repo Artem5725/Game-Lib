@@ -10,5 +10,8 @@ export const customErrorsMap = {
   fbNewGroupAlreadyExists: 'Группа уже существует',
   fbChangingGroupMemberFail: 'Не удалось изменить участников группы',
   fbNewAccountAlreadyExists: 'Аккаунт уже существует',
-  fbAddingAccountFail: 'Не удалось создать запись для нового аккаунта' // TODO ...
+  fbAddingAccountFail: 'Не удалось создать запись для нового аккаунта',
+  fbLoadingGameCommentsFail: 'Не удалось загрузить комментарии к игре',
+  fbNoGameCommentsYet: 'На игру еще нет обзоров',
+  fbChangingCommentFail: 'Не удалось изменить обзор' // TODO ...
 };
