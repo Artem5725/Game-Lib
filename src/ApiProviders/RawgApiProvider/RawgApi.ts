@@ -1,3 +1,4 @@
+import { customErrorsMap } from '../../helpers/Errors.js';
 import {
   RawgScreenshotInfo,
   RawgGameInfo,
@@ -38,10 +39,12 @@ export class RawgApiProvider {
   /**
    * Метод получает весь необходимый набор дополнительной информации для игры.
    * Обертка над getGameExtraInfo
-   * @param {number} game_id идентификатор игры, для которой нужно получить дополнительную информацию
-   * @returns промис, результатом которого будет информация, собранная об игре
+   * @param {number} gameId идентификатор игры, для которой нужно получить дополнительную информацию
+   * @returns промис, результатом которого будет информация, собранная об игре. 
+   * Если ни один из запросов на получение дополнительной информации об игре не завершится успехом,
+   * то будет выброшена ошибка
    */
-  public loadGameInfo(game_id: number): Promise<GameExtraInfo> {
+  public loadGameInfo(gameId: number): Promise<GameExtraInfo | void> {
     const gameInfo: GameExtraInfo = {
       screenshots: [],
       achievements: [],
@@ -52,42 +55,43 @@ export class RawgApiProvider {
     const cardInfoPromises: Promise<void>[] = [];
 
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgScreenshotInfo>(game_id, 'screenshots')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgScreenshotInfo>(gameId, 'screenshots').then(
+        ({ results }) => {
           gameInfo.screenshots = this.mapScreenshotInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgAchievementsInfo>(game_id, 'achievements')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgAchievementsInfo>(gameId, 'achievements').then(
+        ({ results }) => {
           gameInfo.achievements = this.mapAchievementsInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgGameInfo>(game_id, 'additions')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgGameInfo>(gameId, 'additions').then(
+        ({ results }) => {
           gameInfo.dlc = this.mapCardInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgGameInfo>(game_id, 'game-series')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgGameInfo>(gameId, 'game-series').then(
+        ({ results }) => {
           gameInfo.serieGames = this.mapCardInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
-    return Promise.allSettled(cardInfoPromises).then(_res => gameInfo);
+    return Promise.allSettled(cardInfoPromises).then((requestsResults) => {
+      if (
+        requestsResults.findIndex((elem) => {
+          return elem.status === 'fulfilled';
+        }) === -1
+      ) {
+        throw new Error(customErrorsMap.rawgLoadGameExtraInfoFail);
+      }
+      return gameInfo;
+    });
   }
 
   /**

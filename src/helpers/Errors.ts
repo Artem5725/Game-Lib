@@ -13,5 +13,7 @@ export const customErrorsMap = {
   fbAddingAccountFail: 'Не удалось создать запись для нового аккаунта',
   fbLoadingGameCommentsFail: 'Не удалось загрузить комментарии к игре',
   fbNoGameCommentsYet: 'На игру еще нет обзоров',
-  fbChangingCommentFail: 'Не удалось изменить обзор' // TODO ...
+  fbChangingCommentFail: 'Не удалось изменить обзор',
+  rawgLoadGameExtraInfoFail:
+    'Не удалось получить дополнительную информацию об игре' // TODO ...
 };

@@ -2,19 +2,19 @@ import {
   CommentFirebase,
   GameComments
 } from '../../ApiProviders/FirebaseApiProvider/FirebaseTypes';
-import * as constants from './constants';
+import * as comments from './constants';
 
 export const commentsLoading = () => {
   return {
-    type: constants.COMMENTS_LOADING,
+    type: comments.COMMENTS_LOADING,
     payload: null
   };
 };
 
-export const commentsLoaded = (comments: GameComments) => {
+export const commentsLoaded = (gameComments: GameComments) => {
   return {
-    type: constants.COMMENTS_LOADED,
-    payload: comments
+    type: comments.COMMENTS_LOADED,
+    payload: gameComments
   };
 };
 
@@ -24,7 +24,7 @@ export const commentsUserCommentChanged = (author: string, comment: string) => {
     comment
   };
   return {
-    type: constants.COMMENTS_USER_COMMENT_CHANGED,
+    type: comments.COMMENTS_USER_COMMENT_CHANGED,
     payload: userComment
   };
 };
