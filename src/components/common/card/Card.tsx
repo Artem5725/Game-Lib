@@ -9,25 +9,29 @@ type Props = {
   card: MainCardInfo;
 };
 const Card: React.FC<Props> = ({ card }) => {
-  const onClickAction = useCallback(
-    (event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-      //@ts-ignore
-      if (event.target.classList.contains('card__image-button-icon_star')) {
-        card.onFavouriteChangeAction(card.cardInfo.id);
-        return;
-      }
-      //@ts-ignore
-      if (event.target.classList.contains('card__image-button-icon_group')) {
-        card.onAllChangeAction(card.cardInfo.id);
-        return;
-      }
-      card.onClickAction(card.cardInfo.id);
+  const onCardClick = useCallback(() => {
+    card.onClickAction(card.cardInfo.id);
+  }, []);
+
+  const onFavouriteClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      card.onFavouriteChangeAction(card.cardInfo.id);
     },
     []
   );
 
+  const onGroupClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      card.onGroupChangeAction(card.cardInfo.id);
+    },
+    []
+  );
+
+  // TODO в onclick надо прокидывать нормальную функцию спецом для
   return (
-    <div className="card" onClick={onClickAction}>
+    <div className="card" onClick={onCardClick}>
       <div className="card__image-space">
         <img
           className="card__image"
@@ -37,12 +41,12 @@ const Card: React.FC<Props> = ({ card }) => {
         <CardButton
           buttonImage="favourite"
           isActive={card.isFavourite}
-          onClick={onClickAction}
+          onClick={onFavouriteClick}
         />
         <CardButton
           buttonImage={card.isCrossForGroup ? 'cross' : 'check'}
           isActive={card.isInGroup}
-          onClick={onClickAction}
+          onClick={onGroupClick}
         />
       </div>
       <div className="card__mark">{card.cardInfo.rating}</div>

@@ -97,7 +97,7 @@ export type MainCardInfo = {
   isCrossForGroup: boolean;
   onClickAction: (id: number) => void;
   onFavouriteChangeAction: (id: number) => void;
-  onAllChangeAction: (id: number) => void;
+  onGroupChangeAction: (id: number) => void;
 };
 
 export type GameExtraInfo = {

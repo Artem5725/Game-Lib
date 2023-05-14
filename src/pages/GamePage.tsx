@@ -70,7 +70,7 @@ const GamePage: React.FC = () => {
     isFavourite: false,
     isInGroup: true,
     onClickAction: onCardClick,
-    onAllChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
+    onGroupChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
   };
 
