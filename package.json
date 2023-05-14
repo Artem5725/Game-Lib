@@ -10,6 +10,8 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "classnames": "^2.3.2",
+    "css-loader": "^6.7.3",
     "customize-cra": "^1.0.0",
     "firebase": "^9.21.0",
     "react": "^18.2.0",
@@ -18,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
+    "style-loader": "^3.3.2",
     "typedoc": "^0.24.6",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"

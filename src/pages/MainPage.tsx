@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import './PageContent.less';
+import styles from './PageContent.module.less';
 import SearchLine from '../components/mainPage/searchLine/SearchLine';
 import Card from '../components/common/card/Card';
 import CardBlock from '../components/common/cardBlock/CardBlock';
@@ -23,6 +23,7 @@ const MainPage: React.FC = () => {
       rating: 5.0,
       platforms: ['PC', 'PS']
     },
+    isCrossForGroup: false,
     isFavourite: true,
     isInGroup: false,
     onClickAction: onCardClick,
@@ -38,6 +39,7 @@ const MainPage: React.FC = () => {
       rating: 5.0,
       platforms: ['PC', 'PS']
     },
+    isCrossForGroup: false,
     isFavourite: false,
     isInGroup: true,
     onClickAction: onCardClick,
@@ -48,7 +50,7 @@ const MainPage: React.FC = () => {
   const cards: MainCardInfo[] = [test, test, testFavourite];
 
   return (
-    <div className="page-content main-page">
+    <div className={styles.pageContent}>
       <SearchLine />
       <CardBlock>
         {cards.map(elem => (

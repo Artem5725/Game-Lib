@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import './PageContent.less';
+import styles from './PageContent.module.less';
 import Card from '../components/common/card/Card';
 import CardAdd from '../components/common/card/CardAdd';
 import CardBlock from '../components/common/cardBlock/CardBlock';
@@ -26,6 +26,7 @@ const UserPage: React.FC = () => {
       rating: 5.0,
       platforms: ['PC', 'PS']
     },
+    isCrossForGroup: true,
     isFavourite: true,
     isInGroup: false,
     onClickAction: onCardClick,
@@ -41,6 +42,7 @@ const UserPage: React.FC = () => {
       rating: 5.0,
       platforms: ['PC', 'PS']
     },
+    isCrossForGroup: true,
     isFavourite: false,
     isInGroup: true,
     onClickAction: onCardClick,
@@ -51,7 +53,7 @@ const UserPage: React.FC = () => {
   const cards: MainCardInfo[] = [test, test, testFavourite];
 
   return (
-    <div className="page-content user-page">
+    <div className={styles.pageContent}>
       <CardBlock name={groupName ?? ''}>
         {cards.map(elem => (
           <Card key={elem.cardInfo.id} card={elem} />

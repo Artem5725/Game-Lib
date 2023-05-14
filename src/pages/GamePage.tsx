@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import './PageContent.less';
+import styles from './PageContent.module.less';
 import MainInfo from '../components/gamePage/mainInfo/MainInfo';
 import ScrollHorizontal from '../components/common/scroll/ScrollHorizontal';
 import CardBlock from '../components/common/cardBlock/CardBlock';
@@ -66,6 +66,7 @@ const GamePage: React.FC = () => {
       rating: 5.0,
       platforms: ['PC', 'PS']
     },
+    isCrossForGroup: false,
     isFavourite: false,
     isInGroup: true,
     onClickAction: onCardClick,
@@ -96,7 +97,7 @@ const GamePage: React.FC = () => {
   ];
 
   return (
-    <div className="page-content game-page">
+    <div className={styles.pageContent}>
       <MainInfo game={test.cardInfo}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map(elem => (

@@ -2,13 +2,15 @@
 import React, { useCallback } from 'react';
 import './Card.less';
 import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
+import Platforms from '../platforms/Platforms';
+import CardButton from './cardButton/CardButton';
 
 type Props = {
   card: MainCardInfo;
 };
 const Card: React.FC<Props> = ({ card }) => {
   const onClickAction = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
       //@ts-ignore
       if (event.target.classList.contains('card__image-button-icon_star')) {
         card.onFavouriteChangeAction(card.cardInfo.id);
@@ -32,30 +34,20 @@ const Card: React.FC<Props> = ({ card }) => {
           alt="Game main"
           src={card.cardInfo.background_image}
         />
-        <div className="card__image-button card__image-button_favourite">
-          <div
-            className={`card__image-button-icon card__image-button-icon_star ${
-              card.isFavourite ? 'card__image-button-icon_star_active' : ''
-            }`}
-          />
-        </div>
-        <div className="card__image-button card__image-button_all">
-          <div
-            className={`card__image-button-icon card__image-button-icon_group ${
-              card.isInGroup ? 'card__image-button-icon_group_active' : ''
-            }`}
-          />
-        </div>
+        <CardButton
+          buttonImage="favourite"
+          isActive={card.isFavourite}
+          onClick={onClickAction}
+        />
+        <CardButton
+          buttonImage={card.isCrossForGroup ? 'cross' : 'check'}
+          isActive={card.isInGroup}
+          onClick={onClickAction}
+        />
       </div>
       <div className="card__mark">{card.cardInfo.rating}</div>
       <div className="card__name">{card.cardInfo.name}</div>
-      <div className="card__platforms">
-        {card.cardInfo.platforms.map(elem => (
-          <div key={elem} className="card__platform">
-            {elem}
-          </div>
-        ))}
-      </div>
+      <Platforms platforms={card.cardInfo.platforms} platformClassName="card" />
     </div>
   );
 };

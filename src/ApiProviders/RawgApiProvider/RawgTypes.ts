@@ -94,6 +94,7 @@ export type MainCardInfo = {
   cardInfo: CardInfo;
   isFavourite: boolean;
   isInGroup: boolean;
+  isCrossForGroup: boolean;
   onClickAction: (id: number) => void;
   onFavouriteChangeAction: (id: number) => void;
   onAllChangeAction: (id: number) => void;

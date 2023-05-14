@@ -2,6 +2,7 @@ import React from 'react';
 import { CardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 import './MainInfo.less';
 import '../buyButton/BuyButton.less';
+import Platforms from '../../common/platforms/Platforms';
 
 type Props = {
   game: CardInfo;
@@ -13,25 +14,15 @@ const MainInfo: React.FC<Props> = ({
 }) => (
   <div className="main-info">
     <div className="main-info__wrapper">
-      <img
-        className="main-info__img"
-        src={background_image}
-        alt="Game main"
-      />
+      <img className="main-info__img" src={background_image} alt="Game main" />
       <div className="main-info__info">
         <div className="main-info__name">{name}</div>
         <button type="button" className="main-info__button buy-button">
-            Старт
+          Старт
         </button>
       </div>
     </div>
-    <div className="main-info__platforms">
-      {platforms.map(elem => (
-        <div key={elem} className="main-info__platform">
-          {elem}
-        </div>
-      ))}
-    </div>
+    <Platforms platforms={platforms} platformClassName="mainInfo" />
   </div>
 );
 
