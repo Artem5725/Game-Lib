@@ -6,7 +6,7 @@ import CardBlock from '../components/common/cardBlock/CardBlock';
 import CommentsBlock from '../components/gamePage/commentsBlock/CommentsBlock';
 import UserComment from '../components/gamePage/userComment/UserComment';
 import Card from '../components/common/card/Card';
-import { tipsHoc } from '../components/common/tips/Tips';
+import Tip from '../components/common/tip/Tip';
 import { useParams } from 'react-router-dom';
 import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes';
 import { useNavigate } from 'react-router-dom';
@@ -103,14 +103,20 @@ const GamePage: React.FC = () => {
         ))}
       </ScrollHorizontal>
       <ScrollHorizontal>
-        {achievements.map((elem, index) =>
-          tipsHoc(
-            <img key={elem.name} src={elem.image} alt="Achievement" />,
-            <div>
-              <p>{elem.name}</p>
-              <p>{elem.description}</p>
-            </div>,
-            index ? true : false
+        {achievements.map(
+          (elem, index) => (
+            <Tip
+              key={elem.name}
+              isLeft={index ? true : false}
+              tipElement={
+                <div>
+                  <p>{elem.name}</p>
+                  <p>{elem.description}</p>
+                </div>
+              }
+            >
+              <img key={elem.name} src={elem.image} alt="Achievement" />
+            </Tip>
           )
         )}
       </ScrollHorizontal>

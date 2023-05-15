@@ -1,0 +1,48 @@
+@import '../globals/Globals.less';
+
+.wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.element {
+  &_left {
+    &:hover + .tip_left {
+      right: 100%;
+      opacity: 1;
+    }
+  }
+
+  &_right {
+    &:hover + .tip_right {
+      left: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+.tip {
+  position: absolute;
+  z-index: 80;
+  opacity: 0;
+  color: @common-font-color;
+  .font-mixin(16px, 16px, 400);
+  background-color: @modal-window-content-background-color;
+  padding: 10px;
+  border-radius: 10px;
+
+  //htts://cubic-bezier.com/
+  &_left {
+    top: 0;
+    right: calc(200px + 100%);
+    transition: right 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
+      opacity 0.5s 0.2s linear;
+  }
+
+  &_right {
+    top: 0;
+    left: calc(200px + 100%);
+    transition: left 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
+      opacity 0.5s 0.2s linear;
+  }
+}
