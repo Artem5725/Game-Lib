@@ -58,14 +58,12 @@ const GamePage: React.FC = () => {
   //   onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
   // };
   const test: MainCardInfo = {
-    cardInfo: {
-      id: 1,
-      name: 'Best game',
-      released: 2022,
-      background_image: '../../placeholder.png',
-      rating: 5.0,
-      platforms: ['PC', 'PS']
-    },
+    id: 1,
+    name: 'Best game',
+    released: 2022,
+    background_image: '../../placeholder.png',
+    rating: 5.0,
+    platforms: ['PC', 'PS'],
     isCrossForGroup: false,
     isFavourite: false,
     isInGroup: true,
@@ -98,7 +96,7 @@ const GamePage: React.FC = () => {
 
   return (
     <div className={styles.pageContent}>
-      <MainInfo game={test.cardInfo}></MainInfo>
+      <MainInfo game={test}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map(elem => (
           <img key={elem} src={elem} alt="Screenshot" />
@@ -118,12 +116,12 @@ const GamePage: React.FC = () => {
       </ScrollHorizontal>
       <CardBlock name="DLC">
         {dlcs.map(elem => (
-          <Card key={elem.cardInfo.id} card={elem} />
+          <Card key={elem.id} {...elem} />
         ))}
       </CardBlock>
       <CardBlock name="Игры серии">
         {series.map(elem => (
-          <Card key={elem.cardInfo.id} card={elem} />
+          <Card key={elem.id} {...elem} />
         ))}
       </CardBlock>
       <CommentsBlock comments={comments}></CommentsBlock>

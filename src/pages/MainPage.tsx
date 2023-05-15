@@ -15,14 +15,12 @@ const MainPage: React.FC = () => {
   // TODO из фетча стора по запросу и платформе (в первый раз запрос автом сделать)
   // TODO placeholder
   const testFavourite: MainCardInfo = {
-    cardInfo: {
-      id: 1,
-      name: 'Best game',
-      released: 2022,
-      background_image: '../../placeholder.png',
-      rating: 5.0,
-      platforms: ['PC', 'PS']
-    },
+    id: 1,
+    name: 'Best game',
+    released: 2022,
+    background_image: '../../placeholder.png',
+    rating: 5.0,
+    platforms: ['PC', 'PS'],
     isCrossForGroup: false,
     isFavourite: true,
     isInGroup: false,
@@ -31,14 +29,12 @@ const MainPage: React.FC = () => {
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
   };
   const test: MainCardInfo = {
-    cardInfo: {
-      id: 1,
-      name: 'Best game',
-      released: 2022,
-      background_image: '../../placeholder.png',
-      rating: 5.0,
-      platforms: ['PC', 'PS']
-    },
+    id: 1,
+    name: 'Best game',
+    released: 2022,
+    background_image: '../../placeholder.png',
+    rating: 5.0,
+    platforms: ['PC', 'PS'],
     isCrossForGroup: false,
     isFavourite: false,
     isInGroup: true,
@@ -54,7 +50,7 @@ const MainPage: React.FC = () => {
       <SearchLine />
       <CardBlock>
         {cards.map(elem => (
-          <Card key={elem.cardInfo.id} card={elem} />
+          <Card key={elem.id} {...elem} />
         ))}
       </CardBlock>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './CardBlock.less';
+import styles from './CardBlock.module.less';
 
 type Props = {
   name?: string;
@@ -7,9 +7,9 @@ type Props = {
 };
 
 const CardBlock: React.FC<Props> = ({ name, children }) => (
-  <div className="card-block">
-    {name && <div className="card-block__name">{name}</div>}
-    <div className="card-block__gallery">{children}</div>
+  <div className={styles.cardBlock}>
+    {name && <div className={styles.name}>{name}</div>}
+    <div className={styles.gallery}>{children}</div>
   </div>
 );
 

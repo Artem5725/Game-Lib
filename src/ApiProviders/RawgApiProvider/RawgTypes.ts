@@ -90,15 +90,14 @@ export type CardInfo = {
   platforms: string[];
 };
 
-export type MainCardInfo = {
-  cardInfo: CardInfo;
+export interface MainCardInfo extends CardInfo {
   isFavourite: boolean;
   isInGroup: boolean;
   isCrossForGroup: boolean;
   onClickAction: (id: number) => void;
   onFavouriteChangeAction: (id: number) => void;
   onGroupChangeAction: (id: number) => void;
-};
+}
 
 export type GameExtraInfo = {
   screenshots: string[];

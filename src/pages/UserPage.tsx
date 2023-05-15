@@ -18,14 +18,12 @@ const UserPage: React.FC = () => {
   // TODO из фетча стора по blockname
   // TODO placeholder
   const testFavourite: MainCardInfo = {
-    cardInfo: {
-      id: 1,
-      name: 'Best game',
-      released: 2022,
-      background_image: '../../placeholder.png',
-      rating: 5.0,
-      platforms: ['PC', 'PS']
-    },
+    id: 1,
+    name: 'Best game',
+    released: 2022,
+    background_image: '../../placeholder.png',
+    rating: 5.0,
+    platforms: ['PC', 'PS'],
     isCrossForGroup: true,
     isFavourite: true,
     isInGroup: false,
@@ -34,14 +32,12 @@ const UserPage: React.FC = () => {
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
   };
   const test: MainCardInfo = {
-    cardInfo: {
-      id: 1,
-      name: 'Best game',
-      released: 2022,
-      background_image: '../../placeholder.png',
-      rating: 5.0,
-      platforms: ['PC', 'PS']
-    },
+    id: 1,
+    name: 'Best game',
+    released: 2022,
+    background_image: '../../placeholder.png',
+    rating: 5.0,
+    platforms: ['PC', 'PS'],
     isCrossForGroup: true,
     isFavourite: false,
     isInGroup: true,
@@ -56,7 +52,7 @@ const UserPage: React.FC = () => {
     <div className={styles.pageContent}>
       <CardBlock name={groupName ?? ''}>
         {cards.map(elem => (
-          <Card key={elem.cardInfo.id} card={elem} />
+          <Card key={elem.id} {...elem} />
         ))}
         <CardAdd />
       </CardBlock>

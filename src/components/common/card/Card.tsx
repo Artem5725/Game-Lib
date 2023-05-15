@@ -5,18 +5,28 @@ import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 import Platforms from '../platforms/Platforms';
 import CardButton from './cardButton/CardButton';
 
-type Props = {
-  card: MainCardInfo;
-};
-const Card: React.FC<Props> = ({ card }) => {
+type Props = MainCardInfo;
+const Card: React.FC<Props> = ({
+  id,
+  name,
+  background_image,
+  rating,
+  platforms,
+  isFavourite,
+  isCrossForGroup,
+  isInGroup,
+  onClickAction,
+  onFavouriteChangeAction,
+  onGroupChangeAction
+}) => {
   const onCardClick = useCallback(() => {
-    card.onClickAction(card.cardInfo.id);
+    onClickAction(id);
   }, []);
 
   const onFavouriteClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      card.onFavouriteChangeAction(card.cardInfo.id);
+      onFavouriteChangeAction(id);
     },
     []
   );
@@ -24,7 +34,7 @@ const Card: React.FC<Props> = ({ card }) => {
   const onGroupClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      card.onGroupChangeAction(card.cardInfo.id);
+      onGroupChangeAction(id);
     },
     []
   );
@@ -33,25 +43,21 @@ const Card: React.FC<Props> = ({ card }) => {
   return (
     <div className="card" onClick={onCardClick}>
       <div className="card__image-space">
-        <img
-          className="card__image"
-          alt="Game main"
-          src={card.cardInfo.background_image}
-        />
+        <img className="card__image" alt="Game main" src={background_image} />
         <CardButton
           buttonImage="favourite"
-          isActive={card.isFavourite}
+          isActive={isFavourite}
           onClick={onFavouriteClick}
         />
         <CardButton
-          buttonImage={card.isCrossForGroup ? 'cross' : 'check'}
-          isActive={card.isInGroup}
+          buttonImage={isCrossForGroup ? 'cross' : 'check'}
+          isActive={isInGroup}
           onClick={onGroupClick}
         />
       </div>
-      <div className="card__mark">{card.cardInfo.rating}</div>
-      <div className="card__name">{card.cardInfo.name}</div>
-      <Platforms platforms={card.cardInfo.platforms} platformClassName="card" />
+      <div className="card__mark">{rating}</div>
+      <div className="card__name">{name}</div>
+      <Platforms platforms={platforms} platformClassName="card" />
     </div>
   );
 };
