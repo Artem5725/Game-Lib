@@ -1,5 +1,5 @@
 import React from 'react';
-import './SidePanel.less';
+import styles from './SidePanel.module.less';
 import SidePanelList from '../lists/sideList/SidePanelList';
 import AddGroupBlock from './addGroupBlock/AddGroupBlock';
 
@@ -7,7 +7,7 @@ import AddGroupBlock from './addGroupBlock/AddGroupBlock';
 const itemsPlaceholder = ['Все', 'Избранное'];
 
 const SidePanel: React.FC = () => (
-  <div className="panel-side">
+  <div className={styles.panelSide}>
     <SidePanelList groupNames={itemsPlaceholder} />
     <AddGroupBlock />
   </div>

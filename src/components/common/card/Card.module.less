@@ -1,0 +1,41 @@
+@import '../globals/Globals.less';
+
+@card-color: rgba(0, 0, 0, 1);
+@card-base-back-color: rgba(255, 255, 255, 1);
+@card-hover-back-color: rgba(231, 236, 241, 0.8);
+
+.card {
+  width: @card-width;
+  min-height: @card-min-height;
+  height: fit-content;
+  padding: 12px;
+  border-radius: @card-border-radius;
+  background-color: @card-base-back-color;
+  color: @card-color;
+  &:hover {
+    background-color: @card-hover-back-color;
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  height: fit-content;
+  border-radius: inherit;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+.mark {
+  .font-mixin(16px, 20px, 400);
+  margin-bottom: 8px;
+}
+
+.name {
+  .font-mixin(20px, 26px, 600);
+  margin-bottom: 8px;
+}

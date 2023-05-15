@@ -1,5 +1,5 @@
 import React from 'react';
-import './Page.less';
+import styles from './Page.module.less';
 import GamePage from './GamePage';
 import MainPage from './MainPage';
 import UserPage from './UserPage';
@@ -11,7 +11,7 @@ const Page: React.FC = () =>
 // TODO селектить ошибку из стора
 
   (
-    <div className="page">
+    <div className={styles.page}>
       <Routes>
         <Route index path="/search?" element={<MainPage />}></Route>
         <Route path="/game/:gameId" element={<GamePage />}></Route>

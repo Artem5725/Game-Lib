@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import './UserComment.less';
+import styles from './UserComment.module.less';
 
 // TODO через проп прокинуть колбэк для возврата введенного комента в строку
 const UserComment: React.FC = () => {
@@ -13,20 +13,14 @@ const UserComment: React.FC = () => {
     []
   );
 
-
-
   return (
-    <div className="user-comment">
+    <div className={styles.userComment}>
       <textarea
         ref={refComment}
-        className="user-comment__field"
+        className={styles.field}
         placeholder="Комментарий..."
       ></textarea>
-      <button
-        onClick={submitComment}
-        className="user-comment__button"
-        type="button"
-      >
+      <button onClick={submitComment} className={styles.button} type="button">
         Подтвердить
       </button>
     </div>

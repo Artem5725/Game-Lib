@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useCallback } from 'react';
-import './Card.less';
+import styles from './Card.module.less';
 import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 import Platforms from '../platforms/Platforms';
 import CardButton from './cardButton/CardButton';
@@ -41,9 +41,9 @@ const Card: React.FC<Props> = ({
 
   // TODO в onclick надо прокидывать нормальную функцию спецом для
   return (
-    <div className="card" onClick={onCardClick}>
-      <div className="card__image-space">
-        <img className="card__image" alt="Game main" src={background_image} />
+    <div className={styles.card} onClick={onCardClick}>
+      <div className={styles.imageWrapper}>
+        <img className={styles.image} alt="Game main" src={background_image} />
         <CardButton
           buttonImage="favourite"
           isActive={isFavourite}
@@ -55,8 +55,8 @@ const Card: React.FC<Props> = ({
           onClick={onGroupClick}
         />
       </div>
-      <div className="card__mark">{rating}</div>
-      <div className="card__name">{name}</div>
+      <div className={styles.mark}>{rating}</div>
+      <div className={styles.name}>{name}</div>
       <Platforms platforms={platforms} platformClassName="card" />
     </div>
   );

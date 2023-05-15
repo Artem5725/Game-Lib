@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import './SearchLine.less';
+import styles from './SearchLine.module.less';
+import cn from 'classnames';
 
 const SearchLine: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
@@ -23,23 +24,13 @@ const SearchLine: React.FC = () => {
 
   return (
     <div
-      className={`search-line${isActive ? ' search-line_active' : ''}`}
+      className={cn(styles.searchLine, isActive && styles.searchLine_active)}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}
     >
-      <div
-        className="search-line__icon search-line__icon-search"
-        onClick={startSearch}
-      />
-      <input
-        className="search-line__input"
-        ref={refSearch}
-        placeholder="Поиск..."
-      />
-      <div
-        className="search-line__icon search-line__icon-cross"
-        onClick={cleanInput}
-      />
+      <div className={cn(styles.icon, styles.search)} onClick={startSearch} />
+      <input className={styles.input} ref={refSearch} placeholder="Поиск..." />
+      <div className={cn(styles.icon, styles.cross)} onClick={cleanInput} />
     </div>
   );
 };

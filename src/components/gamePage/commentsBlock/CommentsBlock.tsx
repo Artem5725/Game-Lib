@@ -1,5 +1,5 @@
 import React from 'react';
-import './CommentsBlock.less';
+import styles from'./CommentsBlock.module.less';
 import SingleComment from '../singleComment/SingleComment';
 import { CommentFirebase } from '../../../ApiProviders/FirebaseApiProvider/FirebaseTypes';
 
@@ -8,9 +8,9 @@ type Props = {
 };
 
 const CommentsBlock: React.FC<Props> = ({ comments }) => (
-  <div className="comment-block">
-    {comments.map(elem => (
-      <SingleComment key={elem.author} commentData={elem}></SingleComment>
+  <div className={styles.commentBlock}>
+    {comments.map(comment => (
+      <SingleComment key={comment.author} {...comment}></SingleComment>
     ))}
   </div>
 );

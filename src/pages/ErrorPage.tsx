@@ -1,13 +1,14 @@
 import React from 'react';
-import './ErrorPage.less';
+import styles from './ErrorPage.module.less';
+import stylespageContent from './PageContent.module.less';
 
 type Props = {
   errorText: string;
 };
 
 const ErrorPage: React.FC<Props> = ({ errorText }) => (
-  <div className="page-content">
-    <div className="error-msg">{`Ошибка: ${errorText}`}</div>
+  <div className={stylespageContent.pageContent}>
+    <div className={styles.errorMsg}>{`Ошибка: ${errorText}`}</div>
   </div>
 );
 

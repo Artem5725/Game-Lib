@@ -1,0 +1,37 @@
+@import '../../common/globals/Globals.less';
+
+@image-width: 690px;
+@image-height: 450px;
+
+.mainInfo {
+  width: 100%;
+  height: fit-content;
+  color: @common-font-color;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 30px;
+  margin-bottom: 30px;
+}
+
+.img {
+  width: @image-width;
+  height: @image-height;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  row-gap: 30px;
+  padding: 10px;
+  padding-top: 40px;
+}
+
+.name {
+  .font-mixin(26px, 26px, 600);
+}

@@ -96,7 +96,7 @@ const GamePage: React.FC = () => {
 
   return (
     <div className={styles.pageContent}>
-      <MainInfo game={test}></MainInfo>
+      <MainInfo {...test}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map(elem => (
           <img key={elem} src={elem} alt="Screenshot" />
