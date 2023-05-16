@@ -6,7 +6,7 @@ import {
   CardInfo,
   GameExtraInfo,
   AchievementsInfo
-} from './RawgTypes.mjs';
+} from './RawgTypes';
 
 /**
  * Реализует функционал получения данных об играх через api Rawg
@@ -31,10 +31,8 @@ export class RawgApiProvider {
     pageNumber: number
   ) {
     return this.searchGames(searchRequest, parentPlatformId, pageNumber)
-      .then(({ results }) => {
-        return this.mapCardInfo(results);
-      })
-      .catch((error) => console.log(error)); // TODO check error
+      .then(({ results }) => this.mapCardInfo(results))
+      .catch(error => console.log(error)); // TODO check error
   }
 
   /**
@@ -58,7 +56,7 @@ export class RawgApiProvider {
         .then(({ results }) => {
           gameInfo.screenshots = this.mapScreenshotInfo(results);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         })
     );
@@ -67,7 +65,7 @@ export class RawgApiProvider {
         .then(({ results }) => {
           gameInfo.achievements = this.mapAchievementsInfo(results);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         })
     );
@@ -76,7 +74,7 @@ export class RawgApiProvider {
         .then(({ results }) => {
           gameInfo.dlc = this.mapCardInfo(results);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         })
     );
@@ -85,11 +83,11 @@ export class RawgApiProvider {
         .then(({ results }) => {
           gameInfo.serieGames = this.mapCardInfo(results);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         })
     );
-    return Promise.allSettled(cardInfoPromises).then((_res) => gameInfo);
+    return Promise.allSettled(cardInfoPromises).then(_res => gameInfo);
   }
 
   /**
@@ -106,7 +104,7 @@ export class RawgApiProvider {
       encodeURI(
         `https://api.rawg.io/api/games/${gameId}/${infoType}?key=${this.key}`
       )
-    ).then((result) => {
+    ).then(result => {
       if (result.ok) {
         return result.json();
       }
@@ -129,15 +127,16 @@ export class RawgApiProvider {
     const searchPrecisly = true;
     const searchExact = true;
     const str = encodeURI(
-      `https://api.rawg.io/api/games?key=${this.key}` +
-        `&search=${request}` +
-        `&search_precise=${searchPrecisly}` +
+      `https://api.rawg.io/api/games?key=${this.key}`
+        + `&search=${request}`
+        + `&search_precise=${searchPrecisly}`
         //`&search_exact=${searchExact}` + // TODO для точности проверить
-        `&parent_platforms=${parentPlatformId}` +
-        `&page_size=${pageSize}` +
-        `&page=${pageNumber}`
+        + `&parent_platforms=${parentPlatformId}`
+        + `&page_size=${pageSize}`
+        + `&page=${pageNumber}`
     );
-    return fetch(str).then((result) => {
+
+    return fetch(str).then(result => {
       if (result.ok) {
         return result.json();
       }
@@ -160,16 +159,14 @@ export class RawgApiProvider {
    */
   private mapCardInfo(results: RawgGameInfo[]): CardInfo[] {
     return results.map(
-      ({ id, background_image, name, released, platforms, rating }) => {
-        return {
-          id,
-          background_image,
-          name,
-          released: new Date(released).getFullYear(),
-          platforms: platforms.map((elem) => elem.platform.name),
-          rating
-        };
-      }
+      ({ id, background_image, name, released, platforms, rating }) => ({
+        id,
+        background_image,
+        name,
+        released: new Date(released).getFullYear(),
+        platforms: platforms.map(elem => elem.platform.name),
+        rating
+      })
     );
   }
 
@@ -181,8 +178,10 @@ export class RawgApiProvider {
   private mapAchievementsInfo(
     results: RawgAchievementsInfo[]
   ): AchievementsInfo[] {
-    return results.map(({ description, image, name }) => {
-      return { description, image, name };
-    });
+    return results.map(({ description, image, name }) => ({
+      description,
+      image,
+      name
+    }));
   }
 }

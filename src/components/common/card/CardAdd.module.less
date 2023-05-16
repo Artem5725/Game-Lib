@@ -1,0 +1,45 @@
+@import '../globals/Globals.less';
+
+@adding-card-back-color: rgba(123, 123, 123, 0.7);
+@adding-card-plus-color: rgba(244, 244, 244, 1);
+
+.cardAdd {
+  width: @card-width;
+  min-height: @card-min-height;
+  height: fit-content;
+  border-radius: @card-border-radius;
+  position: relative;
+  background-color: @adding-card-back-color;
+
+  &:hover .addingSpace {
+    opacity: 1;
+  }
+}
+
+.addingSpace {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transition-duration: 0.8s;
+  opacity: 0;
+  &:hover {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
+
+.plusPart {
+  width: 140px;
+  height: 10px;
+  background-color: @adding-card-plus-color;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &:first-child {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}

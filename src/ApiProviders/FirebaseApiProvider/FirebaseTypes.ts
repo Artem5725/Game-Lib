@@ -1,13 +1,13 @@
-import { CardInfo } from "../RawgApiProvider/RawgTypes.mjs";
+import { CardInfo } from '../RawgApiProvider/RawgTypes';
 
-type Comment = {
+export type CommentFirebase = {
   author: string;
   comment: string;
 };
 
 export type GameComments = {
   gameId: string;
-  comments: Comment[];
+  comments: CommentFirebase[];
 };
 
 type UserGroupInfo = {

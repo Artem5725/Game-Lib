@@ -1,24 +1,17 @@
 import React from 'react';
-import './App.less';
-
+import './Clean.less';
+import SidePanel from './components/common/panels/SidePanel';
+import UpPanel from './components/common/panels/UpPanel';
+import Page from './pages/Page';
+import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <SidePanel />
+      <UpPanel />
+      <Page />
+    </BrowserRouter>
   );
 }
 
-export default App;
+export default React.memo(App);

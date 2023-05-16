@@ -13,7 +13,7 @@ import {
   Firestore
 } from 'firebase/firestore';
 import { AccountInfo } from './FirebaseTypes';
-import { CardInfo } from '../RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../RawgApiProvider/RawgTypes';
 
 /**
  * Класс реализует функционал для работы с базой данных аккаунтов на Firebase 
@@ -61,13 +61,15 @@ export class FirebaseAccountApi {
    */
   public newUserEntry(uid: string): Promise<string> {
     const docUser = this.docRefToUserGenerator(uid);
-    return getDoc(docUser).then((res) => {
+
+    return getDoc(docUser).then(res => {
       if (res.exists()) {
         return 'User already exists';
       }
       return setDoc(docUser, {})
         .then(() => {
           const promises: Promise<void>[] = [];
+
           promises.push(
             setDoc(this.docRefToGroupGenerator(uid, 'Все'), {
               groupMembers: []
@@ -78,13 +80,9 @@ export class FirebaseAccountApi {
               groupMembers: []
             })
           );
-          return Promise.all(promises).then(() => {
-            return 'User entry set';
-          });
+          return Promise.all(promises).then(() => 'User entry set');
         })
-        .catch((_e) => {
-          return 'Error adding user entry';
-        });
+        .catch(_e => 'Error adding user entry');
     });
   }
 
@@ -96,18 +94,15 @@ export class FirebaseAccountApi {
    */
   public newUserGroup(uid: string, groupName: string): Promise<string> {
     const docRef = this.docRefToGroupGenerator(uid, groupName);
+
     return getDoc(docRef)
-      .then((res) => {
+      .then(res => {
         if (res.exists()) {
           return 'Group exists';
         }
-        return setDoc(docRef, { groupMembers: [] }).then(() => {
-          return 'Group added';
-        });
+        return setDoc(docRef, { groupMembers: [] }).then(() => 'Group added');
       })
-      .catch((_e) => {
-        return 'Error adding group';
-      });
+      .catch(_e => 'Error adding group');
   }
 
   /**
@@ -123,25 +118,22 @@ export class FirebaseAccountApi {
     uid: string,
     groupName: string,
     groupMember: CardInfo,
-    shouldAdd: boolean = true
+    shouldAdd = true
   ): Promise<string> {
     const docRef = this.docRefToGroupGenerator(uid, groupName);
+
     return getDoc(docRef)
-      .then((res) => {
+      .then(res => {
         if (!res.exists()) {
-          return "Group doesn't exist";
+          return 'Group doesn\'t exist';
         }
         return updateDoc(docRef, {
-          groupMembers: shouldAdd
-            ? arrayUnion(groupMember)
-            : arrayRemove(groupMember)
-        }).then(() => {
-          return 'Group member changed';
-        });
+          groupMembers: shouldAdd ?
+            arrayUnion(groupMember) :
+            arrayRemove(groupMember)
+        }).then(() => 'Group member changed');
       })
-      .catch((_e) => {
-        return 'Error changing member of group';
-      });
+      .catch(_e => 'Error changing member of group');
   }
 
   /**
@@ -152,6 +144,7 @@ export class FirebaseAccountApi {
    */
   private mapFirebaseDataToAccountInfo(data: DocumentData): AccountInfo {
     const accountInfo: AccountInfo = { groups: [] };
+
     data.forEach((entry: any) => {
       accountInfo.groups.push({
         groupName: entry.id,
@@ -169,12 +162,9 @@ export class FirebaseAccountApi {
   public getAccountGroupsByUid(uid: string): Promise<AccountInfo | null> {
     const collectionRef = this.collectionRefToUserGroupsGenerator(uid);
     const groupsQuery = query(collectionRef);
+
     return getDocs(groupsQuery)
-      .then((res) => {
-        return this.mapFirebaseDataToAccountInfo(res);
-      })
-      .catch((_e) => {
-        return null;
-      });
+      .then(res => this.mapFirebaseDataToAccountInfo(res))
+      .catch(_e => null);
   }
 }
