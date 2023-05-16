@@ -5,6 +5,7 @@ import Card from '../components/common/card/Card';
 import CardBlock from '../components/common/cardBlock/CardBlock';
 import { MainCardInfo } from '../ApiProviders/RawgApiProvider/RawgTypes';
 import { useNavigate } from 'react-router-dom';
+import cards from '../mocks/cardMock.json'; // TODO mock
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
@@ -14,42 +15,18 @@ const MainPage: React.FC = () => {
 
   // TODO из фетча стора по запросу и платформе (в первый раз запрос автом сделать)
   // TODO placeholder
-  const testFavourite: MainCardInfo = {
-    id: 1,
-    name: 'Best game',
-    released: 2022,
-    background_image: '../../placeholder.png',
-    rating: 5.0,
-    platforms: ['PC', 'PS'],
+  const cardWithActions: MainCardInfo[] = cards.map(card => Object.assign(card, {
     isCrossForGroup: false,
-    isFavourite: true,
-    isInGroup: false,
     onClickAction: onCardClick,
     onGroupChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
     onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
-  };
-  const test: MainCardInfo = {
-    id: 1,
-    name: 'Best game',
-    released: 2022,
-    background_image: '../../placeholder.png',
-    rating: 5.0,
-    platforms: ['PC', 'PS'],
-    isCrossForGroup: false,
-    isFavourite: false,
-    isInGroup: true,
-    onClickAction: onCardClick,
-    onGroupChangeAction: onCardClick, // TODO добавляет/удаляет из группы Все
-    onFavouriteChangeAction: onCardClick // добавляет/удаляет из группы Избранное
-  };
-
-  const cards: MainCardInfo[] = [test, test, testFavourite];
-
+  }));
+ 
   return (
     <div className={styles.pageContent}>
       <SearchLine />
       <CardBlock>
-        {cards.map(elem => (
+        {cardWithActions.map(elem => (
           <Card key={elem.id} {...elem} />
         ))}
       </CardBlock>
