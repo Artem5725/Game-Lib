@@ -18,7 +18,7 @@ export function fetchLoadGameExtraInfoWrapper(gameId: number) {
     dispatch(extraGameInfoActions.extraGameInfoLoading());
     rawgProvider
       .loadGameInfo(gameId)
-      .then((gameExtraInfo) => {
+      .then(gameExtraInfo => {
         if (gameExtraInfo) {
           dispatch(extraGameInfoActions.extraGameInfoLoaded(gameExtraInfo));
         }

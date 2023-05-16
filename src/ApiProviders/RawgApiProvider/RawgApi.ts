@@ -35,12 +35,13 @@ export class RawgApiProvider {
     return this.searchGames(searchRequest, parentPlatformId, pageNumber)
       .then(({ results }) => {
         const resultGames = this.mapCardInfo(results);
+
         if (resultGames.length === 0) {
           throw new Error(customErrorsMap.rawgNoGamesOnRequestFound);
         }
         return resultGames;
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.rawgLoadGamesOnRequestFail);
       });
   }
@@ -91,11 +92,9 @@ export class RawgApiProvider {
         }
       )
     );
-    return Promise.allSettled(cardInfoPromises).then((requestsResults) => {
+    return Promise.allSettled(cardInfoPromises).then(requestsResults => {
       if (
-        requestsResults.findIndex((elem) => {
-          return elem.status === 'fulfilled';
-        }) === -1
+        requestsResults.findIndex(elem => elem.status === 'fulfilled') === -1
       ) {
         throw new Error(customErrorsMap.rawgLoadGameExtraInfoFail);
       }

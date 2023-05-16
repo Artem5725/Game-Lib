@@ -13,7 +13,7 @@ import {
   Firestore
 } from 'firebase/firestore';
 import { AccountInfo } from './FirebaseTypes';
-import { CardInfo } from '../RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../RawgApiProvider/RawgTypes';
 import { customErrorsMap } from '../../helpers/Errors';
 
 /**
@@ -60,7 +60,8 @@ export class FirebaseAccountApi {
    */
   public newUserEntry(): Promise<string | void> {
     const docUser = this.docRefToUserGenerator();
-    return getDoc(docUser).then((res) => {
+
+    return getDoc(docUser).then(res => {
       if (res.exists()) {
         throw new Error(customErrorsMap.fbNewAccountAlreadyExists);
       }
@@ -78,11 +79,9 @@ export class FirebaseAccountApi {
               groupMembers: []
             })
           );
-          return Promise.all(promises).then(() => {
-            return customErrorsMap.success;
-          });
+          return Promise.all(promises).then(() => customErrorsMap.success);
         })
-        .catch((_e) => {
+        .catch(_e => {
           throw new Error(customErrorsMap.fbAddingAccountFail);
         });
     });
@@ -95,16 +94,15 @@ export class FirebaseAccountApi {
    */
   public newUserGroup(groupName: string): Promise<string | void> {
     const docRef = this.docRefToGroupGenerator(groupName);
+
     return getDoc(docRef)
       .then(res => {
         if (res.exists()) {
           throw new Error(customErrorsMap.fbNewGroupAlreadyExists);
         }
-        return setDoc(docRef, { groupMembers: [] }).then(() => {
-          return customErrorsMap.success;
-        });
+        return setDoc(docRef, { groupMembers: [] }).then(() => customErrorsMap.success);
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.fbAddingGroupFail);
       });
   }
@@ -120,23 +118,22 @@ export class FirebaseAccountApi {
   public changeGroupMember(
     groupName: string,
     groupMember: CardInfo,
-    shouldAdd: boolean = true
+    shouldAdd = true
   ): Promise<string | void> {
     const docRef = this.docRefToGroupGenerator(groupName);
+
     return getDoc(docRef)
       .then(res => {
         if (!res.exists()) {
           throw new Error(customErrorsMap.fbNoRequiredGroup);
         }
         return updateDoc(docRef, {
-          groupMembers: shouldAdd
-            ? arrayUnion(groupMember)
-            : arrayRemove(groupMember)
-        }).then(() => {
-          return customErrorsMap.success;
-        });
+          groupMembers: shouldAdd ?
+            arrayUnion(groupMember) :
+            arrayRemove(groupMember)
+        }).then(() => customErrorsMap.success);
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.fbChangingGroupMemberFail);
       });
   }
@@ -149,6 +146,7 @@ export class FirebaseAccountApi {
    */
   private mapFirebaseDataToAccountInfo(data: DocumentData): AccountInfo {
     const accountInfo: AccountInfo = [];
+
     data.forEach((entry: any) => {
       accountInfo.push({
         groupName: entry.id,
@@ -167,14 +165,15 @@ export class FirebaseAccountApi {
     const groupsQuery = query(collectionRef);
 
     return getDocs(groupsQuery)
-      .then((res) => {
+      .then(res => {
         const userGroups = this.mapFirebaseDataToAccountInfo(res);
+
         if (userGroups.length === 0) {
           throw new Error(customErrorsMap.fbLoadingAccountGroupsZeroFound);
         }
         return userGroups;
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.fbLoadingAccountGroupsFail);
       });
   }

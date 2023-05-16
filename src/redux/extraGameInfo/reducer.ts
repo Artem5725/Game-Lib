@@ -1,4 +1,4 @@
-import { GameExtraInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { GameExtraInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes';
 import * as actions from './actions';
 import * as extraInfo from './constants';
 

@@ -1,4 +1,4 @@
-import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes';
 
 export type SearchRequest = {
   platform: string;

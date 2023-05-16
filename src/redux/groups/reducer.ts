@@ -12,6 +12,7 @@ type GroupsState = AccountInfo;
 
 const initialState: GroupsState = [];
 
+// eslint-disable-next-line max-statements
 const reducer = (state = initialState, action: GroupsAction): GroupsState => {
   switch (action.type) {
     case groups.GROUPS_LOADING: {
@@ -28,11 +29,10 @@ const reducer = (state = initialState, action: GroupsAction): GroupsState => {
     }
     case groups.GROUPS_MEMBER_ADDED: {
       const stateCopy: GroupsState = structuredClone(state);
-      const requiredGroupLink = stateCopy.find((elem) => {
-        return (
-          elem.groupName === (action.payload as UserGroupCardInfo).groupName
-        );
-      });
+      const requiredGroupLink = stateCopy.find(elem => (
+        elem.groupName === (action.payload as UserGroupCardInfo).groupName
+      ));
+
       requiredGroupLink?.groupMembers.push(
         (action.payload as UserGroupCardInfo).card
       );
@@ -40,19 +40,17 @@ const reducer = (state = initialState, action: GroupsAction): GroupsState => {
     }
     case groups.GROUPS_MEMBER_REMOVED: {
       const stateCopy: GroupsState = structuredClone(state);
-      const requiredGroupLink = stateCopy.find((elem) => {
-        return (
-          elem.groupName === (action.payload as UserGroupCardInfo).groupName
-        );
-      });
+      const requiredGroupLink = stateCopy.find(elem => (
+        elem.groupName === (action.payload as UserGroupCardInfo).groupName
+      ));
+
       if (!requiredGroupLink) {
         return state;
       }
       const requiredGameCardIndex = requiredGroupLink.groupMembers.findIndex(
-        (elem) => {
-          return elem.id === (action.payload as UserGroupCardInfo).card.id;
-        }
+        elem => elem.id === (action.payload as UserGroupCardInfo).card.id
       );
+
       if (requiredGameCardIndex === -1) {
         return state;
       }

@@ -1,4 +1,4 @@
-import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes';
 import { SearchRequestWithResults, SearchRequest } from './searchTypes';
 import * as actions from './actions';
 import * as search from './constants';

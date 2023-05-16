@@ -17,9 +17,9 @@ export function fetchLoadGameCommentsWrapper(gameId: string) {
     dispatch(commentsActions.commentsLoading());
     firebaseProvider.commentsProvider
       .getCommentsByGameId(gameId)
-      .then((gameComments) => {
+      .then(gameComments => {
         if (gameComments)
-          dispatch(commentsActions.commentsLoaded(gameComments));
+        {dispatch(commentsActions.commentsLoaded(gameComments));}
       })
       .catch((error: Error) => {
         dispatch(errorsMessageChanged(error.message));
@@ -46,7 +46,7 @@ export function fetchSendNewGameCommentWrapper(
   ) {
     firebaseProvider.commentsProvider
       .newGameComment(gameId, author, comment)
-      .then((_res) => {
+      .then(_res => {
         dispatch(commentsActions.commentsUserCommentChanged(author, comment));
       })
       .catch((error: Error) => {

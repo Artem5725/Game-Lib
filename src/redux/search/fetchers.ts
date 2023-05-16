@@ -19,9 +19,10 @@ export async function fetchLoadGamesOnRequest(
   const { request, platform, pageNumber }: SearchRequest =
     getState().search.request;
   const platfromId = rawgPlatformsMap.get(platform);
+
   rawgProvider
     .loadCardsOnRequest(request, platfromId ?? 1, pageNumber)
-    .then((loadedCards) => {
+    .then(loadedCards => {
       if (loadedCards) {
         dispatch(searchActions.searchLoadedOnRequest(loadedCards));
       }

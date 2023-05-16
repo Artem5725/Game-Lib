@@ -26,9 +26,8 @@ const reducer = (
     }
     case comments.COMMENTS_USER_COMMENT_CHANGED: {
       const stateCopy: CommentsState = structuredClone(state);
-      const userCommentLink = stateCopy.find((elem) => {
-        return elem.author === (action.payload as CommentFirebase).author;
-      });
+      const userCommentLink = stateCopy.find(elem => elem.author === (action.payload as CommentFirebase).author);
+
       if (!userCommentLink) {
         stateCopy.push(action.payload as CommentFirebase);
       } else {

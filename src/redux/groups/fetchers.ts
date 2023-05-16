@@ -2,7 +2,7 @@ import { firebaseProvider } from '../store/apiProviders';
 import * as groupActions from './actions';
 import { DispatchType, GetStateType } from '../store/store';
 import { errorsMessageChanged } from '../shared/actions';
-import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes.mjs';
+import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes';
 
 /**
  * Функция-фетчер выполняет загрузку информации о всех пользовательских группах
@@ -16,7 +16,7 @@ export async function fetchLoadUserGroups(
   dispatch(groupActions.groupsLoading());
   firebaseProvider.accountsProvider
     .getAccountGroups()
-    .then((accountGroups) => {
+    .then(accountGroups => {
       if (accountGroups) {
         dispatch(groupActions.groupsLoaded(accountGroups));
       }
@@ -38,7 +38,7 @@ export function fetchSendNewGroupAddedWrapper(groupName: string) {
   ) {
     firebaseProvider.accountsProvider
       .newUserGroup(groupName)
-      .then((_res) => {
+      .then(_res => {
         dispatch(groupActions.groupsAddedNew(groupName));
       })
       .catch((error: Error) => {
@@ -59,7 +59,7 @@ export function fetchSendNewGroupAddedWrapper(groupName: string) {
 export function fetchSendChangeGroupMemberWrapper(
   groupName: string,
   groupMember: CardInfo,
-  shouldAdd: boolean = true
+  shouldAdd = true
 ) {
   return async function fetchSendChangeGroupMember(
     dispatch: DispatchType,
@@ -67,11 +67,11 @@ export function fetchSendChangeGroupMemberWrapper(
   ) {
     firebaseProvider.accountsProvider
       .changeGroupMember(groupName, groupMember, shouldAdd)
-      .then((_res) => {
+      .then(_res => {
         dispatch(
-          shouldAdd
-            ? groupActions.groupsMemberAdded(groupName, groupMember)
-            : groupActions.groupsMemberRemoved(groupName, groupMember)
+          shouldAdd ?
+            groupActions.groupsMemberAdded(groupName, groupMember) :
+            groupActions.groupsMemberRemoved(groupName, groupMember)
         );
       })
       .catch((error: Error) => {
@@ -91,7 +91,8 @@ export function fetchInitializeNewUser(
 ) {
   firebaseProvider.accountsProvider
     .newUserEntry()
-    .then((_res) => {
+    .then(_res => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       dispatch(fetchLoadUserGroups);
     })

@@ -69,19 +69,13 @@ export class FirebaseCommentsApi {
         if (res.exists()) {
           return setDoc(this.docRefToUserCommentGenerator(gameId, author), {
             comment
-          }).then(() => {
-            return customErrorsMap.success;
-          });
+          }).then(() => customErrorsMap.success);
         }
-        return setDoc(docRef, {}).then(() => {
-          return setDoc(this.docRefToUserCommentGenerator(gameId, author), {
-            comment
-          }).then(() => {
-            return customErrorsMap.success;
-          });
-        });
+        return setDoc(docRef, {}).then(() => setDoc(this.docRefToUserCommentGenerator(gameId, author), {
+          comment
+        }).then(() => customErrorsMap.success));
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.fbChangingCommentFail);
       });
   }
@@ -94,6 +88,7 @@ export class FirebaseCommentsApi {
    */
   private mapFirebaseDataToGameComments(data: DocumentData) {
     const gameComments: GameComments = [];
+
     data.forEach((entry: any) => {
       gameComments.push({
         comment: entry.data().comment,
@@ -113,14 +108,15 @@ export class FirebaseCommentsApi {
     const groupsQuery = query(collectionRef);
 
     return getDocs(groupsQuery)
-      .then((res) => {
+      .then(res => {
         const gameComments = this.mapFirebaseDataToGameComments(res);
+
         if (gameComments.length === 0) {
           throw new Error(customErrorsMap.fbNoGameCommentsYet);
         }
         return gameComments;
       })
-      .catch((_e) => {
+      .catch(_e => {
         throw new Error(customErrorsMap.fbLoadingGameCommentsFail);
       });
   }
