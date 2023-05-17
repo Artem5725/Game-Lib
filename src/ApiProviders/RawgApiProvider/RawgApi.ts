@@ -1,4 +1,4 @@
-import { customErrorsMap } from '../../helpers/Errors.js';
+import { customErrorsMap } from '../../helpers/Errors';
 import {
   RawgScreenshotInfo,
   RawgGameInfo,
@@ -137,6 +137,7 @@ export class RawgApiProvider {
   ): Promise<RawgGameInfoResponse<RawgGameInfo>> {
     const pageSize = 20;
     const searchPrecisly = true;
+    // eslint-disable-next-line no-unused-vars
     const searchExact = true;
     const str = encodeURI(
       `https://api.rawg.io/api/games?key=${this.key}`

@@ -6,7 +6,7 @@ type ExtraInfoAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
 
-type ExtraInfoState = GameExtraInfo;
+export type ExtraInfoState = GameExtraInfo;
 
 const initialState: ExtraInfoState = {
   screenshots: [],

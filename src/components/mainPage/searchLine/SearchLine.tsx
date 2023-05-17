@@ -2,22 +2,22 @@ import React, { useCallback, useRef, useState } from 'react';
 import styles from './SearchLine.module.less';
 import cn from 'classnames';
 
-const SearchLine: React.FC = () => {
+type Props = {
+  onStartSearch: (requestString: string) => void;
+};
+
+const SearchLine: React.FC<Props> = ({ onStartSearch }) => {
   const [isActive, setIsActive] = useState(false);
-  const refSearch = useRef(null);
-  const startSearch = useCallback(
-    (_event: React.MouseEvent<HTMLDivElement>) => {
-      if (refSearch.current) {
-        // TODO в пропсах кoлбек для возврата ввода в компонент стр
-        // props.callback(refSearch.current.value);
-      }
-    },
-    []
-  );
-  const cleanInput = useCallback((_event: React.MouseEvent<HTMLDivElement>) => {
+  const refSearch = useRef<HTMLInputElement>(null);
+  const startSearch = useCallback(() => {
     if (refSearch.current) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
+      if (refSearch.current.value) {
+        onStartSearch(refSearch.current.value);
+      }
+    }
+  }, []);
+  const cleanInput = useCallback(() => {
+    if (refSearch.current) {
       refSearch.current.value = '';
     }
   }, []);

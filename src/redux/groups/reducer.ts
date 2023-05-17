@@ -8,7 +8,7 @@ import {
 type GroupsAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
-type GroupsState = AccountInfo;
+export type GroupsState = AccountInfo;
 
 const initialState: GroupsState = [];
 

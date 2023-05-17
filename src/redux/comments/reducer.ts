@@ -9,7 +9,7 @@ type CommentsAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
 
-type CommentsState = GameComments;
+export type CommentsState = GameComments;
 
 const initialState: CommentsState = [];
 

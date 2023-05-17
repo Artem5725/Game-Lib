@@ -5,7 +5,7 @@ type ErrorAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
 
-type ErrorState = {
+export type ErrorState = {
   errorMessage: string;
 };
 
