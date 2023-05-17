@@ -5,16 +5,16 @@ export type CommentFirebase = {
   comment: string;
 };
 
-export type GameComments = {
-  gameId: string;
-  comments: CommentFirebase[];
-};
+export type GameComments = CommentFirebase[];
 
 type UserGroupInfo = {
   groupName: string;
   groupMembers: CardInfo[];
 };
 
-export type AccountInfo = {
-  groups: UserGroupInfo[];
+export type UserGroupCardInfo = {
+  groupName: string;
+  card: CardInfo;
 };
+
+export type AccountInfo = UserGroupInfo[];

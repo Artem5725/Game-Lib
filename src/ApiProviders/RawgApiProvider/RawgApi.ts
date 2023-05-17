@@ -1,3 +1,4 @@
+import { customErrorsMap } from '../../helpers/Errors.js';
 import {
   RawgScreenshotInfo,
   RawgGameInfo,
@@ -23,25 +24,37 @@ export class RawgApiProvider {
    * @param {string} searchRequest поисковой запрос
    * @param {number} parentPlatformId идентификатор платформы, игры которой будут искаться
    * @param {number} pageNumber номер страницы результата
-   * @returns промис, результатом которого будет отформатированный список записей о найденных играх
+   * @returns промис, результатом которого будет отформатированный список записей о найденных играх.
+   * В случае ошибки загрузки или, если по запросу не будут найдены игры, будет выброшена ошибка
    */
   public loadCardsOnRequest(
     searchRequest: string,
     parentPlatformId: number,
     pageNumber: number
-  ) {
+  ): Promise<CardInfo[] | void> {
     return this.searchGames(searchRequest, parentPlatformId, pageNumber)
-      .then(({ results }) => this.mapCardInfo(results))
-      .catch(error => console.log(error)); // TODO check error
+      .then(({ results }) => {
+        const resultGames = this.mapCardInfo(results);
+
+        if (resultGames.length === 0) {
+          throw new Error(customErrorsMap.rawgNoGamesOnRequestFound);
+        }
+        return resultGames;
+      })
+      .catch(_e => {
+        throw new Error(customErrorsMap.rawgLoadGamesOnRequestFail);
+      });
   }
 
   /**
    * Метод получает весь необходимый набор дополнительной информации для игры.
    * Обертка над getGameExtraInfo
-   * @param {number} game_id идентификатор игры, для которой нужно получить дополнительную информацию
-   * @returns промис, результатом которого будет информация, собранная об игре
+   * @param {number} gameId идентификатор игры, для которой нужно получить дополнительную информацию
+   * @returns промис, результатом которого будет информация, собранная об игре.
+   * Если ни один из запросов на получение дополнительной информации об игре не завершится успехом,
+   * то будет выброшена ошибка
    */
-  public loadGameInfo(game_id: number): Promise<GameExtraInfo> {
+  public loadGameInfo(gameId: number): Promise<GameExtraInfo | void> {
     const gameInfo: GameExtraInfo = {
       screenshots: [],
       achievements: [],
@@ -52,42 +65,41 @@ export class RawgApiProvider {
     const cardInfoPromises: Promise<void>[] = [];
 
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgScreenshotInfo>(game_id, 'screenshots')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgScreenshotInfo>(gameId, 'screenshots').then(
+        ({ results }) => {
           gameInfo.screenshots = this.mapScreenshotInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgAchievementsInfo>(game_id, 'achievements')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgAchievementsInfo>(gameId, 'achievements').then(
+        ({ results }) => {
           gameInfo.achievements = this.mapAchievementsInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgGameInfo>(game_id, 'additions')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgGameInfo>(gameId, 'additions').then(
+        ({ results }) => {
           gameInfo.dlc = this.mapCardInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
     cardInfoPromises.push(
-      this.getGameExtraInfo<RawgGameInfo>(game_id, 'game-series')
-        .then(({ results }) => {
+      this.getGameExtraInfo<RawgGameInfo>(gameId, 'game-series').then(
+        ({ results }) => {
           gameInfo.serieGames = this.mapCardInfo(results);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        }
+      )
     );
-    return Promise.allSettled(cardInfoPromises).then(_res => gameInfo);
+    return Promise.allSettled(cardInfoPromises).then(requestsResults => {
+      if (
+        requestsResults.findIndex(elem => elem.status === 'fulfilled') === -1
+      ) {
+        throw new Error(customErrorsMap.rawgLoadGameExtraInfoFail);
+      }
+      return gameInfo;
+    });
   }
 
   /**

@@ -5,7 +5,7 @@ import MainPage from './MainPage';
 import UserPage from './UserPage';
 import ErrorPage from './ErrorPage';
 import { Route, Routes } from 'react-router-dom';
-import { errorsMap } from '../helpers/Errors';
+import { customErrorsMap } from '../helpers/Errors';
 
 const Page: React.FC = () => 
 // TODO селектить ошибку из стора
@@ -18,7 +18,7 @@ const Page: React.FC = () =>
         <Route path="/user/:groupName" element={<UserPage />}></Route>
         <Route
           path="*"
-          element={<ErrorPage errorText={errorsMap.pageNotFound} />}
+          element={<ErrorPage errorText={customErrorsMap.pageNotFound} />}
         ></Route>
       </Routes>
     </div>
