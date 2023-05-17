@@ -95,8 +95,8 @@ export interface MainCardInfo extends CardInfo {
   isInGroup: boolean;
   isCrossForGroup: boolean;
   onClickAction: (id: number) => void;
-  onFavouriteChangeAction: (id: number) => void;
-  onGroupChangeAction: (id: number) => void;
+  onFavouriteChangeAction: (id: number, shouldAdd: boolean) => void;
+  onGroupChangeAction: (id: number, shouldAdd: boolean) => void;
 }
 
 export type GameExtraInfo = {

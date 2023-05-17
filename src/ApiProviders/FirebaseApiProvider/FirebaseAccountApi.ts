@@ -26,6 +26,9 @@ export class FirebaseAccountApi {
   constructor(db: Firestore) {
     this.db = db;
     this.uid = '';
+    
+    // TODO placeholder after auth must be set
+    this.setUid('user5');
   }
 
   /**
@@ -100,7 +103,9 @@ export class FirebaseAccountApi {
         if (res.exists()) {
           throw new Error(customErrorsMap.fbNewGroupAlreadyExists);
         }
-        return setDoc(docRef, { groupMembers: [] }).then(() => customErrorsMap.success);
+        return setDoc(docRef, { groupMembers: [] }).then(
+          () => customErrorsMap.success
+        );
       })
       .catch(_e => {
         throw new Error(customErrorsMap.fbAddingGroupFail);

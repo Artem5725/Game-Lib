@@ -26,7 +26,7 @@ const Card: React.FC<Props> = ({
   const onFavouriteClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      onFavouriteChangeAction(id);
+      onFavouriteChangeAction(id, !isFavourite);
     },
     []
   );
@@ -34,7 +34,7 @@ const Card: React.FC<Props> = ({
   const onGroupClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      onGroupChangeAction(id);
+      onGroupChangeAction(id, !isInGroup);
     },
     []
   );
