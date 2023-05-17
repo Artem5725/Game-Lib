@@ -14,15 +14,24 @@ import {
   selectSearchRequest,
   selectSearchResults
 } from '../redux/search/selectors';
+import { selectMapGroupNameToGroupMembers } from '../redux/groups/selectors';
 import { fetchLoadGamesOnRequest } from '../redux/search/fetchers';
 import { fetchSendChangeGroupMemberWrapper } from '../redux/groups/fetchers';
 import { searchRequestChanged } from '../redux/search/actions';
 import Loader from '../components/common/loader/Loader';
+import * as defaultNames from '../helpers/DefaultGroupNames';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const searchResults = useSelector(selectSearchResults);
   const searchRequest = useSelector(selectSearchRequest);
+  const groupNameToMembersIdsMap = useSelector(
+    selectMapGroupNameToGroupMembers
+  );
+  const favouriteGroupMembersIds =
+    groupNameToMembersIdsMap.get(defaultNames.favourite) ?? [];
+  const allGroupMembersIds =
+    groupNameToMembersIdsMap.get(defaultNames.all) ?? [];
   const dispatch = useDispatch();
 
   useMemo(
@@ -43,12 +52,25 @@ const MainPage: React.FC = () => {
       );
 
       if (cardInfo) {
-        //@ts-ignore
         // Из группы "Избранное" по нажатию в любом случае будет выполнено добавление/удаление
-        dispatch(fetchSendChangeGroupMemberWrapper('Избранное', cardInfo, shouldAdd));
-        //@ts-ignore
-        // В группу "Все" можно только добавить, но нельзя удалять по нажатию на кнопку избранного  
-        shouldAdd && dispatch(fetchSendChangeGroupMemberWrapper('Все', cardInfo, shouldAdd));
+        dispatch(
+          //@ts-ignore
+          fetchSendChangeGroupMemberWrapper(
+            defaultNames.favourite,
+            cardInfo,
+            shouldAdd
+          )
+        );
+        // В группу "Все" можно только добавить, но нельзя удалять по нажатию на кнопку избранного
+        shouldAdd
+          && dispatch(
+            //@ts-ignore
+            fetchSendChangeGroupMemberWrapper(
+              defaultNames.all,
+              cardInfo,
+              shouldAdd
+            )
+          );
       }
     },
     [searchResults]
@@ -60,13 +82,27 @@ const MainPage: React.FC = () => {
         card => card.id === id
       );
 
-      if (cardInfo) {
-        //@ts-ignore
-        dispatch(fetchSendChangeGroupMemberWrapper('Все', cardInfo, shouldAdd));
-        // TODO если shouldAdd здесь на удаление то нужно удалять из всех групп - селектор на имена групп, в которых есть игра с таким идом и по ним пройтись
+      if (!cardInfo) {
+        return;
       }
+      dispatch(
+        //@ts-ignore
+        fetchSendChangeGroupMemberWrapper(defaultNames.all, cardInfo, shouldAdd)
+      );
+      if (shouldAdd) {
+        return;
+      }
+      // при удалении из группы Все игра также удаляется из всех остальных групп
+      groupNameToMembersIdsMap.forEach((members, groupName) => {
+        if (members.indexOf(id) !== -1) {
+          dispatch(
+            //@ts-ignore
+            fetchSendChangeGroupMemberWrapper(groupName, cardInfo, shouldAdd)
+          );
+        }
+      });
     },
-    [searchResults]
+    [searchResults, groupNameToMembersIdsMap]
   );
 
   const onSearchClick = useCallback((requestString: string) => {
@@ -77,8 +113,8 @@ const MainPage: React.FC = () => {
   const cardWithActions: MainCardInfo[] | undefined = searchResults?.map(
     card =>
       Object.assign({}, card, {
-        isFavourite: false,
-        isInGroup: false,
+        isFavourite: favouriteGroupMembersIds.indexOf(card.id) !== -1,
+        isInGroup: allGroupMembersIds.indexOf(card.id) !== -1,
         isCrossForGroup: false,
         onClickAction: onCardClick,
         onGroupChangeAction: onGroupClick,

@@ -28,7 +28,7 @@ const Card: React.FC<Props> = ({
       event.stopPropagation();
       onFavouriteChangeAction(id, !isFavourite);
     },
-    []
+    [isFavourite]
   );
 
   const onGroupClick = useCallback(
@@ -36,7 +36,7 @@ const Card: React.FC<Props> = ({
       event.stopPropagation();
       onGroupChangeAction(id, !isInGroup);
     },
-    []
+    [isInGroup]
   );
   
   // TODO placeholder вместо отсутствующей основной картинки

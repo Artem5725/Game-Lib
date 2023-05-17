@@ -15,6 +15,7 @@ import {
 import { AccountInfo } from './FirebaseTypes';
 import { CardInfo } from '../RawgApiProvider/RawgTypes';
 import { customErrorsMap } from '../../helpers/Errors';
+import * as defaultGroupNames from '../../helpers/DefaultGroupNames';
 
 /**
  * Класс реализует функционал для работы с базой данных аккаунтов на Firebase
@@ -73,12 +74,12 @@ export class FirebaseAccountApi {
           const promises: Promise<void>[] = [];
 
           promises.push(
-            setDoc(this.docRefToGroupGenerator('Все'), {
+            setDoc(this.docRefToGroupGenerator(defaultGroupNames.all), {
               groupMembers: []
             })
           );
           promises.push(
-            setDoc(this.docRefToGroupGenerator('Избранное'), {
+            setDoc(this.docRefToGroupGenerator(defaultGroupNames.favourite), {
               groupMembers: []
             })
           );
