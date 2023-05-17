@@ -56,7 +56,7 @@ const GamePage: React.FC = () => {
       <MainInfo {...mainCard}></MainInfo>
       <ScrollHorizontal>
         {screenshots.map(elem => (
-          <img key={elem} src={elem} alt="Screenshot" />
+          <img loading='lazy' key={elem} src={elem} alt="Screenshot" />
         ))}
       </ScrollHorizontal>
       <ScrollHorizontal>
@@ -71,7 +71,7 @@ const GamePage: React.FC = () => {
               </div>
             }
           >
-            <img key={elem.name} src={elem.image} alt="Achievement" />
+            <img loading='lazy' key={elem.name} src={elem.image} alt="Achievement" />
           </Tip>
         ))}
       </ScrollHorizontal>

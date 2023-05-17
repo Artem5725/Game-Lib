@@ -6,7 +6,7 @@ type Props = CardInfo;
 
 const CardTruncated: React.FC<Props> = ({ name, background_image }) => (
   <div className={styles.cardTruncated}>
-    <img className={styles.image} alt="Game main" src={background_image} />
+    <img loading='lazy' className={styles.image} alt="Game main" src={background_image} />
     <div className={styles.contentWrapper}>
       <div className={styles.info}>
         <div className={styles.name}>{name}</div>

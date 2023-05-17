@@ -43,7 +43,7 @@ const Card: React.FC<Props> = ({
   return (
     <div className={styles.card} onClick={onCardClick}>
       <div className={styles.imageWrapper}>
-        <img className={styles.image} alt="Game main" src={background_image ?? '../../noimage.png'} />
+        <img loading='lazy' className={styles.image} alt="Game main" src={background_image ?? '../../noimage.png'} />
         <CardButton
           buttonImage="favourite"
           isActive={isFavourite}

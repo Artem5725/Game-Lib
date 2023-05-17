@@ -9,7 +9,7 @@ import {
   MainCardInfo
 } from '../ApiProviders/RawgApiProvider/RawgTypes';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import {
   selectSearchRequest,
   selectSearchResults
@@ -23,7 +23,7 @@ import * as defaultNames from '../helpers/DefaultGroupNames';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
-  const searchResults = useSelector(selectSearchResults);
+  const searchResults = useSelector(selectSearchResults, shallowEqual);
   const searchRequest = useSelector(selectSearchRequest);
   const groupNameToMembersIdsMap = useSelector(
     selectMapGroupNameToGroupMembers
@@ -109,7 +109,7 @@ const MainPage: React.FC = () => {
     dispatch(searchRequestChanged(requestString));
   }, []);
 
-  // TODO placeholder допилить после внедрения работы с группами isInGroup и isFavourite селектить
+  // TODO подумать как мемоизировать
   const cardWithActions: MainCardInfo[] | undefined = searchResults?.map(
     card =>
       Object.assign({}, card, {
@@ -122,17 +122,19 @@ const MainPage: React.FC = () => {
       })
   );
 
-  return cardWithActions ? (
+  return (
     <div className={styles.pageContent}>
       <SearchLine onStartSearch={onSearchClick} />
-      <CardBlock>
-        {cardWithActions.map(elem => (
-          <Card key={elem.id} {...elem} />
-        ))}
-      </CardBlock>
+      {cardWithActions ? (
+        <CardBlock>
+          {cardWithActions.map(elem => (
+            <Card key={elem.id} {...elem} />
+          ))}
+        </CardBlock>
+      ) : (
+        <Loader />
+      )}
     </div>
-  ) : (
-    <Loader />
   );
 };
 
