@@ -38,12 +38,12 @@ const Card: React.FC<Props> = ({
     },
     []
   );
-
-  // TODO в onclick надо прокидывать нормальную функцию спецом для
+  
+  // TODO placeholder вместо отсутствующей основной картинки
   return (
     <div className={styles.card} onClick={onCardClick}>
       <div className={styles.imageWrapper}>
-        <img className={styles.image} alt="Game main" src={background_image} />
+        <img className={styles.image} alt="Game main" src={background_image ?? '../../noimage.png'} />
         <CardButton
           buttonImage="favourite"
           isActive={isFavourite}

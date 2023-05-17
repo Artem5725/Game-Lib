@@ -2,18 +2,21 @@
 
 @card-color: rgba(0, 0, 0, 1);
 @card-base-back-color: rgba(255, 255, 255, 1);
-@card-hover-back-color: rgba(231, 236, 241, 0.8);
+@card-hover-back-color: rgba(231, 236, 241, 1);
+@card-hover-shadow-color: rgba(0, 0, 0, 1);
+@card-image-border-color: rgba(205, 205, 205, 0.5);
 
 .card {
   width: @card-width;
-  min-height: @card-min-height;
-  height: fit-content;
+  height: @card-height;
   padding: 12px;
   border-radius: @card-border-radius;
   background-color: @card-base-back-color;
   color: @card-color;
+  transition: 0.2s ease-in;
   &:hover {
     background-color: @card-hover-back-color;
+    box-shadow: 4px 4px 5px @card-hover-shadow-color;
   }
 }
 
@@ -22,12 +25,15 @@
   height: fit-content;
   border-radius: inherit;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .image {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
   border-radius: inherit;
+  border: 1px solid @card-image-border-color;
 }
 
 .mark {
@@ -38,4 +44,7 @@
 .name {
   .font-mixin(20px, 26px, 600);
   margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
