@@ -19,7 +19,7 @@ import { fetchLoadGamesOnRequest } from '../redux/search/fetchers';
 import { fetchSendChangeGroupMemberWrapper } from '../redux/groups/fetchers';
 import { searchRequestChanged } from '../redux/search/actions';
 import Loader from '../components/common/loader/Loader';
-import * as defaultNames from '../helpers/DefaultGroupNames';
+import * as defaultGroups from '../helpers/DefaultGroupNames';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
@@ -29,9 +29,9 @@ const MainPage: React.FC = () => {
     selectMapGroupNameToGroupMembers
   );
   const favouriteGroupMembersIds =
-    groupNameToMembersIdsMap.get(defaultNames.favourite) ?? [];
+    groupNameToMembersIdsMap.get(defaultGroups.favourite) ?? [];
   const allGroupMembersIds =
-    groupNameToMembersIdsMap.get(defaultNames.all) ?? [];
+    groupNameToMembersIdsMap.get(defaultGroups.all) ?? [];
   const dispatch = useDispatch();
 
   useMemo(
@@ -56,7 +56,7 @@ const MainPage: React.FC = () => {
         dispatch(
           //@ts-ignore
           fetchSendChangeGroupMemberWrapper(
-            defaultNames.favourite,
+            defaultGroups.favourite,
             cardInfo,
             shouldAdd
           )
@@ -66,7 +66,7 @@ const MainPage: React.FC = () => {
           && dispatch(
             //@ts-ignore
             fetchSendChangeGroupMemberWrapper(
-              defaultNames.all,
+              defaultGroups.all,
               cardInfo,
               shouldAdd
             )
@@ -87,7 +87,7 @@ const MainPage: React.FC = () => {
       }
       dispatch(
         //@ts-ignore
-        fetchSendChangeGroupMemberWrapper(defaultNames.all, cardInfo, shouldAdd)
+        fetchSendChangeGroupMemberWrapper(defaultGroups.all, cardInfo, shouldAdd)
       );
       if (shouldAdd) {
         return;

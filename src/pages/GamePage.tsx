@@ -18,7 +18,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/common/loader/Loader';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import * as defaultNames from '../helpers/DefaultGroupNames';
+import * as defaultGroups from '../helpers/DefaultGroupNames';
 import { fetchLoadGameExtraInfoWrapper } from '../redux/extraGameInfo/fetchers';
 import {
   fetchLoadGameCommentsWrapper,
@@ -76,9 +76,9 @@ const GamePage: React.FC = () => {
   );
 
   const favouriteGroupMembersIds =
-    groupNameToMembersIdsMap.get(defaultNames.favourite) ?? [];
+    groupNameToMembersIdsMap.get(defaultGroups.favourite) ?? [];
   const allGroupMembersIds =
-    groupNameToMembersIdsMap.get(defaultNames.all) ?? [];
+    groupNameToMembersIdsMap.get(defaultGroups.all) ?? [];
 
   const onCardClick = useCallback((id: number) => {
     navigate(`/game/${id}`);
@@ -94,7 +94,7 @@ const GamePage: React.FC = () => {
         dispatch(
           //@ts-ignore
           fetchSendChangeGroupMemberWrapper(
-            defaultNames.favourite,
+            defaultGroups.favourite,
             cardInfo,
             shouldAdd
           )
@@ -104,7 +104,7 @@ const GamePage: React.FC = () => {
           && dispatch(
             //@ts-ignore
             fetchSendChangeGroupMemberWrapper(
-              defaultNames.all,
+              defaultGroups.all,
               cardInfo,
               shouldAdd
             )
@@ -125,7 +125,7 @@ const GamePage: React.FC = () => {
       }
       dispatch(
         //@ts-ignore
-        fetchSendChangeGroupMemberWrapper(defaultNames.all, cardInfo, shouldAdd)
+        fetchSendChangeGroupMemberWrapper(defaultGroups.all, cardInfo, shouldAdd)
       );
       if (shouldAdd) {
         return;

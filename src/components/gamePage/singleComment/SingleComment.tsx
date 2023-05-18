@@ -9,7 +9,7 @@ type Props = CommentFirebase;
 const SingleComment: React.FC<Props> = ({ author, comment }) => (
   <div className={cn(stylesComment.comment, styles.singleComment)}>
     <div className={styles.username}>{author}</div>
-    <div className={styles.text}>{comment}</div>
+    <pre className={styles.text}>{comment}</pre>
   </div>
 );
 
