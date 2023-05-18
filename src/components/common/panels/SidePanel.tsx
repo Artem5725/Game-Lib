@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useCallback } from 'react';
 import styles from './SidePanel.module.less';
 import SidePanelList from '../lists/sideList/SidePanelList';
 import AddGroupBlock from './addGroupBlock/AddGroupBlock';
 import { selectGroupNames } from '../../../redux/groups/selectors';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { fetchLoadUserGroups } from '../../../redux/groups/fetchers';
+import {
+  fetchLoadUserGroups,
+  fetchSendNewGroupAddedWrapper
+} from '../../../redux/groups/fetchers';
 import Loader from '../loader/Loader';
 
 const SidePanel: React.FC = () => {
@@ -17,15 +20,25 @@ const SidePanel: React.FC = () => {
     dispatch(fetchLoadUserGroups);
   }, []);
 
+  const onAddGroupClick = useCallback(
+    (newGroupName: string) => {
+      if (groupNames.indexOf(newGroupName) === -1) {
+        //@ts-ignore
+        dispatch(fetchSendNewGroupAddedWrapper(newGroupName));
+      }
+    },
+    [groupNames]
+  );
+
   return (
     <div className={styles.panelSide}>
       {groupNames ? (
         <Fragment>
           <SidePanelList groupNames={groupNames} />
-          <AddGroupBlock />
+          <AddGroupBlock onAddGroupAction={onAddGroupClick} />
         </Fragment>
       ) : (
-        <Loader/>
+        <Loader />
       )}
     </div>
   );

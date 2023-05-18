@@ -17,9 +17,12 @@ const SearchLine: React.FC<Props> = ({ onStartSearch }) => {
     }
   }, []);
   const cleanInput = useCallback(() => {
-    if (refSearch.current) {
+    if (!refSearch.current) {
+      return;
+    }
+    if (refSearch.current.value) {
+      onStartSearch('');
       refSearch.current.value = '';
-      onStartSearch(refSearch.current.value);
     }
   }, []);
 
