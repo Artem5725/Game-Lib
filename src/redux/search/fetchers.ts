@@ -28,6 +28,7 @@ export async function fetchLoadGamesOnRequest(
       }
     })
     .catch((error: Error) => {
+      dispatch(searchActions.searchLoadedOnRequest([]))
       dispatch(errorsMessageChanged(error.message));
     });
 }

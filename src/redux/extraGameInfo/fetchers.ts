@@ -24,6 +24,14 @@ export function fetchLoadGameExtraInfoWrapper(gameId: number) {
         }
       })
       .catch((error: Error) => {
+        dispatch(
+          extraGameInfoActions.extraGameInfoLoaded({
+            screenshots: [],
+            achievements: [],
+            dlc: [],
+            serieGames: []
+          })
+        );
         dispatch(errorsMessageChanged(error.message));
       });
   };
