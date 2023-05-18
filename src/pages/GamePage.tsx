@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useCallback, useEffect, Fragment } from 'react';
@@ -24,6 +25,7 @@ import {
   fetchSendNewGameCommentWrapper
 } from '../redux/comments/fetchers';
 import { fetchSendChangeGroupMemberWrapper } from '../redux/groups/fetchers';
+import { fetchLoadGameBaseInfoWrapper } from '../redux/baseGameInfo/fetchers';
 import { selectMapGroupNameToGroupMembers } from '../redux/groups/selectors';
 import {
   selectScreenshots,
@@ -35,6 +37,7 @@ import {
 import { selectComments, selectUserComment } from '../redux/comments/selectors';
 import { selectSearchResultsGameById } from '../redux/search/selectors';
 import { selectErrorMessage } from '../redux/shared/selectors';
+import { selectBaseGameInfo } from '../redux/baseGameInfo/selectors';
 import { customErrorsMap } from '../helpers/Errors';
 
 const GamePage: React.FC = () => {
@@ -48,7 +51,10 @@ const GamePage: React.FC = () => {
   const dlcs = useSelector(selectDlcs, shallowEqual);
   const series = useSelector(selectSeries, shallowEqual);
   const link = useSelector(selectLink);
-  const currentGame = useSelector(selectSearchResultsGameById(Number(gameId)));
+  const currentGameFromRequest = useSelector(
+    selectSearchResultsGameById(Number(gameId))
+  );
+  const baseInfo = useSelector(selectBaseGameInfo);
   const comments = useSelector(selectComments);
   const errorMsg = useSelector(selectErrorMessage);
   // TODO Placeholder - должен установиться в сторе после аутентификации
@@ -59,6 +65,10 @@ const GamePage: React.FC = () => {
     dispatch(fetchLoadGameCommentsWrapper(Number(gameId)));
     // @ts-ignore
     dispatch(fetchLoadGameExtraInfoWrapper(Number(gameId)));
+    if (!currentGameFromRequest) {
+      // @ts-ignore
+      dispatch(fetchLoadGameBaseInfoWrapper(Number(gameId)));
+    }
   }, [gameId]);
 
   const groupNameToMembersIdsMap = useSelector(
@@ -166,7 +176,13 @@ const GamePage: React.FC = () => {
 
   return (
     <div className={styles.pageContent}>
-      {currentGame ? <MainInfo {...currentGame} link={link} /> : <Loader />}
+      {currentGameFromRequest ? (
+        <MainInfo {...currentGameFromRequest} link={link} />
+      ) : baseInfo?.id ? (
+        <MainInfo {...baseInfo} link={link} />
+      ) : (
+        <Loader />
+      )}
 
       <ScrollHorizontal>
         {achievements ? (
@@ -223,7 +239,10 @@ const GamePage: React.FC = () => {
       ) : (
         <Loader />
       )}
-      <UserComment onAddCommentClick={onAddCommentClick} userComment={userComment?.comment} />
+      <UserComment
+        onAddCommentClick={onAddCommentClick}
+        userComment={userComment?.comment}
+      />
     </div>
   );
 };

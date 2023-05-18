@@ -48,6 +48,31 @@ export class RawgApiProvider {
   }
 
   /**
+   * Метод получает информацию об игре по ее идентификатору Rawg
+   * @param {number} gameId идентификатор игры, для которой нужно получить информацию 
+   * @returns промис, результатом которого будет информация о запрошенной игре
+   * В случае ошибки загрузки будет выброшена ошибка
+   */
+  public loadCardInfoById(gameId: number): Promise<CardInfo | void> {
+    return this.getGameInfoByid(gameId)
+      .then(result => {
+        const resultGames: CardInfo = {
+          id: result.id,
+          name: result.name,
+          released: new Date(result.released).getFullYear(),
+          background_image: result.background_image,
+          rating: result.rating,
+          platforms: result.platforms.map(elem => elem.platform.name)
+        };
+
+        return resultGames;
+      })
+      .catch(_e => {
+        throw new Error(customErrorsMap.rawgLoadGameInfoByIdFail);
+      });
+  }
+
+  /**
    * Метод получает весь необходимый набор дополнительной информации для игры.
    * Обертка над getGameExtraInfo
    * @param {number} gameId идентификатор игры, для которой нужно получить дополнительную информацию
@@ -133,7 +158,7 @@ export class RawgApiProvider {
   }
 
   /**
-   * Фунция получает информацию об играх по поисковому запросу
+   * Метод получает информацию об играх по поисковому запросу
    * @param {string} request поисковой запрос
    * @param {number} parentPlatformId идентификатор платформы, игры которой будут искаться
    * @param {number} pageNumber номер страницы результата
@@ -159,6 +184,21 @@ export class RawgApiProvider {
     );
 
     return fetch(str).then(result => {
+      if (result.ok) {
+        return result.json();
+      }
+    });
+  }
+
+  /**
+   * Метод получает информацию об игре по ее идентификатору
+   * @param {number} gameId идентификатор игры, для которой нужно получить информацию
+   * @returns промис, результатом которого будет информация об игре, представленная объектом Rawg
+   */
+  private getGameInfoByid(gameId: number): Promise<RawgGameInfo> {
+    return fetch(
+      encodeURI(`https://api.rawg.io/api/games/${gameId}?key=${this.key}`)
+    ).then(result => {
       if (result.ok) {
         return result.json();
       }

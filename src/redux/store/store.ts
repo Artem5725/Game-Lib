@@ -7,6 +7,7 @@ import { GroupsState } from '../groups/reducer';
 import { CommentsState } from '../comments/reducer';
 import { ExtraInfoState } from '../extraGameInfo/reducer';
 import { SearchState } from '../search/reducer';
+import { BaseInfoState } from '../baseGameInfo/reducer';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 const store = createStore(rootReducer, enhancer);
@@ -18,6 +19,7 @@ export type StoreState = {
   groups: GroupsState;
   comments: CommentsState;
   extraGameInfo: ExtraInfoState;
+  baseGameInfo: BaseInfoState;
   search: SearchState;
 };
 export default store;

@@ -17,5 +17,6 @@ export const customErrorsMap = {
   rawgLoadGameExtraInfoFail:
     'Не удалось получить дополнительную информацию об игре',
   rawgLoadGamesOnRequestFail: 'Не выполнить поиск',
-  rawgNoGamesOnRequestFound: 'Игр по запросу не найдено' // TODO ...
+  rawgNoGamesOnRequestFound: 'Игр по запросу не найдено',
+  rawgLoadGameInfoByIdFail: 'Не удалось загрузить информацию об игре' // TODO ...
 };

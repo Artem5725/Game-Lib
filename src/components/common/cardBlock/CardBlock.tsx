@@ -9,7 +9,11 @@ type Props = {
 const CardBlock: React.FC<Props> = ({ name, children }) => (
   <div className={styles.cardBlock}>
     {name && <div className={styles.name}>{name}</div>}
-    <div className={styles.gallery}>{children}</div>
+    {children.length ? (
+      <div className={styles.gallery}>{children}</div>
+    ) : (
+      <div>{`Ничего не найдено`}</div>
+    )}
   </div>
 );
 
