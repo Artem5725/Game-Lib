@@ -29,7 +29,8 @@ import {
   selectScreenshots,
   selectAchievements,
   selectDlcs,
-  selectSeries
+  selectSeries,
+  selectLink
 } from '../redux/extraGameInfo/selectors';
 import { selectComments, selectUserComment } from '../redux/comments/selectors';
 import { selectSearchResultsGameById } from '../redux/search/selectors';
@@ -46,6 +47,7 @@ const GamePage: React.FC = () => {
   const achievements = useSelector(selectAchievements, shallowEqual);
   const dlcs = useSelector(selectDlcs, shallowEqual);
   const series = useSelector(selectSeries, shallowEqual);
+  const link = useSelector(selectLink);
   const currentGame = useSelector(selectSearchResultsGameById(Number(gameId)));
   const comments = useSelector(selectComments);
   const errorMsg = useSelector(selectErrorMessage);
@@ -164,7 +166,7 @@ const GamePage: React.FC = () => {
 
   return (
     <div className={styles.pageContent}>
-      {currentGame ? <MainInfo {...currentGame} /> : <Loader />}
+      {currentGame ? <MainInfo {...currentGame} link={link} /> : <Loader />}
 
       <ScrollHorizontal>
         {achievements ? (

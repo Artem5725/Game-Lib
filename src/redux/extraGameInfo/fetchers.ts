@@ -29,7 +29,8 @@ export function fetchLoadGameExtraInfoWrapper(gameId: number) {
             screenshots: [],
             achievements: [],
             dlc: [],
-            serieGames: []
+            serieGames: [],
+            link: ''
           })
         );
         dispatch(errorsMessageChanged(error.message));

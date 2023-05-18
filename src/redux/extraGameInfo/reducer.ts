@@ -12,7 +12,8 @@ const initialState: ExtraInfoState = {
   screenshots: [],
   achievements: [],
   dlc: [],
-  serieGames: []
+  serieGames: [],
+  link: ''
 };
 
 const reducer = (

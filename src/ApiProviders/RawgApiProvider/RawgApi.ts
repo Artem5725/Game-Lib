@@ -6,7 +6,8 @@ import {
   RawgGameInfoResponse,
   CardInfo,
   GameExtraInfo,
-  AchievementsInfo
+  AchievementsInfo,
+  RawgLinksInfo
 } from './RawgTypes';
 
 /**
@@ -59,7 +60,8 @@ export class RawgApiProvider {
       screenshots: [],
       achievements: [],
       dlc: [],
-      serieGames: []
+      serieGames: [],
+      link: ''
     };
 
     const cardInfoPromises: Promise<void>[] = [];
@@ -89,6 +91,13 @@ export class RawgApiProvider {
       this.getGameExtraInfo<RawgGameInfo>(gameId, 'game-series').then(
         ({ results }) => {
           gameInfo.serieGames = this.mapCardInfo(results);
+        }
+      )
+    );
+    cardInfoPromises.push(
+      this.getGameExtraInfo<RawgLinksInfo>(gameId, 'stores').then(
+        ({ results }) => {
+          gameInfo.link = this.mapLinksInfo(results);
         }
       )
     );
@@ -138,7 +147,7 @@ export class RawgApiProvider {
     const pageSize = 20;
     const searchPrecisly = true;
     // eslint-disable-next-line no-unused-vars
-    const searchExact = true;
+    // const searchExact = true;
     const str = encodeURI(
       `https://api.rawg.io/api/games?key=${this.key}`
         + `&search=${request}`
@@ -196,5 +205,19 @@ export class RawgApiProvider {
       image,
       name
     }));
+  }
+
+  /**
+   * Метод забирает ссылку на игру в магазине стим, а если его нет, то первую из полученных ссылок
+   * @param {RawgLinksInfo[]} results массив записей о ссылках на ресурсы, где можно приобрести игру
+   * @returns ссылка на ресурс, где можно приобрести игру
+   */
+  private mapLinksInfo(results: RawgLinksInfo[]): string {
+    if (results.length === 0) {
+      return '';
+    }
+    const link = results.find(linkInfo => linkInfo.store_id === 1);
+
+    return link ? link.url : results[0].url;
   }
 }
