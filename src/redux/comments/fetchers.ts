@@ -22,6 +22,7 @@ export function fetchLoadGameCommentsWrapper(gameId: string) {
         {dispatch(commentsActions.commentsLoaded(gameComments));}
       })
       .catch((error: Error) => {
+        dispatch(commentsActions.commentsLoaded([]));
         dispatch(errorsMessageChanged(error.message));
       });
   };

@@ -1,16 +1,28 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import styles from './UserComment.module.less';
 
-// TODO через проп прокинуть колбэк для возврата введенного комента в строку
-const UserComment: React.FC = () => {
-  const refComment = useRef(null);
+type Props = {
+  userComment?: string;
+  onAddCommentClick: (newComment: string) => void;
+};
+
+const UserComment: React.FC<Props> = ({ userComment, onAddCommentClick }) => {
+  const refComment = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!refComment.current) {
+      return;
+    }
+    refComment.current.value = userComment ?? '';
+  }, [userComment]);
+
   const submitComment = useCallback(
     (_event: React.MouseEvent<HTMLButtonElement>) => {
       if (refComment.current) {
-        // props.callback(refComment.current.value);
+        onAddCommentClick(refComment.current.value);
       }
     },
-    []
+    [onAddCommentClick]
   );
 
   return (
@@ -19,7 +31,7 @@ const UserComment: React.FC = () => {
         ref={refComment}
         className={styles.field}
         placeholder="Комментарий..."
-      ></textarea>
+      />
       <button onClick={submitComment} className={styles.button} type="button">
         Подтвердить
       </button>
