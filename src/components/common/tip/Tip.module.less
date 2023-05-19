@@ -6,12 +6,11 @@
 }
 
 .element {
-  
-  
   &_left {
     &:hover + .tip_left {
       right: 100%;
       opacity: 1;
+      z-index: 80;
     }
   }
 
@@ -19,18 +18,18 @@
     &:hover + .tip_right {
       left: 100%;
       opacity: 1;
+      z-index: 80;
     }
   }
 }
 
 .tip {
   position: absolute;
-  z-index: 80;
+  z-index: -1;
   opacity: 0;
   color: @common-font-color;
-  .font-mixin(16px, 16px, 400);
   background-color: @modal-window-content-background-color;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
 
   //htts://cubic-bezier.com/

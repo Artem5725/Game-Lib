@@ -10,7 +10,11 @@
 @up-panel-height: 90px;
 @up-panel-elems-height: 26px;
 
-@page-back-color: linear-gradient(112deg, #1a1c4b 16.68%, #0897ab 96.66%);
+@page-back-color: linear-gradient(
+  112deg,
+  rgba(26, 28, 75, 1) 16.68%,
+  rgba(8, 151, 171, 1) 96.66%
+);
 @panel-background-color: rgba(17, 16, 29, 1);
 @button-active-back-color: rgba(0, 0, 255, 1);
 @common-font-color: rgba(255, 255, 255, 1);
@@ -19,6 +23,7 @@
 @common-icon-color: rgba(255, 255, 255, 1);
 @common-icon-color-transparent: rgba(255, 255, 255, 0.5);
 @common-blocks-back-color: rgba(17, 20, 49, 1);
+@common-scroll-thumb-color: rgba(17, 20, 49, 1);
 @common-border-color: rgba(25, 210, 234, 1);
 @common-hover-back-color: rgba(255, 255, 255, 0.5);
 @modal-window-background-color: rgba(200, 200, 200, 0.8);
@@ -70,4 +75,17 @@
   &_active {
     background-color: @active-back-color;
   }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: @common-scroll-thumb-color transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 8px;
+  background-color: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: @common-scroll-thumb-color;
 }

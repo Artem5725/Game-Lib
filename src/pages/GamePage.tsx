@@ -10,6 +10,9 @@ import CommentsBlock from '../components/gamePage/commentsBlock/CommentsBlock';
 import UserComment from '../components/gamePage/userComment/UserComment';
 import Card from '../components/common/card/Card';
 import Tip from '../components/common/tip/Tip';
+import Screenshot from '../components/gamePage/screenshot/Screenshot';
+import Achievement from '../components/gamePage/achievements/Achievement';
+import AchievementTip from '../components/gamePage/achievements/AchievementTip';
 import { useParams } from 'react-router-dom';
 import {
   CardInfo,
@@ -189,10 +192,8 @@ const GamePage: React.FC = () => {
       )}
 
       <ScrollHorizontal>
-        {achievements ? (
-          screenshots.map(elem => (
-            <img loading="lazy" key={elem} src={elem} alt="Screenshot" />
-          ))
+        {screenshots ? (
+          screenshots.map(elem => <Screenshot key={elem} screenUrl={elem} />)
         ) : (
           <Loader />
         )}
@@ -202,20 +203,15 @@ const GamePage: React.FC = () => {
           achievements.map((elem, index) => (
             <Tip
               key={elem.name}
-              isLeft={index ? true : false}
+              isLeft={index > 1 ? true : false}
               tipElement={
-                <div>
-                  <p>{elem.name}</p>
-                  <p>{elem.description}</p>
-                </div>
+                <AchievementTip
+                  name={elem.name}
+                  description={elem.description}
+                />
               }
             >
-              <img
-                loading="lazy"
-                key={elem.name}
-                src={elem.image}
-                alt="Achievement"
-              />
+              <Achievement key={elem.name} imageUrl={elem.image} />
             </Tip>
           ))
         ) : (

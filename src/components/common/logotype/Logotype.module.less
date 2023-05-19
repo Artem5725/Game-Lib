@@ -1,0 +1,26 @@
+@import '../globals/Globals.less';
+
+.logoNav {
+  display: flex;
+  flex-flow: row nowrap;
+  text-decoration: none;
+}
+
+.img {
+  width: 37px;
+  height: @up-panel-elems-height;
+  margin-right: 7px;
+  background-color: @common-icon-color;
+  content: '';
+  mask: url('./logo.svg') no-repeat 10% 50%;
+  -webkit-mask: url('./logo.svg') no-repeat 10% 50%;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}
+
+.text {
+  height: @up-panel-elems-height;
+  margin-right: 135px;
+  color: @common-font-color;
+  .font-mixin(@up-panel-elems-height, @up-panel-elems-height, 400);
+}

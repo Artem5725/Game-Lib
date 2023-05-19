@@ -12,7 +12,7 @@ const CardBlock: React.FC<Props> = ({ name, children }) => (
     {children.length ? (
       <div className={styles.gallery}>{children}</div>
     ) : (
-      <div>{`Ничего не найдено`}</div>
+      <div className={styles.warning}>{`Ничего не найдено`}</div>
     )}
   </div>
 );

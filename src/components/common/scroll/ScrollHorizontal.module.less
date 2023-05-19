@@ -1,8 +1,13 @@
+@scroll-back-color: rgba(255, 255, 255, 0.5);
+
 .scroll {
   display: flex;
   flex-flow: row nowrap;
   column-gap: 20px;
   overflow: auto;
   width: 100%;
+  padding: 15px;
+  border-radius: 5px;
   height: fit-content;
+  background-color: @scroll-back-color;
 }
