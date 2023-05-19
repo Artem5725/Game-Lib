@@ -38,6 +38,7 @@ import { selectComments, selectUserComment } from '../redux/comments/selectors';
 import { selectSearchResultsGameById } from '../redux/search/selectors';
 import { selectErrorMessage } from '../redux/shared/selectors';
 import { selectBaseGameInfo } from '../redux/baseGameInfo/selectors';
+import { selectAccountMail } from '../redux/authentication/selectors';
 import { customErrorsMap } from '../helpers/Errors';
 
 const GamePage: React.FC = () => {
@@ -46,6 +47,7 @@ const GamePage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const userMail = useSelector(selectAccountMail);
   const screenshots = useSelector(selectScreenshots, shallowEqual);
   const achievements = useSelector(selectAchievements, shallowEqual);
   const dlcs = useSelector(selectDlcs, shallowEqual);
@@ -57,8 +59,7 @@ const GamePage: React.FC = () => {
   const baseInfo = useSelector(selectBaseGameInfo);
   const comments = useSelector(selectComments);
   const errorMsg = useSelector(selectErrorMessage);
-  // TODO Placeholder - должен установиться в сторе после аутентификации
-  const userComment = useSelector(selectUserComment('user5'));
+  const userComment = useSelector(selectUserComment(userMail));
 
   useEffect(() => {
     // @ts-ignore
@@ -125,7 +126,11 @@ const GamePage: React.FC = () => {
       }
       dispatch(
         //@ts-ignore
-        fetchSendChangeGroupMemberWrapper(defaultGroups.all, cardInfo, shouldAdd)
+        fetchSendChangeGroupMemberWrapper(
+          defaultGroups.all,
+          cardInfo,
+          shouldAdd
+        )
       );
       if (shouldAdd) {
         return;
@@ -146,8 +151,7 @@ const GamePage: React.FC = () => {
   const onAddCommentClick = useCallback(
     (newComment: string) => {
       //@ts-ignore
-      // TODO Placeholder - должен установиться в сторе после аутентификации
-      dispatch(fetchSendNewGameCommentWrapper(gameId, 'user5', newComment));
+      dispatch(fetchSendNewGameCommentWrapper(gameId, userMail, newComment));
     },
     [gameId]
   );

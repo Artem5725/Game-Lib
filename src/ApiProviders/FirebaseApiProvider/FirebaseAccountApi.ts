@@ -27,9 +27,6 @@ export class FirebaseAccountApi {
   constructor(db: Firestore) {
     this.db = db;
     this.uid = '';
-    
-    // TODO placeholder after auth must be set
-    this.setUid('user5');
   }
 
   /**

@@ -26,7 +26,9 @@ export function fetchSignUpWrapper(mail: string, password: string) {
       .then(uid => {
         if (uid) {
           firebaseProvider.accountsProvider.setUid(uid);
-          dispatch(authenticationActions.signupLoaded(mail));
+          firebaseProvider.accountsProvider.newUserEntry().then(_success => {
+            dispatch(authenticationActions.signupLoaded(mail));
+          });
         }
       })
       .catch((error: Error) => dispatch(errorsMessageChanged(error.message)));

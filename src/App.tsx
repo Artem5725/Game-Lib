@@ -1,16 +1,56 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React, { useCallback, useState } from 'react';
 import './Clean.less';
 import SidePanel from './components/common/panels/SidePanel';
 import UpPanel from './components/common/panels/UpPanel';
 import Page from './pages/Page';
 import { BrowserRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  fetchSignInWrapper,
+  fetchSignUpWrapper
+} from './redux/authentication/fetchers';
+import { selectAccountMail } from './redux/authentication/selectors';
+import { selectErrorMessage } from './redux/shared/selectors';
+import AuthWindow from './components/common/authWindow/AuthWindow';
+
 function App() {
+  const dispatch = useDispatch();
+  const [isAuthWindowOpen, setIsAuthWindowOpen] = useState(true);
+  const accountEmail = useSelector(selectAccountMail);
+  const errorMsg = useSelector(selectErrorMessage);
+
+  if (accountEmail && isAuthWindowOpen) {
+    setIsAuthWindowOpen(false);
+  }
+
+  const onSignInClick = useCallback((mail: string, password: string) => {
+    // @ts-ignore
+    dispatch(fetchSignInWrapper(mail, password));
+  }, []);
+
+  const onSignUpClick = useCallback((mail: string, password: string) => {
+    // @ts-ignore
+    dispatch(fetchSignUpWrapper(mail, password));
+  }, []);
+
   return (
-    <BrowserRouter>
-      <SidePanel />
-      <UpPanel />
-      <Page />
-    </BrowserRouter>
+    <>
+      {accountEmail ? (
+        <BrowserRouter>
+          <SidePanel />
+          <UpPanel />
+          <Page />
+        </BrowserRouter>
+      ) : (
+        <AuthWindow
+          isActive={isAuthWindowOpen}
+          warningMessage={errorMsg}
+          onSignInAction={onSignInClick}
+          onSignUpAction={onSignUpClick}
+        />
+      )}
+    </>
   );
 }
 
