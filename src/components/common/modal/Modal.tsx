@@ -7,7 +7,7 @@ const modalRootElement = document.getElementById('modal');
 
 type Props = {
   isActive: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   children: any;
   childClass: string;
 };
@@ -21,7 +21,7 @@ const Modal: React.FC<Props> = ({
   const onCloseClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       if (event.target === event.currentTarget) {
-        onClose();
+        onClose && onClose();
       }
     },
     [onClose]

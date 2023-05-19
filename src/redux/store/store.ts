@@ -21,5 +21,6 @@ export type StoreState = {
   extraGameInfo: ExtraInfoState;
   baseGameInfo: BaseInfoState;
   search: SearchState;
+  authentication: string;
 };
 export default store;
