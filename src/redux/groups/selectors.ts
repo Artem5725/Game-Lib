@@ -31,6 +31,29 @@ export const selectMapGroupNameToGroupMembers = createSelector(
   }
 );
 
+export const selectInFirstButNotInSecond = (
+  firstGroupName: string,
+  secondGroupName: string
+) =>
+  createSelector(
+    selectGroupMembersByName(firstGroupName),
+    selectGroupMembersByName(secondGroupName),
+    (firstGroupMembers, secondGroupMembers) => {
+      if (!firstGroupMembers) {
+        return [];
+      }
+      if (!secondGroupMembers) {
+        return firstGroupMembers;
+      }
+      return firstGroupMembers.filter(
+        firstGroupMember =>
+          secondGroupMembers.findIndex(
+            secondGroupMember => secondGroupMember.id === firstGroupMember.id
+          ) === -1
+      );
+    }
+  );
+
 // TODO возможно не пригодится
 export const selectIsInGroup = (id: number, groupName: string) =>
   createSelector(selectGroupMembersByName(groupName), groupMembers => {

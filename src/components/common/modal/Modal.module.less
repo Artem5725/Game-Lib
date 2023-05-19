@@ -14,11 +14,12 @@
 }
 
 .window {
-  width: fit-content;
-  height: fit-content;
   min-width: @modal-window-min-width;
   min-height: @modal-window-min-height;
+  max-width: @modal-window-max-width;
+  max-height: @modal-window-max-width;
   border-radius: 10px;
+  padding: 10px;
   background-color: @modal-window-content-background-color;
   color: @common-font-color;
 }

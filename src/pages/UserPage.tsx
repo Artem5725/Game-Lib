@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './PageContent.module.less';
 import Card from '../components/common/card/Card';
 import CardAdd from '../components/common/card/CardAdd';
 import CardBlock from '../components/common/cardBlock/CardBlock';
+import CardTruncated from '../components/common/card/CardTruncated';
+import AddCardWindow from '../components/userPage/addCardWindow/AddCardWindow';
 import {
   MainCardInfo,
   CardInfo
@@ -13,10 +15,14 @@ import { useNavigate } from 'react-router-dom';
 import * as defaultGroups from '../helpers/DefaultGroupNames';
 import { fetchSendChangeGroupMemberWrapper } from '../redux/groups/fetchers';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGroupMembersByName } from '../redux/groups/selectors';
-import { selectMapGroupNameToGroupMembers } from '../redux/groups/selectors';
+import {
+  selectGroupMembersByName,
+  selectMapGroupNameToGroupMembers,
+  selectInFirstButNotInSecond
+} from '../redux/groups/selectors';
 
 const UserPage: React.FC = () => {
+  const [isModalWindowsOpen, setIsModalWindowsOpen] = useState(false);
   const { groupName } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,6 +36,10 @@ const UserPage: React.FC = () => {
     selectMapGroupNameToGroupMembers
   );
 
+  const gamesToAddToGroup = useSelector(
+    selectInFirstButNotInSecond(defaultGroups.all, groupName ?? '')
+  );
+
   const onCardClick = useCallback((id: number) => {
     navigate(`/game/${id}`);
   }, []);
@@ -40,10 +50,7 @@ const UserPage: React.FC = () => {
         card => card.id === id
       );
 
-      if (!cardInfo) {
-        return;
-      }
-      if (!groupName) {
+      if (!cardInfo || !groupName) {
         return;
       }
 
@@ -91,6 +98,28 @@ const UserPage: React.FC = () => {
     [currentGroupCards]
   );
 
+  const onCardAddClick = useCallback(() => {
+    setIsModalWindowsOpen(true);
+  }, []);
+
+  const onAddingCardClick = useCallback(
+    (id: number) => {
+      setIsModalWindowsOpen(false);
+      const cardInfo: CardInfo | undefined = gamesToAddToGroup?.find(
+        card => card.id === id
+      );
+
+      if (!cardInfo || !groupName) {
+        return;
+      }
+      dispatch(
+        //@ts-ignore
+        fetchSendChangeGroupMemberWrapper(groupName, cardInfo, true)
+      );
+    },
+    [gamesToAddToGroup, groupName]
+  );
+
   const cardWithActions: MainCardInfo[] | undefined = currentGroupCards?.map(
     card =>
       Object.assign({}, card, {
@@ -111,7 +140,23 @@ const UserPage: React.FC = () => {
       <CardBlock name={groupName ?? ''}>
         {cardWithActions
           && cardWithActions.map(elem => <Card key={elem.id} {...elem} />)}
-        {groupName !== defaultGroups.all && <CardAdd />}
+        {groupName !== defaultGroups.all && (
+          <>
+            <CardAdd onCardAddAction={onCardAddClick} />
+            <AddCardWindow
+              isOpen={isModalWindowsOpen}
+              onCloseAction={() => setIsModalWindowsOpen(false)}
+            >
+              {gamesToAddToGroup.map(game => (
+                <CardTruncated
+                  key={game.id}
+                  {...game}
+                  onAddingCardClick={onAddingCardClick}
+                />
+              ))}
+            </AddCardWindow>
+          </>
+        )}
       </CardBlock>
     </div>
   );

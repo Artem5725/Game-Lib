@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from './CardAdd.module.less';
 
-const CardAdd: React.FC = () => (
+type Props = {
+  onCardAddAction: () => void;
+};
+
+const CardAdd: React.FC<Props> = ({ onCardAddAction }) => (
   <div className={styles.cardAdd}>
-    <div className={styles.addingSpace}>
+    <div onClick={onCardAddAction} className={styles.addingSpace}>
       <div className={styles.plusPart} />
       <div className={styles.plusPart} />
     </div>
