@@ -7,23 +7,19 @@ import ErrorPage from './ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 import { customErrorsMap } from '../helpers/Errors';
 
-const Page: React.FC = () => 
-// TODO селектить ошибку из стора
-
-  (
-    <div className={styles.page}>
-      <Routes>
-        <Route index path="/search?" element={<MainPage />}></Route>
-        <Route path="/game/:gameId" element={<GamePage />}></Route>
-        <Route path="/user/:groupName" element={<UserPage />}></Route>
-        <Route
-          path="*"
-          element={<ErrorPage errorText={customErrorsMap.pageNotFound} />}
-        ></Route>
-      </Routes>
-    </div>
-  )
-
-;
+const Page: React.FC = () => (
+  // TODO селектить ошибку из стора
+  <div className={styles.page}>
+    <Routes>
+      <Route index path="/search?" element={<MainPage />}></Route>
+      <Route path="/game/:gameId" element={<GamePage />}></Route>
+      <Route path="/user/:groupName" element={<UserPage />}></Route>
+      <Route
+        path="*"
+        element={<ErrorPage errorText={customErrorsMap.pageNotFound} />}
+      ></Route>
+    </Routes>
+  </div>
+);
 
 export default React.memo(Page);
