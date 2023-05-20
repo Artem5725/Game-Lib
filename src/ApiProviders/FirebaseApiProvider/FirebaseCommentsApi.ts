@@ -55,12 +55,14 @@ export class FirebaseCommentsApi {
    * @param {string} gameId идентификатор игры по базе данных rawg
    * @param {string} author имя пользователя
    * @param {string} comment комментарий
+   * @param {number} timestamp временная метка написания комментария
    * @returns возвращает промис, который вернет сообщение об успехе или выбросит ошибку
    */
   public newGameComment(
     gameId: string,
     author: string,
-    comment: string
+    comment: string,
+    timestamp: number
   ): Promise<string | void> {
     const docRef = this.docRefToGameCommentsGenerator(gameId);
 
@@ -68,12 +70,16 @@ export class FirebaseCommentsApi {
       .then(res => {
         if (res.exists()) {
           return setDoc(this.docRefToUserCommentGenerator(gameId, author), {
-            comment
+            comment,
+            timestamp
           }).then(() => customErrorsMap.success);
         }
-        return setDoc(docRef, {}).then(() => setDoc(this.docRefToUserCommentGenerator(gameId, author), {
-          comment
-        }).then(() => customErrorsMap.success));
+        return setDoc(docRef, {}).then(() =>
+          setDoc(this.docRefToUserCommentGenerator(gameId, author), {
+            comment,
+            timestamp
+          }).then(() => customErrorsMap.success)
+        );
       })
       .catch(_e => {
         throw new Error(customErrorsMap.fbChangingCommentFail);
@@ -92,6 +98,7 @@ export class FirebaseCommentsApi {
     data.forEach((entry: any) => {
       gameComments.push({
         comment: entry.data().comment,
+        timestamp: entry.data().timestamp,
         author: entry.id
       });
     });

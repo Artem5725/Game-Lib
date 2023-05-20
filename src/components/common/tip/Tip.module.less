@@ -31,13 +31,13 @@
   background-color: @modal-window-content-background-color;
   padding: 15px;
   border-radius: 10px;
-
+  border: 2px solid @alternate-border-color;
   //htts://cubic-bezier.com/
   &_left {
     top: 0;
     right: calc(200px + 100%);
     transition: right 1s 0.2s cubic-bezier(0.48, 1.77, 0.48, 0.43),
-      opacity 0.5s 0.2s linear;
+      opacity 0.5s 0.2s linear, z-index 0.5s 0.2s linear;
   }
 
   &_right {

@@ -14,10 +14,11 @@ export const commentsLoaded = (gameComments: GameComments) => ({
   payload: gameComments
 });
 
-export const commentsUserCommentChanged = (author: string, comment: string) => {
+export const commentsUserCommentChanged = (author: string, comment: string, timestamp: number) => {
   const userComment: CommentFirebase = {
     author,
-    comment
+    comment,
+    timestamp
   };
 
   return {

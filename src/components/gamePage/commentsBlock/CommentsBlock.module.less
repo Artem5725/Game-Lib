@@ -1,9 +1,20 @@
+@import '../../common/globals/Globals.less';
+
 .commentBlock {
   width: 100%;
-  height: fit-content;
-  padding: 10px;  
+  max-height: 400px;
+  padding: 10px;
+  border-radius: @common-content-block-border-radius;
+  overflow: auto;
+  background-color: @common-content-block-back-color;
 }
 
 .comment:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.warning {
+  .font-mixin(20px, 28px, 700);
+  color: @common-font-color;
+  text-align: center;
 }

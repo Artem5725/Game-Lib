@@ -18,8 +18,9 @@ export function fetchLoadGameCommentsWrapper(gameId: string) {
     firebaseProvider.commentsProvider
       .getCommentsByGameId(gameId)
       .then(gameComments => {
-        if (gameComments)
-        {dispatch(commentsActions.commentsLoaded(gameComments));}
+        if (gameComments) {
+          dispatch(commentsActions.commentsLoaded(gameComments));
+        }
       })
       .catch((error: Error) => {
         dispatch(commentsActions.commentsLoaded([]));
@@ -34,21 +35,25 @@ export function fetchLoadGameCommentsWrapper(gameId: string) {
  * @param {string} gameId идентификатор игры, для который был добавлен/изменен комментарий
  * @param {string} author имя пользователя
  * @param {string} comment комментарий
+ * @param {number} timestamp временная метка написания комментария
  * @returns возвращается функция-фетчер
  */
 export function fetchSendNewGameCommentWrapper(
   gameId: string,
   author: string,
-  comment: string
+  comment: string,
+  timestamp: number
 ) {
   return async function fetchSendNewGameComment(
     dispatch: DispatchType,
     _getState: GetStateType
   ) {
     firebaseProvider.commentsProvider
-      .newGameComment(gameId, author, comment)
+      .newGameComment(gameId, author, comment, timestamp)
       .then(_res => {
-        dispatch(commentsActions.commentsUserCommentChanged(author, comment));
+        dispatch(
+          commentsActions.commentsUserCommentChanged(author, comment, timestamp)
+        );
       })
       .catch((error: Error) => {
         dispatch(errorsMessageChanged(error.message));

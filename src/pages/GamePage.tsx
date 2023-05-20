@@ -154,7 +154,7 @@ const GamePage: React.FC = () => {
   const onAddCommentClick = useCallback(
     (newComment: string) => {
       //@ts-ignore
-      dispatch(fetchSendNewGameCommentWrapper(gameId, userMail, newComment));
+      dispatch(fetchSendNewGameCommentWrapper(gameId, userMail, newComment, Date.now()));
     },
     [gameId]
   );
@@ -165,8 +165,8 @@ const GamePage: React.FC = () => {
       isInGroup: allGroupMembersIds.indexOf(card.id) !== -1,
       isCrossForGroup: false,
       onClickAction: onCardClick,
-      onGroupChangeAction: onGroupClick, // TODO добавляет/удаляет из группы Все
-      onFavouriteChangeAction: onFavouriteClick // добавляет/удаляет из группы Избранное
+      onGroupChangeAction: onGroupClick,
+      onFavouriteChangeAction: onFavouriteClick
     })
   );
 

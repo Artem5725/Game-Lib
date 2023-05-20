@@ -32,6 +32,7 @@ const reducer = (
         stateCopy.push(action.payload as CommentFirebase);
       } else {
         userCommentLink.comment = (action.payload as CommentFirebase).comment;
+        userCommentLink.timestamp = (action.payload as CommentFirebase).timestamp;
       }
       return stateCopy;
     }
