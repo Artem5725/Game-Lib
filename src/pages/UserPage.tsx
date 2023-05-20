@@ -137,27 +137,32 @@ const UserPage: React.FC = () => {
 
   return (
     <div className={styles.pageContent}>
-      <CardBlock name={groupName ?? ''}>
-        {cardWithActions
-          && cardWithActions.map(elem => <Card key={elem.id} {...elem} />)}
-        {groupName !== defaultGroups.all && (
-          <>
-            <CardAdd onCardAddAction={onCardAddClick} />
-            <AddCardWindow
-              isOpen={isModalWindowsOpen}
-              onCloseAction={() => setIsModalWindowsOpen(false)}
-            >
-              {gamesToAddToGroup.map(game => (
-                <CardTruncated
-                  key={game.id}
-                  {...game}
-                  onAddingCardClick={onAddingCardClick}
-                />
-              ))}
-            </AddCardWindow>
-          </>
-        )}
-      </CardBlock>
+      {cardWithActions ? (
+        <CardBlock name={groupName ?? ''}>
+          {cardWithActions.map(elem => (
+            <Card key={elem.id} {...elem} />
+          ))}
+          {groupName !== defaultGroups.all && (
+            <>
+              <CardAdd onCardAddAction={onCardAddClick} />
+              <AddCardWindow
+                isOpen={isModalWindowsOpen}
+                onCloseAction={() => setIsModalWindowsOpen(false)}
+              >
+                {gamesToAddToGroup.map(game => (
+                  <CardTruncated
+                    key={game.id}
+                    {...game}
+                    onAddingCardClick={onAddingCardClick}
+                  />
+                ))}
+              </AddCardWindow>
+            </>
+          )}
+        </CardBlock>
+      ) : (
+        <div className={styles.warning}>Группа не найдена</div>
+      )}
     </div>
   );
 };
