@@ -4,6 +4,7 @@ import styles from './Card.module.less';
 import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 import Platforms from '../platforms/Platforms';
 import CardButton from './cardButton/CardButton';
+import LazyImg from '../lazyImg/LazyImg';
 
 type Props = MainCardInfo;
 const Card: React.FC<Props> = ({
@@ -38,12 +39,15 @@ const Card: React.FC<Props> = ({
     },
     [isInGroup, onGroupChangeAction, id]
   );
-  
-  // TODO placeholder вместо отсутствующей основной картинки
+
   return (
     <div className={styles.card} onClick={onCardClick}>
       <div className={styles.imageWrapper}>
-        <img loading='lazy' className={styles.image} alt="Game main" src={background_image ?? '../../noimage.png'} />
+        <LazyImg
+          src={background_image ?? '../../noimage.png'}
+          customClassName={styles.image}
+          alt="Game main"
+        />
         <CardButton
           buttonImage="favourite"
           isActive={isFavourite}

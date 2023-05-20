@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import styles from './CardTruncated.module.less';
 import { CardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
+import LazyImg from '../lazyImg/LazyImg';
 
 interface Props extends CardInfo {
   onAddingCardClick: (id: number) => void;
@@ -21,11 +22,10 @@ const CardTruncated: React.FC<Props> = ({
 
   return (
     <div onClick={onAddingCardAction} className={styles.cardTruncated}>
-      <img
-        loading="lazy"
-        className={styles.image}
-        alt="Game main"
+      <LazyImg
+        customClassName={styles.image}
         src={background_image}
+        alt="Game main"
       />
       <div className={styles.contentWrapper}>
         <div className={styles.info}>
