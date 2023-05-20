@@ -22,6 +22,7 @@ const UpPanel: React.FC = () => {
   }, []);
 
   const onAccountExitClick = useCallback(() => {
+    sessionStorage.setItem('gamesArchieve', '');
     dispatch(signoutProcess());
   }, []);
 

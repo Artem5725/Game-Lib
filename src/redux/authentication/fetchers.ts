@@ -10,6 +10,10 @@ export function fetchSignInWrapper(mail: string, password: string) {
       .signIn(mail, password)
       .then(uid => {
         if (uid) {
+          sessionStorage.setItem(
+            'gamesArchieve',
+            JSON.stringify({ mail, uid })
+          );
           firebaseProvider.accountsProvider.setUid(uid);
           dispatch(authenticationActions.signinLoaded(mail));
         }
@@ -25,6 +29,10 @@ export function fetchSignUpWrapper(mail: string, password: string) {
       .signUp(mail, password)
       .then(uid => {
         if (uid) {
+          sessionStorage.setItem(
+            'gamesArchieve',
+            JSON.stringify({ mail, uid })
+          );
           firebaseProvider.accountsProvider.setUid(uid);
           firebaseProvider.accountsProvider.newUserEntry().then(_success => {
             dispatch(authenticationActions.signupLoaded(mail));
