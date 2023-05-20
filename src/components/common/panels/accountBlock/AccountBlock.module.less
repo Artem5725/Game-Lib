@@ -1,0 +1,30 @@
+@import '../../globals/Globals.less';
+
+@elements-size: 20px;
+
+.account {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.name {
+  .font-mixin(@elements-size, @elements-size, 500);
+  color: @common-font-color;
+}
+
+.exit {
+  mask: url('./exit.svg') no-repeat 10% 50%;
+  -webkit-mask: url('./exit.svg') no-repeat 10% 50%;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: @common-icon-color-transparent;
+  width: @elements-size;
+  height: @elements-size;
+  border: none;
+  &:hover {
+    background-color: @common-icon-color;
+  }
+}

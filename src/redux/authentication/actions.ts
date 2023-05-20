@@ -19,3 +19,8 @@ export const signupLoaded = (userMail: string) => ({
   type: authentication.SIGNUP_LAODED,
   payload: userMail
 });
+
+export const signoutProcess = () => ({
+  type: authentication.SIGNOUT_PROCESS,
+  payload: ''
+});

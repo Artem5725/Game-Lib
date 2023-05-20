@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import './Clean.less';
 import SidePanel from './components/common/panels/SidePanel';
 import UpPanel from './components/common/panels/UpPanel';
@@ -16,13 +16,8 @@ import AuthWindow from './components/common/authWindow/AuthWindow';
 
 function App() {
   const dispatch = useDispatch();
-  const [isAuthWindowOpen, setIsAuthWindowOpen] = useState(true);
   const accountEmail = useSelector(selectAccountMail);
   const errorMsg = useSelector(selectErrorMessage);
-
-  if (accountEmail && isAuthWindowOpen) {
-    setIsAuthWindowOpen(false);
-  }
 
   const onSignInClick = useCallback((mail: string, password: string) => {
     // @ts-ignore
@@ -44,7 +39,7 @@ function App() {
         </BrowserRouter>
       ) : (
         <AuthWindow
-          isActive={isAuthWindowOpen}
+          isActive={!accountEmail}
           warningMessage={errorMsg}
           onSignInAction={onSignInClick}
           onSignUpAction={onSignUpClick}

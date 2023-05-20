@@ -26,6 +26,9 @@ const reducer = (
     case authentication.SIGNUP_LAODED: {
       return action.payload;
     }
+    case authentication.SIGNOUT_PROCESS: {
+      return '';
+    }
     default:
       return state;
   }
