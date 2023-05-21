@@ -9,13 +9,17 @@ type Props = {
 const SearchLine: React.FC<Props> = ({ onStartSearch }) => {
   const [isActive, setIsActive] = useState(false);
   const refSearch = useRef<HTMLInputElement>(null);
-  const startSearch = useCallback(() => {
-    if (refSearch.current) {
-      if (refSearch.current.value) {
-        onStartSearch(refSearch.current.value);
+  const startSearch = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      if (refSearch.current) {
+        if (refSearch.current.value) {
+          onStartSearch(refSearch.current.value);
+        }
       }
-    }
-  }, []);
+    },
+    []
+  );
   const cleanInput = useCallback(() => {
     if (!refSearch.current) {
       return;
@@ -27,15 +31,23 @@ const SearchLine: React.FC<Props> = ({ onStartSearch }) => {
   }, []);
 
   return (
-    <div
+    <form
       className={cn(styles.searchLine, isActive && styles.searchLine_active)}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}
     >
-      <div className={cn(styles.icon, styles.search)} onClick={startSearch} />
+      <button
+        type="submit"
+        className={cn(styles.icon, styles.search)}
+        onClick={startSearch}
+      />
       <input className={styles.input} ref={refSearch} placeholder="Поиск..." />
-      <div className={cn(styles.icon, styles.cross)} onClick={cleanInput} />
-    </div>
+      <button
+        type="button"
+        className={cn(styles.icon, styles.cross)}
+        onClick={cleanInput}
+      />
+    </form>
   );
 };
 

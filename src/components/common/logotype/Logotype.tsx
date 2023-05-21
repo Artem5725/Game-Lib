@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const Logotype: React.FC = () => (
   <NavLink className={styles.logoNav} to="/search">
     <div className={styles.img} />
-    <div className={styles.text}>Game Store</div>
+    <div className={styles.text}>Game Lib</div>
   </NavLink>
 );
 
