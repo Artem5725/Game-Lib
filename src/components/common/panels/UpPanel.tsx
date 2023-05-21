@@ -5,7 +5,7 @@ import Logotype from '../logotype/Logotype';
 import AccountBlock from './accountBlock/AccountBlock';
 import { rawgPlatformsMap } from '../../../ApiProviders/RawgApiProvider/RawgPlatforms';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchPlatformChanged } from '../../../redux/search/actions';
+import { searchCleaned, searchPlatformChanged } from '../../../redux/search/actions';
 import { selectSearchRequestPlatform } from '../../../redux/search/selectors';
 import { selectAccountMail } from '../../../redux/authentication/selectors';
 import { signoutProcess } from '../../../redux/authentication/actions';
@@ -25,6 +25,7 @@ const UpPanel: React.FC = () => {
   const onAccountExitClick = useCallback(() => {
     sessionStorage.setItem('gamesArchieve', '');
     dispatch(errorsMessageCleaned());
+    dispatch(searchCleaned());
     dispatch(signoutProcess());
   }, []);
 

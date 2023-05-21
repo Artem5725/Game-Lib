@@ -25,3 +25,8 @@ export const searchLoadedOnRequest = (loadedCards: CardInfo[]) => ({
   type: search.SEARCH_LOADED_ON_REQUEST,
   payload: loadedCards
 });
+
+export const searchCleaned = () => ({
+  type: search.SEARCH_CLEANED,
+  payload: null
+});

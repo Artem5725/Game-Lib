@@ -45,7 +45,12 @@ const reducer = (state = initialState, action: SearchAction): SearchState => {
       requestCopy.pageNumber = action.payload as number;
       return { ...state, request: requestCopy };
     }
-
+    case search.SEARCH_CLEANED: {
+      return {
+        request: { platform: 'PC', request: '', pageNumber: 1 },
+        searchResults: []
+      };
+    }
     default: {
       return state;
     }

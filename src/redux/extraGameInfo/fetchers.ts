@@ -1,4 +1,3 @@
-// фетч на загрузку доп инфы об игре с rawg
 import { DispatchType, GetStateType } from '../store/store';
 import * as extraGameInfoActions from './actions';
 import { errorsMessageChanged } from '../shared/actions';
