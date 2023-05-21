@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useCallback, useEffect } from 'react';
-import './Clean.less';
 import SidePanel from './components/common/panels/SidePanel';
 import UpPanel from './components/common/panels/UpPanel';
 import Page from './pages/Page';

@@ -44,7 +44,7 @@ const Card: React.FC<Props> = ({
     <div className={styles.card} onClick={onCardClick}>
       <div className={styles.imageWrapper}>
         <LazyImg
-          src={background_image ?? '../../noimage.png'}
+          src={background_image}
           customClassName={styles.image}
           alt="Game main"
         />

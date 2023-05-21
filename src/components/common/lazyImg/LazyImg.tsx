@@ -26,9 +26,10 @@ const LazyImg: React.FC<Props> = ({ src, alt, customClassName }) => {
         className={cn(
           customClassName,
           styles.image,
-          loaded && styles.imageLoaded
+          loaded && styles.imageLoaded,
+          src || styles.imageBorder
         )}
-        src={src}
+        src={src || '../../noimage.png'}
         alt={alt}
       />
     </div>
