@@ -58,3 +58,5 @@
 Подробное описание каждой из страниц и панелей представлено в файле [документации](/docs/Documentation.md)
 
 Документация к реализованному функционалу представлена в [файле](/doc/index.html)
+
+План работы в [документе](https://docs.google.com/document/d/13WTdVHz9Ryd6KP_DPk-9oU5lqkoNpZbhgFTHCI-KN_M/edit)
