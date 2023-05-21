@@ -191,14 +191,14 @@ const GamePage: React.FC = () => {
         <Loader />
       )}
 
-      <ScrollHorizontal>
+      <ScrollHorizontal scrollName='Скриншоты'>
         {screenshots ? (
           screenshots.map(elem => <Screenshot key={elem} screenUrl={elem} />)
         ) : (
           <Loader />
         )}
       </ScrollHorizontal>
-      <ScrollHorizontal>
+      <ScrollHorizontal scrollName='Достижения'>
         {achievements ? (
           achievements.map((elem, index) => (
             <Tip

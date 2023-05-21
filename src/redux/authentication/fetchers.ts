@@ -1,4 +1,4 @@
-import { errorsMessageChanged } from '../shared/actions';
+import { errorsMessageChanged, errorsMessageCleaned } from '../shared/actions';
 import { firebaseProvider } from '../store/apiProviders';
 import { DispatchType, GetStateType } from '../store/store';
 import * as authenticationActions from './actions';
@@ -16,6 +16,7 @@ export function fetchSignInWrapper(mail: string, password: string) {
           );
           firebaseProvider.accountsProvider.setUid(uid);
           dispatch(authenticationActions.signinLoaded(mail));
+          dispatch(errorsMessageCleaned());
         }
       })
       .catch((error: Error) => dispatch(errorsMessageChanged(error.message)));
@@ -37,6 +38,7 @@ export function fetchSignUpWrapper(mail: string, password: string) {
           firebaseProvider.accountsProvider.newUserEntry().then(_success => {
             dispatch(authenticationActions.signupLoaded(mail));
           });
+          dispatch(errorsMessageCleaned());
         }
       })
       .catch((error: Error) => dispatch(errorsMessageChanged(error.message)));

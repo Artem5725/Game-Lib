@@ -18,6 +18,9 @@ const reducer = (state = initialState, action: ErrorAction): ErrorState => {
     case constants.ERRORS_MESSAGE_CHANGED: {
       return { errorMessage: action.payload };
     }
+    case constants.ERRORS_MESSAGE_CLEANED: {
+      return { errorMessage: '' };
+    }
     default: {
       return state;
     }

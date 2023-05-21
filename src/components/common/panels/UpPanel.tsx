@@ -9,6 +9,7 @@ import { searchPlatformChanged } from '../../../redux/search/actions';
 import { selectSearchRequestPlatform } from '../../../redux/search/selectors';
 import { selectAccountMail } from '../../../redux/authentication/selectors';
 import { signoutProcess } from '../../../redux/authentication/actions';
+import { errorsMessageCleaned } from '../../../redux/shared/actions';
 
 const platformNames = Array.from(rawgPlatformsMap.keys());
 
@@ -23,6 +24,7 @@ const UpPanel: React.FC = () => {
 
   const onAccountExitClick = useCallback(() => {
     sessionStorage.setItem('gamesArchieve', '');
+    dispatch(errorsMessageCleaned());
     dispatch(signoutProcess());
   }, []);
 
