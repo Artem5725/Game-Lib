@@ -45,7 +45,6 @@ import { selectAccountMail } from '../redux/authentication/selectors';
 import { customErrorsMap } from '../helpers/Errors';
 
 const GamePage: React.FC = () => {
-  // eslint-disable-next-line no-unused-vars
   const { gameId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -176,8 +175,8 @@ const GamePage: React.FC = () => {
       isInGroup: allGroupMembersIds.indexOf(card.id) !== -1,
       isCrossForGroup: false,
       onClickAction: onCardClick,
-      onGroupChangeAction: onGroupClick, // TODO добавляет/удаляет из группы Все
-      onFavouriteChangeAction: onFavouriteClick // добавляет/удаляет из группы Избранное
+      onGroupChangeAction: onGroupClick,
+      onFavouriteChangeAction: onFavouriteClick
     })
   );
 

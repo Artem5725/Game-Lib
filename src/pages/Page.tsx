@@ -8,7 +8,6 @@ import { Route, Routes } from 'react-router-dom';
 import { customErrorsMap } from '../helpers/Errors';
 
 const Page: React.FC = () => (
-  // TODO селектить ошибку из стора
   <div className={styles.page}>
     <Routes>
       <Route index path="/search?" element={<MainPage />}></Route>

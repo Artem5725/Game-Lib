@@ -1,6 +1,5 @@
 import { StoreState } from '../store/store';
 import { createSelector } from 'reselect';
-import * as defaultGroupNames from '../../helpers/DefaultGroupNames';
 
 export const selectGroupNames = createSelector(
   (state: StoreState) => state.groups,
@@ -53,17 +52,3 @@ export const selectInFirstButNotInSecond = (
       );
     }
   );
-
-// TODO возможно не пригодится
-export const selectIsInGroup = (id: number, groupName: string) =>
-  createSelector(selectGroupMembersByName(groupName), groupMembers => {
-    const indexInGroup = groupMembers?.findIndex(member => member.id === id);
-
-    return indexInGroup && indexInGroup !== -1;
-  });
-
-export const selectIsInFavouriteGroupById = (id: number) =>
-  selectIsInGroup(id, defaultGroupNames.favourite);
-
-export const selectIsInAllGroupById = (id: number) =>
-  selectIsInGroup(id, defaultGroupNames.all);

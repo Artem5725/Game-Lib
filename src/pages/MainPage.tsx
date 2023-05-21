@@ -109,7 +109,6 @@ const MainPage: React.FC = () => {
     dispatch(searchRequestChanged(requestString));
   }, []);
 
-  // TODO подумать как мемоизировать
   const cardWithActions: MainCardInfo[] | undefined = searchResults?.map(
     card =>
       Object.assign({}, card, {
