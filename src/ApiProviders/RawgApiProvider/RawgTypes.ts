@@ -68,6 +68,13 @@ export type RawgAchievementsInfo = {
   percent: string;
 };
 
+export type RawgLinksInfo = {
+  id: number,
+  game_id: number,
+  store_id: number,
+  url: string
+}
+
 export type RawgGameInfoResponse<T> = {
   count: number;
   next: string;
@@ -95,8 +102,8 @@ export interface MainCardInfo extends CardInfo {
   isInGroup: boolean;
   isCrossForGroup: boolean;
   onClickAction: (id: number) => void;
-  onFavouriteChangeAction: (id: number) => void;
-  onGroupChangeAction: (id: number) => void;
+  onFavouriteChangeAction: (id: number, shouldAdd: boolean) => void;
+  onGroupChangeAction: (id: number, shouldAdd: boolean) => void;
 }
 
 export type GameExtraInfo = {
@@ -104,4 +111,5 @@ export type GameExtraInfo = {
   achievements: AchievementsInfo[];
   dlc: CardInfo[];
   serieGames: CardInfo[];
+  link: string
 };

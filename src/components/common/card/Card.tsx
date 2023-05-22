@@ -4,6 +4,7 @@ import styles from './Card.module.less';
 import { MainCardInfo } from '../../../ApiProviders/RawgApiProvider/RawgTypes';
 import Platforms from '../platforms/Platforms';
 import CardButton from './cardButton/CardButton';
+import LazyImg from '../lazyImg/LazyImg';
 
 type Props = MainCardInfo;
 const Card: React.FC<Props> = ({
@@ -26,24 +27,27 @@ const Card: React.FC<Props> = ({
   const onFavouriteClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      onFavouriteChangeAction(id);
+      onFavouriteChangeAction(id, !isFavourite);
     },
-    []
+    [isFavourite, onFavouriteChangeAction, id]
   );
 
   const onGroupClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      onGroupChangeAction(id);
+      onGroupChangeAction(id, !isInGroup);
     },
-    []
+    [isInGroup, onGroupChangeAction, id]
   );
 
-  // TODO в onclick надо прокидывать нормальную функцию спецом для
   return (
     <div className={styles.card} onClick={onCardClick}>
       <div className={styles.imageWrapper}>
-        <img className={styles.image} alt="Game main" src={background_image} />
+        <LazyImg
+          src={background_image}
+          customClassName={styles.image}
+          alt="Game main"
+        />
         <CardButton
           buttonImage="favourite"
           isActive={isFavourite}

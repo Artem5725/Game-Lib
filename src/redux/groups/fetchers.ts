@@ -22,6 +22,7 @@ export async function fetchLoadUserGroups(
       }
     })
     .catch((error: Error) => {
+      dispatch(groupActions.groupsLoaded([]));
       dispatch(errorsMessageChanged(error.message));
     });
 }

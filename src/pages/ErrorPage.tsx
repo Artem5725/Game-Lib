@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './ErrorPage.module.less';
 import stylespageContent from './PageContent.module.less';
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
 
 const ErrorPage: React.FC<Props> = ({ errorText }) => (
   <div className={stylespageContent.pageContent}>
-    <div className={styles.errorMsg}>{`Ошибка: ${errorText}`}</div>
+    <div className={stylespageContent.warning}>{`Ошибка: ${errorText}`}</div>
   </div>
 );
 

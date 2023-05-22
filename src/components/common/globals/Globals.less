@@ -1,7 +1,5 @@
-// TODO переименовать и собрать все цвета в глобалках
-
 @card-width: 224px;
-@card-min-height: 330px;
+@card-height: 350px;
 @card-border-radius: 20px;
 @card-alternative-color-dark: rgba(0, 0, 0, 0.4);
 
@@ -9,20 +7,33 @@
 @side-panel-elems-width: 200px;
 @up-panel-height: 90px;
 @up-panel-elems-height: 26px;
+@page-width: 1280px;
 
-@page-back-color: linear-gradient(112deg, #1a1c4b 16.68%, #0897ab 96.66%);
+@page-back-color: linear-gradient(
+  112deg,
+  rgba(26, 28, 75, 1) 16.68%,
+  rgba(8, 151, 171, 1) 96.66%
+);
+@html-back-color: rgba(17, 20, 49, 1);
 @panel-background-color: rgba(17, 16, 29, 1);
 @button-active-back-color: rgba(0, 0, 255, 1);
 @common-font-color: rgba(255, 255, 255, 1);
 @common-font-alternative-color: rgba(0, 0, 0, 1);
-// now equal with font, but may be changed
 @common-icon-color: rgba(255, 255, 255, 1);
 @common-icon-color-transparent: rgba(255, 255, 255, 0.5);
 @common-blocks-back-color: rgba(17, 20, 49, 1);
+@common-scroll-thumb-color: rgba(17, 20, 49, 1);
 @common-border-color: rgba(25, 210, 234, 1);
+@alternate-border-color: rgba(255, 255, 255, 1);
 @common-hover-back-color: rgba(255, 255, 255, 0.5);
+@common-content-block-back-color: rgba(255, 255, 255, 0.5);
+@common-content-block-border-radius: 5px;
 @modal-window-background-color: rgba(200, 200, 200, 0.8);
 @modal-window-content-background-color: rgba(17, 20, 49, 1);
+@modal-window-min-width: 20%;
+@modal-window-min-height: 20%;
+@modal-window-max-width: 80%;
+@modal-window-max-height: 80%;
 
 .font-mixin(@size, @line-height, @font-weight) {
   font-family: 'Roboto', sans-serif;
@@ -58,6 +69,7 @@
   color: @color;
   background-color: @back-color;
   .font-mixin(@font-size,  @line-height, @font-weight);
+  white-space: nowrap;
 
   &:hover {
     background-color: @hover-back-color;
@@ -66,4 +78,23 @@
   &_active {
     background-color: @active-back-color;
   }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: @common-scroll-thumb-color transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 8px;
+  background-color: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: @common-scroll-thumb-color;
+}
+
+.warning-mixin {
+  .font-mixin(20px, 28px, 700);
+  color: @common-font-color;
+  text-align: center;
 }

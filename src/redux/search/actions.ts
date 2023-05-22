@@ -1,10 +1,19 @@
 import * as search from './constants';
-import { SearchRequest } from './searchTypes';
 import { CardInfo } from '../../ApiProviders/RawgApiProvider/RawgTypes';
 
-export const searchRequestChanged = (request: SearchRequest) => ({
+export const searchRequestChanged = (request: string) => ({
   type: search.SEARCH_REQUEST_CHANGED,
   payload: request
+});
+
+export const searchPageNumberChanged = (pageNumber: number) => ({
+  type: search.SEARCH_PAGENUMBER_CHANGED,
+  payload: pageNumber
+});
+
+export const searchPlatformChanged = (platform: string) => ({
+  type: search.SEARCH_PLATFORM_CHANGED,
+  payload: platform
 });
 
 export const searchLoadingOnRequest = () => ({
@@ -15,4 +24,9 @@ export const searchLoadingOnRequest = () => ({
 export const searchLoadedOnRequest = (loadedCards: CardInfo[]) => ({
   type: search.SEARCH_LOADED_ON_REQUEST,
   payload: loadedCards
+});
+
+export const searchCleaned = () => ({
+  type: search.SEARCH_CLEANED,
+  payload: null
 });

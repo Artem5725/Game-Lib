@@ -8,5 +8,5 @@ export type SearchRequest = {
 
 export type SearchRequestWithResults = {
   request: SearchRequest;
-  searchResults: CardInfo[];
+  searchResults: CardInfo[] | null;
 };

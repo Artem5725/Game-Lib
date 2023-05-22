@@ -1,0 +1,25 @@
+@import '../../common/globals/Globals.less';
+
+@achievement-size: 120px;
+
+.image {
+  width: @achievement-size;
+  height: @achievement-size;
+}
+
+.tip {
+  max-height: @achievement-size;
+  width: @achievement-size * 2;
+  overflow: hidden;
+}
+
+.name {
+  .font-mixin(18px, 18px, 600);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.description {
+  .font-mixin(16px, 16px, 400);
+  text-align: left;
+}

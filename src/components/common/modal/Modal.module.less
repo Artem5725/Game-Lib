@@ -1,0 +1,24 @@
+@import '../../common/globals/Globals.less';
+
+.space {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+  background-color: @modal-window-background-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.window {
+  min-width: @modal-window-min-width;
+  min-height: @modal-window-min-height;
+  max-width: @modal-window-max-width;
+  max-height: @modal-window-max-width;
+  border-radius: 10px;
+  background-color: @modal-window-content-background-color;
+  color: @common-font-color;
+}

@@ -9,7 +9,7 @@ type CommentsAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
 
-type CommentsState = GameComments;
+export type CommentsState = GameComments;
 
 const initialState: CommentsState = [];
 
@@ -32,6 +32,7 @@ const reducer = (
         stateCopy.push(action.payload as CommentFirebase);
       } else {
         userCommentLink.comment = (action.payload as CommentFirebase).comment;
+        userCommentLink.timestamp = (action.payload as CommentFirebase).timestamp;
       }
       return stateCopy;
     }

@@ -1,4 +1,3 @@
-// фетч на загрузку доп инфы об игре с rawg
 import { DispatchType, GetStateType } from '../store/store';
 import * as extraGameInfoActions from './actions';
 import { errorsMessageChanged } from '../shared/actions';
@@ -24,6 +23,15 @@ export function fetchLoadGameExtraInfoWrapper(gameId: number) {
         }
       })
       .catch((error: Error) => {
+        dispatch(
+          extraGameInfoActions.extraGameInfoLoaded({
+            screenshots: [],
+            achievements: [],
+            dlc: [],
+            serieGames: [],
+            link: ''
+          })
+        );
         dispatch(errorsMessageChanged(error.message));
       });
   };

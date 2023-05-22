@@ -1,0 +1,54 @@
+@import '../globals/Globals.less';
+
+.authWindow {
+  width: 400px;
+  height: 300px;
+  padding: 30px;
+}
+
+.banner {
+  .font-mixin(24px, 24px, 600);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.authForm {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.label {
+  .font-mixin(20px,20px, 500);
+  margin-bottom: 5px;
+}
+
+.password,
+.email {
+  margin-bottom: 20px;
+  padding: 3px;
+  border-radius: 5px;
+  border: none;
+  .font-mixin(16px, 16px, 400);
+  &:focus {
+    outline: none;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.button {
+  .button( @padding: 10px 25px, 
+    @back-color: transparent, 
+    @font-weight: 500);
+  display: inline-block;
+}
+
+.warning{
+    float: right;
+    .font-mixin(16px, 16px, 400);
+}

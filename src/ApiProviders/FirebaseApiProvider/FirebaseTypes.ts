@@ -3,6 +3,7 @@ import { CardInfo } from '../RawgApiProvider/RawgTypes';
 export type CommentFirebase = {
   author: string;
   comment: string;
+  timestamp: number;
 };
 
 export type GameComments = CommentFirebase[];

@@ -8,15 +8,15 @@ import {
 type GroupsAction = {
   [Key in keyof typeof actions]: ReturnType<(typeof actions)[Key]>;
 }[keyof typeof actions];
-type GroupsState = AccountInfo;
+export type GroupsState = AccountInfo;
 
 const initialState: GroupsState = [];
 
 // eslint-disable-next-line max-statements
-const reducer = (state = initialState, action: GroupsAction): GroupsState => {
+const reducer = (state = initialState, action: GroupsAction): GroupsState | null => {
   switch (action.type) {
     case groups.GROUPS_LOADING: {
-      return [];
+      return null;
     }
     case groups.GROUPS_LOADED: {
       return action.payload as AccountInfo;

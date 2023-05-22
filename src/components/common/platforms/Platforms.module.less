@@ -10,7 +10,7 @@
 }
 
 .mainInfoPlatform {
-  .button(@padding:10px 35px, 
+  .button(@padding:10px 25px, 
     @color: @common-font-color, 
     @back-color: @common-hover-back-color, 
     @hover-back-color: @common-hover-back-color, 
@@ -22,12 +22,15 @@
   display: flex;
   flex-flow: row wrap;
   gap: 9px;
+  height: 41px;
+  overflow: hidden;
   margin-bottom: 8px;
 }
 
 .cardPlatform {
   .font-mixin(12px, 16px, 500);
   color: @card-alternative-color-dark;
+  white-space: nowrap;
   &:not(:last-child)::after {
     content: '•';
     margin-left: 9px;
