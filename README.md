@@ -2,7 +2,7 @@
 
 ## Курсовой проект на курсе Tinkoff Fintech School, Frontend, весна 2023
 Выполнил Тищенков Артем Юрьевич  
-[Приложение](https://coursework-artem5725-git-application-fintech-students.vercel.app/)
+[Приложение](https://coursework-artem5725.vercel.app/)
 
 ## Описание проекта
 
